@@ -36,7 +36,7 @@ function requestBluetoothDevice(){
     
     return navigator.bluetooth.requestDevice({
       filters: [{
-      services: ['6e400001b5a3f393e0a9e50e24dcca9e']
+      name: 'BBC micro:bit[tepup]'
       }]
     })
     .then(device => {
