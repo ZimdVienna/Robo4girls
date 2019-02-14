@@ -6,14 +6,10 @@ let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
 
 //connect the device on connect button click
-connectButton.addEventListener('click',function(){
-                               connect();
-                               });
+connectButton.addEventListener('click',function(){connect();});
 
 //Disconnect from the device on disconnect button click
-disconnectButton.addEventListener('click',function(){
-                                  disconnect();
-                                  });
+disconnectButton.addEventListener('click',function(){disconnect();});
 
 //Handle form submit event
 sendForm.addEventListener('submit',function(event){
@@ -39,9 +35,11 @@ function requestBluetoothDevice(){
     log('Requesting Bluetooth device...');
     
     return navigator.bluetooth.requestDevice({
-                                             filters: [{services: ['6e400001-b5a3-f393-e0a9-e50e24dcca9e']}],
-    }).
-    then(device => {
+      filters: [{
+      services: ['6e400001b5a3f393e0a9e50e24dcca9e']
+      }]
+    })
+    .then(device => {
          log('"' + device.name + '" bluetooth device selected');
          deviceCache = device;
          
@@ -64,11 +62,11 @@ function connectDeviceAndCacheCharacteristic(device){
         then(server => {
              log('GATT server connected, getting service...');
              
-             return server.getPrimaryService('6e400001-b5a3-f393-e0a9-e50e24dcca9e');
+             return server.getPrimaryService('6e400001b5a3f393e0a9e50e24dcca9e');
         }).
         then(service => {
              log('Service found, getting characteristic...');
-             return service.getCharacteristic('6e400003-b5a3-f393-e0a9-e50e24dcca9e');
+             return service.getCharacteristic('6e400003b5a3f393e0a9e50e24dcca9e');
         }).
         then(characteristic => {
              log('Characteristic found');
