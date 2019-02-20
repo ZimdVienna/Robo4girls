@@ -4,10 +4,6 @@ let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
-let charachteristicUuid = document.querySelector('#characteristic').value;
-    if(charachteristicUuid.startsWith('0x')){
-        charachteristicUuid = parseInt(charachteristicUuid);
-    }
 var service_uart = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 var microbit_name = "BBC micro:bit [gotuv]";
 var name_prefix = "BBC micro:bit";
@@ -74,22 +70,13 @@ function connectDeviceAndCacheCharacteristic(device){
          }).
     then(service => {
          log('Service found, getting characteristic...');
-         if(characteristicUuid){
-
-            return service.getCharacteristics(uart_characteristic);
-        }
-         return service.getCharacteristics(); 
-        })
-    .then(characteristic => {
+         return service.getCharacteristic(uart_characteristic);
+         }).
+    then(characteristic => {
          log('Characteristic found');
-         //characteristicCache = 
-       //  return characteristic.readValue();
-         return getCharacteristic();
-        // r characteristicCache;
-         })
-         .then(characteristics => {
-             log('> Characteristics: ' + characteristics.map(c => c.uuid).join('\n' + ' '.repeat(19)));
+         characteristicCache = characteristic;
          
+         return characteristicCache;
          });
 }
 
