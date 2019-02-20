@@ -80,13 +80,13 @@ function connectDeviceAndCacheCharacteristic(device){
         }
          return service.getCharacteristics(); 
         })
-    .then(characteristic => {
+    /* .then(characteristic => {
          log('Characteristic found');
          //characteristicCache = 
        //  return characteristic.readValue();
          return getCharacteristic();
         // r characteristicCache;
-         })
+         })*/
          .then(characteristics => {
              log('> Characteristics: ' + characteristics.map(c => c.uuid).join('\n' + ' '.repeat(19)));
          
