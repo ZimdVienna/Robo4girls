@@ -41,6 +41,7 @@ function requestBluetoothDevice(){
                                              filters: [{
                                                        "namePrefix" : name_prefix
                                                        }]
+                                             optionalServices: [service_uart]          
                                              })
     .then(device => {
           log('"' + device.name + '" bluetooth device selected');
