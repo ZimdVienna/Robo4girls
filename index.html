@@ -6,7 +6,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no
 		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-
+	 <link href="styles.css" rel="stylesheet">
 	<title>R4G</title>
 
 	
@@ -28,7 +28,22 @@
 
 <body ontouchstart="" id='i2'><!-- ontouchstart="" enables low-delay CSS transitions. -->
 
-	
+ <button id="connect" type="button">Connect</button>
+        
+        <button id="disconnect" type="button">Disconnect</button>
+        
+        <div id="terminal">
+            <div>Device connection...</div>
+           <!-- <div class="out">Outcoming message</div>
+            <div class="in">Incoming message</div> -->
+        </div>
+        
+        <form id="send-form">
+            <input id="input" type="text">
+                <button type="submit">Send</button>
+        </form>
+        
+        <script src="ble.js"></script>	
   <div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
 
   <xml id="toolbox" style="display: none">
