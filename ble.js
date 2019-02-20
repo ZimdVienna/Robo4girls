@@ -4,7 +4,7 @@ let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
-
+var service_uart = '6e400001b5a3f393e0a9e50e24dcca9e';
 //connect the device on connect button click
 connectButton.addEventListener('click',function(){connect();});
 
@@ -36,7 +36,7 @@ function requestBluetoothDevice(){
     
     return navigator.bluetooth.requestDevice({
                                              filters: [{
-                                                       name: 'BBC micro:bit[tepup]'
+                                                       services: [service_uart]
                                                        }]
                                              })
     .then(device => {
