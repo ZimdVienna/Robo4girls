@@ -78,7 +78,7 @@ function connectDeviceAndCacheCharacteristic(device){
          characteristicCache_tx = characteristic;
          
          return characteristicCache_tx;
-         });
+         }).
     then(service => {
          return service.getCharacteristic(uart_characteristic_rx);
     }).
