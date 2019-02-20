@@ -192,6 +192,7 @@ const int *BEATS[] = {tusch_b,beat2,starWars_b,superMario_b};
 
 /******************* FUNCTIONS ******************************/
 
+// ElecFreaks Motor:bit
 void moveBot(ManagedString msg)
 {
     //< moves the robot in given direction
@@ -236,6 +237,59 @@ void moveBot(ManagedString msg)
     uBit.io.P2.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity);   //pwm motor2
 }
 
+/*
+// Keyestudio Motor Driver Board
+void moveBot(ManagedString msg)
+{
+    //< moves the robot in given direction
+    
+    ManagedString direction(msg.charAt(1));  
+    Enable = pin14
+    Motor1 Direction Clockwise = pin12
+    Motor1 Direction Counter Clockwise = pin13
+    Motor2 Direction Clockwise = pin15
+    Motor2 Direction Counter Clockwise = pin16
+    
+    Bitmask: X X X P15 P16 P12 P13 P14
+    
+    Motor1 PWM = pin1
+    Motor2 PWM = pin2
+    
+    unsigned char moveMask = 0;   //stop (00000000)
+    
+    if(direction == forward)
+    {
+        moveMask = 11; //forward (00001011)
+    }
+    if(direction == backwards)
+    {
+        moveMask = 21; //backwards (00010101)
+    } 
+    if(direction == curveRight)
+    {
+        moveMask = 3; //curveRight(00000011)
+    }
+    if(direction == curveLeft)
+    {
+        moveMask = 9; //curveLeft (00001001)
+    }
+    if(direction == turnRight)
+    {
+        moveMask = 19; //turnRight (00010011)
+    }
+    if(direction == turnLeft)
+    {
+        moveMask = 13; //turnLeft (00001101)
+    }  
+    uBit.io.P1.setAnalogValue(velocity);
+    uBit.io.P2.setAnalogValue(velocity);
+    uBit.io.P12.setDigitalValue((4 & moveMask)/4);
+    uBit.io.P13.setDigitalValue((2 & moveMask)/2);
+    uBit.io.P15.setDigitalValue((16 & moveMask)/16);
+    uBit.io.P16.setDigitalValue((8 & moveMask)/8);
+    uBit.io.P14.setDigitalValue(1 & moveMask);    
+}
+*/
 
 void playMelody(int songidx)
 {
@@ -289,7 +343,11 @@ int main()
 {
     // Initialise the micro:bit runtime.
     uBit.init();
-    
+    /*
+    //serial communication via uart
+    uBit.serial.baud(115200);
+    uBit.serial.send("A\r\n");
+    */
     uBit.messageBus.listen(MICROBIT_ID_BLE, MICROBIT_BLE_EVT_CONNECTED, onConnected);
     uBit.messageBus.listen(MICROBIT_ID_BLE, MICROBIT_BLE_EVT_DISCONNECTED, onDisconnected);
     
