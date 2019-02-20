@@ -71,8 +71,8 @@ connectButton.addEventListener('click', event => {
   
   .then(_ => microbit.connect())
   
-  .then(_ => {microbit.writeUartRx(buffer)})
-  .then(log("...."))
+  .then(_ => {microbit.writeUartRx(new TextEncoder().encode(buffer)})
+  .then(log(buffer))
   .catch(error => { console.log(error) });
 });
 
