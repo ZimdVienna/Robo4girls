@@ -7,7 +7,14 @@ let inputField = document.getElementById('input');
 var service_uart = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 var microbit_name = "BBC micro:bit [gotuv]";
 var name_prefix = "BBC micro:bit";
-var uart_characteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'
+var uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
+var uart_characteristic_rx = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
+//Selected device object cache
+let deviceCache = null;
+//Characteristic object cache
+let characteristicCache_tx = null;
+let characteristicCache_rx = null;
+
 //connect the device on connect button click
 connectButton.addEventListener('click',function(){connect();});
 
@@ -21,9 +28,6 @@ sendForm.addEventListener('submit',function(event){
                           inputField.value = '';    //zero text field
                           inputField.focus();       //focus on text field
                           });
-
-//Selected device object cache
-let deviceCache = null;
 
 //Launch Bluetooth device chooser and connect to the selected device
 function connect(){
@@ -51,9 +55,6 @@ function requestBluetoothDevice(){
           });
 }
 
-//Characteristic object cache
-let characteristicCache = null;
-
 //Connect to speccified device, get service and characteristic
 function connectDeviceAndCacheCharacteristic(device){
     if(device.gatt.connected && characteristicCache) {
@@ -70,13 +71,22 @@ function connectDeviceAndCacheCharacteristic(device){
          }).
     then(service => {
          log('Service found, getting characteristic...');
-         return service.getCharacteristic(uart_characteristic);
+         return service.getCharacteristic(uart_characteristic_tx);
          }).
     then(characteristic => {
-         log('Characteristic found');
-         characteristicCache = characteristic;
+         log('TX Characteristic found: ');
+         characteristicCache_tx = characteristic;
          
-         return characteristicCache;
+         return characteristicCache_tx;
+         }).
+    then(service => {
+         return service.getCharacteristic(uart_characteristic_rx);
+    }).
+    then(characteristic => {
+         log('Rx Characteristic found: ');
+         characteristicCache_rx = characteristic;
+         
+         return characteristicCache_rx;
          });
 }
 
