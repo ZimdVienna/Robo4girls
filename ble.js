@@ -40,7 +40,7 @@ function requestBluetoothDevice(){
     return navigator.bluetooth.requestDevice({
                                              filters: [{
                                                        "namePrefix" : name_prefix
-                                                       }]
+                                                       }],
                                              optionalServices: [service_uart]          
                                              })
     .then(device => {
