@@ -70,11 +70,29 @@ function connectDeviceAndCacheCharacteristic(device){
          }).
     then(service => {
          log('Service found, getting characteristic...');
+<<<<<<< HEAD
          return service.getCharacteristic(uart_characteristic);
          }).
     then(characteristic => {
          log('Characteristic found');
          characteristicCache = characteristic;
+=======
+         if(characteristicUuid){
+
+            return service.getCharacteristics(uart_characteristic);
+        }
+         return service.getCharacteristics(); 
+        })
+    .then(characteristic => {
+         log('Characteristic found');
+         //characteristicCache = 
+       //  return characteristic.readValue();
+         return getCharacteristic();
+        // r characteristicCache;
+         })
+         .then(characteristics => {
+             log('> Characteristics: ' + characteristics.map(c => c.uuid).join('\n' + ' '.repeat(19)));
+>>>>>>> parent of cc6d2d7... Update ble.js
          
          return characteristicCache;
          });
