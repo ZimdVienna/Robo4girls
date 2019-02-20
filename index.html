@@ -43,12 +43,11 @@
           <button type="submit">Send</button>
   </form>
   
-  <script src="ble.js"></script>
+  <script src="ble2.js"></script>
  
-  <button onclick="playSound()" type="button">Play</button>
+  <button onclick="main.handlePlay()" type="button">Play</button>
 	<script> 
-      var vid = document.getElementById("sound"); 
-      
+      var vid = block.getElementById("sound");
       function playSound() { 
         vid.play(); 
       } 
@@ -76,6 +75,7 @@
     var demoWorkspace = Blockly.inject('blocklyDiv',
         {media: 'C:\Users\erisa\Documents\GitHub\Robo4girls\media',
          toolbox: document.getElementById('toolbox')});
+         
   </script>
 <script src="scripts\main.js"></script>
 <script src="scripts\music_maker.js"></script>
