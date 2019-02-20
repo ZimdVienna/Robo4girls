@@ -47,7 +47,7 @@ constructor() {
    
     .then(service => service.getCharacteristic("6e400003-b5a3-f393-e0a9-e50e24dcca9e"))
     
-    .then(characteristic => characteristic.writeValue(data))
+    .then(characteristic => characteristic.writeValue(new TextEncoder().encode(data))
     .then(log());
   }
 
@@ -71,7 +71,7 @@ connectButton.addEventListener('click', event => {
   
   .then(_ => microbit.connect())
   
-  .then(_ => {microbit.writeUartRx(new TextEncoder().encode(buffer)})
+  .then(_ => {microbit.writeUartRx(buffer)})
   .then(log(buffer))
   .catch(error => { console.log(error) });
 });
