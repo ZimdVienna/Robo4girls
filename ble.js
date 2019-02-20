@@ -7,6 +7,7 @@ let inputField = document.getElementById('input');
 var service_uart = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 var microbit_name = "BBC micro:bit [gotuv]";
 var name_prefix = "BBC micro:bit";
+var uart_characteristic = '6e400003-b5a3-f393-e0a9-e50e24dcca9e'
 //connect the device on connect button click
 connectButton.addEventListener('click',function(){connect();});
 
@@ -68,7 +69,7 @@ function connectDeviceAndCacheCharacteristic(device){
          }).
     then(service => {
          log('Service found, getting characteristic...');
-         return service.getCharacteristic(service_uart);
+         return service.getCharacteristic(uart_characteristic);
          }).
     then(characteristic => {
          log('Characteristic found');
