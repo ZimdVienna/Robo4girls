@@ -4,7 +4,7 @@ let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
-var service_uart = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
+var service_uart = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
 var microbit_name = "BBC micro:bit [gotuv]";
 var name_prefix = "BBC micro:bit";
 //connect the device on connect button click
