@@ -4,7 +4,7 @@ let disconnectButton = document.getElementById('disconnect');
 let terminalContainer = document.getElementById('terminal');
 let sendForm = document.getElementById('send-form');
 let inputField = document.getElementById('input');
-var service_uart = '6e400001b5a3f393e0a9e50e24dcca9e';
+var service_uart = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 //connect the device on connect button click
 connectButton.addEventListener('click',function(){connect();});
 
