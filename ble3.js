@@ -16,6 +16,8 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
+var buffer = '';
+
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
@@ -31,6 +33,13 @@ reconnectButton.addEventListener('click', function(){
     onReconnectButtonClick();
 })
 
+// Handle input to form
+sendForm.addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form sending
+  send(inputField.value); // Send text field contents
+  inputField.value = '';  // Zero text field
+  inputField.focus();     // Focus on text field
+});
 
 /* ******************* FUNCTIONS ******************* */
 
@@ -47,6 +56,12 @@ function onDisconnectButtonClick(){
         return;
     }
     log("Disconnecting from Bluetooth device...");
+    
+    // Remove all event listeners
+    //deviceCache.removeEventListener('gattserverdisconnected', onDisconnected);
+    uart_characteristic_rx.removeEventListener('characteristicvaluechanged',handleTxValueChange);
+    
+    // disconnect
     if(deviceCache.gatt.connected){
         deviceCache.gatt.disconnect();
     } else {
@@ -69,12 +84,17 @@ function onReconnectButtonClick(){
     });
 }
 
-
-//connect
+//connect to device, get all characteristics, listen to tx and write the command "M1:" to rx
 function onConnectButtonClick() {
     return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
     .then(device => connectDeviceAndCacheCharacteristic(device))
-    .then(characteristic => startNotifications(characteristic))
+    .then(characteristics => {
+        startNotifications(characteristicCache_tx);
+        let encoder = new TextEncoder('utf-8');
+        let msg = encoder.encode("M1:");
+        characteristicCache_rx.writeValue(msg);
+                           
+    })
     .catch(error => {
         log(error);
     });
@@ -111,12 +131,12 @@ function requestBluetoothDevice() {
     });
 }
 
+//get Service and all characteristics rx/tx from device
 function connectDeviceAndCacheCharacteristic(device){
     // if already connected
-    if(device.gatt.connected && characteristicCache_tx) {
-        return Promise.resolve(characteristicCache_tx);
+    if(device.gatt.connected && characteristicCache_rx) {
+        return Promise.resolve(characteristicCache_rx);
     }
-    
     log("Connecting to GATT Server...");
     return device.gatt.connect()
     .then(server => {
@@ -124,27 +144,61 @@ function connectDeviceAndCacheCharacteristic(device){
         return server.getPrimaryService(uart_service);
     })
     .then(service => {
-        log("Service found, get rx characteristic...");
-        return service.getCharacteristic(uart_characteristic_tx);
+        log("Service found, get characteristic...");
+        return service.getCharacteristics();
     })
-    .then(characteristic => {
-        log("Characteristic found");
-        characteristicCache_tx = characteristic;
-        return characteristicCache_tx;
+    .then(characteristics => {
+        log('> Characteristics: ' + characteristics.map(c => c.uuid));
+        characteristicCache_tx = characteristics[0];
+        characteristicCache_rx = characteristics[1];
+        log(characteristicCache_rx);
+        log(characteristicCache_tx);
     })
     .catch(error => {
         log(error);
     });
+    
 }
 
+// get notified when value in tx characteristic changes
 function startNotifications(characteristic){
     log('Starting notifications...');
     
     return characteristic.startNotifications()
     .then(() => {
-         log('Notifications started');
+        log('Notifications started');
+        characteristic.addEventListener('characteristicvaluechanged',handleTxValueChange);
     });
 }
 
+// Data receiving
+function handleTxValueChange(event) {
+  let value = new TextDecoder().decode(event.target.value);
+  log(value, 'in');
+}
 
+/* does not work yet:
+
+// Send data to device
+function sendData(data){
+    if (!data || !characteristicCache_rx) {
+        log("Not connected to device or no data to send");
+        return;
+    }
+    if(data.length > 20){
+        log("Data too long");
+    } else {
+        writeToCharacteristic(characteristicCache_rx, data);
+        log(data, 'out');
+    }
+}
+
+//write to characteristic
+function writeToCharacteristic(characteristic, data){
+    let encoder = new TextEncoder('utf-8');
+    let msg = encoder.encode(data);
+    return characteristic.writeValue(msg);
+    log("data sent");
+}
+*/
 
