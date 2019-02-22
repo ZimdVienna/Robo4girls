@@ -1,85 +1,91 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+    <head>
 
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, user-scalable=no, 
-		initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-    <link href="styles.css" rel="stylesheet">
-	<title>R4G</title>
-
-	
-
-  <script src="blockly_compressed.js"></script>
-  <script src="blocks_compressed.js"></script>
-  <script src="en.js"></script>
-  <script src="javascript_compressed.js"></script>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-  </style>
-</head>
-
-<body ontouchstart="" id='i2'><!-- ontouchstart="" enables low-delay CSS transitions. -->
-  <button id="connect" type="button">Connect</button>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
         
-  <button id="disconnect" type="button">Disconnect</button>
-  
- <div id="terminal">
-     <div>Device connection...</div>
-    <!--  <div class="out">Outcoming message</div>
-      <div class="in">Incoming message</div> --> 
-  </div>
- 
-  <form id="send-form">
-      <input id="input" type="text">
-          <button type="submit">Send</button>
-  </form>
-  
-  <script src="ble3.js"></script>
- 
-  <button onclick="main.handlePlay()" type="button">Play</button>
-	<script> 
-      var vid = block.getElementById("sound");
-      function playSound() { 
-        vid.play(); 
-      } 
-      
-     </script> 
-  <div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
+        <link href="styles.css" rel="stylesheet">
+        
+        <title>R4G</title>
+        
+        <script src="blockly_compressed.js"></script>
+        <script src="blocks_compressed.js"></script>
+        <script src="en.js"></script>
+        <script src="javascript_compressed.js"></script>
+        
+        <!-- put style in styles.css file -->
+        
+    </head>
+    
 
-  <xml id="toolbox" style="display: none">
-    <category name="Loops" colour="120">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <shadow type="math_number">
-            <field name="NUM">5</field>
-          </shadow>
-        </value>
-      </block>
-    </category>
-    <category name="Sounds" colour="355">
-      <block id="sound" type="play_sound"></block>
-    </category>
-   
-  </xml>
+    <body ontouchstart="" id='i2'><!-- ontouchstart="" enables low-delay CSS transitions. -->
   
-  <script>
-    var demoWorkspace = Blockly.inject('blocklyDiv',
-        {media: 'C:\Users\erisa\Documents\GitHub\Robo4girls\media',
-         toolbox: document.getElementById('toolbox')});
-         
-  </script>
-<script src="scripts\main.js"></script>
-<script src="scripts\music_maker.js"></script>
-<script src="scripts\sound_blocks.js"></script>
-</body>
+    <!-- Bluetooth communication -->
+        <button id="connect" type="button">Connect</button>
+        <button id="disconnect" type="button">Disconnect</button>
+ 
+        <!-- input file and button for sending data -->
+        <input id="input" type="text"/>
+        <button id="sendData" type="button">Send</button>
+        
+        <!-- terminal, text color changes: debug=grey, input=blue, output=red -->
+        <div id="terminal"></div>
+        
+        <!-- script for bluetooth communication -->
+        <script src="ble3.js"></script>
+ 
+  
+    <!-- R4G programming environment -->
+        
+        <!-- play button starts program -->
+        <button onclick="main.handlePlay()" type="button">Play</button>
+        
+        <!-- blockly programming window -->
+        <div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
+        
+    <!-- R4G blocks design --> 
+        <xml id="toolbox" style="display: none">
+            
+            <!-- Repetition / Loop block -->
+            <category name="Loops" colour="120">
+                <block type="controls_repeat_ext">
+                    <value name="TIMES">
+                        <shadow type="math_number">
+                            <field name="NUM">5</field>
+                        </shadow>
+                    </value>
+                </block>
+            </category>
+            
+            <!-- play Sound block -->
+            <category name="Sounds" colour="355">
+                    <block id="sound" type="play_sound"></block>
+            </category>
+            
+        </xml>     
+    <!-- scripts --> <!-- thoroughly comment all the scripts --> 
+        
+        <!-- blockly webview -->
+        <script>
+            var demoWorkspace = Blockly.inject('blocklyDiv',         {media:'C:\Users\erisa\Documents\GitHub\Robo4girls\media', toolbox: document.getElementById('toolbox')});
+        </script>
+        
+        <!-- play melodie -->
+        <script> 
+            var vid = block.getElementById("sound");
+            function playSound() { 
+                vid.play(); 
+            } 
+        </script>
+        
+        <!-- scripts for unknown stuff, please comment -->
+        <script src="scripts\main.js"></script>
+        <script src="scripts\music_maker.js"></script>
+        <script src="scripts\sound_blocks.js"></script>
+        <!-- all scripts needed? -->
+        
+    </body>
 
 </html>
