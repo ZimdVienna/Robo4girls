@@ -21,24 +21,24 @@ var characteristicCache_rx = null;
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
-})
+});
 
 // Disconnect from the device on Disconnect button click
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
-})
+});
 
 /*
 // Reconnect to last device on Reconnect button click
 reconnectButton.addEventListener('click', function(){
     onReconnectButtonClick();
-})
+});
 */
 
 // Send data to device
 sendButton.addEventListener('click', function(){
     sendData();
-})
+});
 
 /* ******************* FUNCTIONS ******************* */
 
@@ -55,12 +55,6 @@ function onConnectButtonClick() {
     .then(device => connectDeviceAndCacheCharacteristic(device))
     .then(characteristics => {
         startNotifications(characteristicCache_tx);
-        let encoder = new TextEncoder('utf-8');
-        let msg = inputField.value;
-        let data = encoder.encode(msg);
-        characteristicCache_rx.writeValue(data);
-        log(msg,'out');
-        inputField.value = "";
     })
     .catch(error => {
         log(error);
@@ -74,16 +68,12 @@ function onDisconnectButtonClick(){
     }
     log("Disconnecting from Bluetooth device...");
     
-    // Remove all event listeners
-    uart_characteristic_rx.removeEventListener('characteristicvaluechanged',handleTxValueChange);
-    
     // disconnect
     if(deviceCache.gatt.connected){
         deviceCache.gatt.disconnect();
     } else {
         log("Bluetooth device is already disconnected");
     }
-    //deviceCache.removeEventListener('gattserverdisconnected', onDisconnected);
 }
 
 // write to characteristic
