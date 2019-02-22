@@ -1,9 +1,10 @@
 
 const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
-const reconnectButton = document.getElementById("reconnect");
+//const reconnectButton = document.getElementById("reconnect");
 const terminalContainer = document.getElementById("terminal");
-const sendForm = document.getElementById("send-form");
+
+const sendButton = document.getElementById("sendData");
 const inputField = document.getElementById("input");
 
 const name_prefix = "BBC micro:bit";
@@ -16,30 +17,28 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
-var buffer = '';
 
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
-});
+})
 
 // Disconnect from the device on Disconnect button click
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
-});
+})
 
+/*
 // Reconnect to last device on Reconnect button click
 reconnectButton.addEventListener('click', function(){
     onReconnectButtonClick();
 })
+*/
 
-// Handle input to form
-sendForm.addEventListener('submit', function(event) {
-  event.preventDefault(); // Prevent form sending
-  send(inputField.value); // Send text field contents
-  inputField.value = '';  // Zero text field
-  inputField.focus();     // Focus on text field
-});
+// Send data to device
+sendButton.addEventListener('click', function(){
+    sendData();
+})
 
 /* ******************* FUNCTIONS ******************* */
 
@@ -50,6 +49,24 @@ function log(data, type = '') {
 
 /* BUTTON FUNCTIONS */
 
+//connect
+function onConnectButtonClick() {
+    return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
+    .then(device => connectDeviceAndCacheCharacteristic(device))
+    .then(characteristics => {
+        startNotifications(characteristicCache_tx);
+        let encoder = new TextEncoder('utf-8');
+        let msg = inputField.value;
+        let data = encoder.encode(msg);
+        characteristicCache_rx.writeValue(data);
+        log(msg,'out');
+        inputField.value = "";
+    })
+    .catch(error => {
+        log(error);
+    });
+}
+
 //disconnect
 function onDisconnectButtonClick(){
     if (!deviceCache) {
@@ -58,7 +75,6 @@ function onDisconnectButtonClick(){
     log("Disconnecting from Bluetooth device...");
     
     // Remove all event listeners
-    //deviceCache.removeEventListener('gattserverdisconnected', onDisconnected);
     uart_characteristic_rx.removeEventListener('characteristicvaluechanged',handleTxValueChange);
     
     // disconnect
@@ -67,8 +83,23 @@ function onDisconnectButtonClick(){
     } else {
         log("Bluetooth device is already disconnected");
     }
+    //deviceCache.removeEventListener('gattserverdisconnected', onDisconnected);
 }
 
+// write to characteristic
+function sendData(){
+    if(!inputField.value && !uart_characteristic_rx) {
+        return;
+    }
+    msg = inputField.value;
+    let encoder = new TextEncoder('utf-8');
+    let data = encoder.encode(msg);
+    characteristicCache_rx.writeValue(data);
+    log(msg,'out');
+    inputField.value = "";
+}
+
+/*
 //reconnect
 function onReconnectButtonClick(){
     if (!deviceCache) {
@@ -83,22 +114,7 @@ function onReconnectButtonClick(){
         log(error);
     });
 }
-
-//connect to device, get all characteristics, listen to tx and write the command "M1:" to rx
-function onConnectButtonClick() {
-    return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
-    .then(device => connectDeviceAndCacheCharacteristic(device))
-    .then(characteristics => {
-        startNotifications(characteristicCache_tx);
-        let encoder = new TextEncoder('utf-8');
-        let msg = encoder.encode("M1:");
-        characteristicCache_rx.writeValue(msg);
-                           
-    })
-    .catch(error => {
-        log(error);
-    });
-}
+*/
 
 /* BLE FUNCTIONS */
 
@@ -110,7 +126,6 @@ function onDisconnected(event) {
 
 //request Bluetooth device with name prefix "BBC micro:bit
 function requestBluetoothDevice() {
-    
     let options = {
     filters: [
         {namePrefix: name_prefix}
@@ -176,29 +191,3 @@ function handleTxValueChange(event) {
   let value = new TextDecoder().decode(event.target.value);
   log(value, 'in');
 }
-
-/* does not work yet:
-
-// Send data to device
-function sendData(data){
-    if (!data || !characteristicCache_rx) {
-        log("Not connected to device or no data to send");
-        return;
-    }
-    if(data.length > 20){
-        log("Data too long");
-    } else {
-        writeToCharacteristic(characteristicCache_rx, data);
-        log(data, 'out');
-    }
-}
-
-//write to characteristic
-function writeToCharacteristic(characteristic, data){
-    let encoder = new TextEncoder('utf-8');
-    let msg = encoder.encode(data);
-    return characteristic.writeValue(msg);
-    log("data sent");
-}
-*/
-
