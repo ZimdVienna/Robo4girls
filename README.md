@@ -23,6 +23,6 @@ Next, connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do mu
 for example, write this in the input field and press send: <b>M1:</b>
 
 <b>If you do not have a buzzer:</b>
-If you do not have a buzzer you can still test the setup and play "the parrot game" with your Micro:bit. Write what ever short text you like (< 19 letters followed by a ":") and click the send button. The micro:bit should repeat what you sent it and add an OK.
+If you do not have a buzzer you can still test the setup and play "the parrot game" with your Micro:bit. Write what ever short text you like (< 19 letters followed by a ":") and click the send button. The micro:bit will scroll the text you sent it and send "OK" when finished.
 
 for example, write this in the input field and press send: <b>You are fun!:</b>
