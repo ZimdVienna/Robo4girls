@@ -192,22 +192,23 @@ const int *BEATS[] = {tusch_b,beat2,starWars_b,superMario_b};
 
 /******************* FUNCTIONS ******************************/
 
+/*
 // ElecFreaks Motor:bit
 void moveBot(ManagedString msg)
 {
     //< moves the robot in given direction
-    
-    ManagedString direction(msg.charAt(1));     //direction given as input
     // ElecFreak Motor:bit pinout:
     // Motor 1 PWM = P1; Motor1 direction = P8 (LOW = CC, HIGH = C)
     // Motor 2 PWM = P2; Motor2 direction = P12(LOW = CC, HIGH = C)
     
     // Each pin is represented by a single bit in 1 Byte: X X X X P12 P2 P8 P1
     // Create a bitmask to set the respective pins high(1) or low(0):
-    unsigned char moveMask = 0;                 //stop (00000000) by default
-    // Create bitmasks for pins                 //pin 1 = 00000001 = 1, pin2 = 00000010 = 2, ...
-    unsigned char m1_pwm = 1, m1_dir = 2, m2_pwm = 4, m2_dir = 8;
+    unsigned char moveMask = 0;                  //stop (00000000) by default
+    // Create bitmasks for motor pins:                 
+    unsigned char m1_pwm = 1, m1_dir = 2, m2_pwm = 4, m2_dir = 8;   //pin 1 = 00000001 = 1, pin2 = 00000010 = 2, ...
     
+    ManagedString direction(msg.charAt(1));     //direction given as input
+
     // set direction
     if(direction == stop){                      //stop for interrupt
         moveMask = 0;   
@@ -236,27 +237,29 @@ void moveBot(ManagedString msg)
     uBit.io.P1.setAnalogValue((m1_pwm & moveMask)* velocity);             //pwm motor1
     uBit.io.P2.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity);   //pwm motor2
 }
+*/
 
-/*
 // Keyestudio Motor Driver Board
 void moveBot(ManagedString msg)
 {
-    //< moves the robot in given direction
+    //<! moves the robot in given direction 
     
-    ManagedString direction(msg.charAt(1));  
-    Enable = pin14
-    Motor1 Direction Clockwise = pin12
-    Motor1 Direction Counter Clockwise = pin13
-    Motor2 Direction Clockwise = pin15
-    Motor2 Direction Counter Clockwise = pin16
+    // Enable = pin14
+    // Motor1 Direction Clockwise = pin12
+    // Motor1 Direction Counter Clockwise = pin13
+    // Motor2 Direction Clockwise = pin15
+    // Motor2 Direction Counter Clockwise = pin16 
+    // Bitmask: X X X P15 P16 P12 P13 P14
+    // Motor1 PWM = pin1
+    // Motor2 PWM = pin2
     
-    Bitmask: X X X P15 P16 P12 P13 P14
-    
-    Motor1 PWM = pin1
-    Motor2 PWM = pin2
+    ManagedString direction(msg.charAt(1));  //direction given as input
     
     unsigned char moveMask = 0;   //stop (00000000)
-    
+    if(direction == stop)
+    {
+        moveMask = 0;
+    }
     if(direction == forward)
     {
         moveMask = 11; //forward (00001011)
@@ -289,10 +292,12 @@ void moveBot(ManagedString msg)
     uBit.io.P16.setDigitalValue((8 & moveMask)/8);
     uBit.io.P14.setDigitalValue(1 & moveMask);    
 }
-*/
+
 
 void playMelody(int songidx)
 {
+    //<! plays melody out of songbook
+    
     for(int i = 0; SONGS[songidx][i] != 0; i++){
             uBit.io.P0.setAnalogValue(511);//set duty cycle
             uBit.io.P0.setAnalogPeriodUs((int)(1000000/SONGS[songidx][i]));
@@ -304,30 +309,55 @@ void playMelody(int songidx)
  
 void onConnected(MicroBitEvent e)
 {
+    //>! reads incoming messages until delimiter ":"
+    //then it scrolls text or moves or plays melody
+    //then it sets all outputs to 0FF and sends "OK"
+    
     ManagedString eom(":");
     uBit.display.scroll("C");
+    
     while(1)
     {
         ManagedString msg = uart->readUntil(eom);
+        uart->send(msg);
         uint32_t duration = 0;
-         
-        if(msg.charAt(0) == 'B'){
-            duration = (uint32_t)((msg.charAt(2)-'0') * 1000);
-            duration = duration + (uint32_t)((msg.charAt(4)-'0') * 100);
-            moveBot(msg);
-            uBit.sleep(duration);
-            moveBot("s");
-        }
-        if(msg.charAt(0) == 'M'){
-            int songidx = (int)(msg.charAt(1)-'0') - 1; //song index in SONGS array
-            if((songidx > storedSongs) || (songidx < 0)){
-                uBit.display.scroll("Unbekanntes Lied");
-            }
-            else{  
+        
+        switch(msg.charAt(0)){
+            case 'B':
+            {
+                //check if input is valid motor input:
+                if((msg.charAt(2)-'0') < 0 || (msg.charAt(2)-'0') > 10){
+                    uBit.display.scroll(msg);
+                    break;
+                }
+                duration = (uint32_t)((msg.charAt(2)-'0') * 1000);
+                duration = duration + (uint32_t)((msg.charAt(4)-'0') * 100);
+                moveBot(msg);
+                uBit.sleep(duration);
+                moveBot("s");
+                break;
+            }  
+            case 'M':
+            {
+                //check if input is valid melody input:
+                if((msg.charAt(1)-'0') < 1 || (msg.charAt(1)-'0') > storedSongs){
+                    uBit.display.scroll(msg);
+                    break;
+                }
+                int songidx = (int)(msg.charAt(1)-'0') - 1; //song index in SONGS array
                 playMelody(songidx);
+                break;
+            }               
+            default:
+            {
+                uBit.display.scroll(msg);
+                break;
             }
         }
+        moveBot("s");                       //turn off motors
+        uBit.io.P0.setAnalogValue(0);       //turn off buzzer pin
         uart->send("OK\n");
+        
     }
 }
 
@@ -343,11 +373,11 @@ int main()
 {
     // Initialise the micro:bit runtime.
     uBit.init();
-    /*
+    
     //serial communication via uart
-    uBit.serial.baud(115200);
+    uBit.serial.baud(9600);
     uBit.serial.send("A\r\n");
-    */
+    
     uBit.messageBus.listen(MICROBIT_ID_BLE, MICROBIT_BLE_EVT_CONNECTED, onConnected);
     uBit.messageBus.listen(MICROBIT_ID_BLE, MICROBIT_BLE_EVT_DISCONNECTED, onDisconnected);
     
