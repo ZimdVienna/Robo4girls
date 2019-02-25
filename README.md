@@ -15,7 +15,7 @@ You can test out the bluetooth communication between our website and a micro:bit
 
 ### Instructions
 
-Connect your micro:bit to your computer via usb and load the R4G_MICROBIT.hex file on to your micro:bit. The R4G_MICROBIT.hex file is in the microbit folder of this repository. 
+Connect your micro:bit to your computer via usb and load one of the R4G_MICROBIT.hex files on to your micro:bit. The R4G_MICROBIT.hex files are in the microbit folder of this repository. If you have either a motor driver board from <a href="https://wiki.keyestudio.com/Ks0308_keyestudio_Motor_Drive_Breakout_Board_for_micro_bit">Keyestudio</a> or <a href="https://www.instructables.com/id/Elecfreaks-Motorbit-User-Guide/">ElecFreaks</a> choose the respective .._KS.hex or .._EF.hex file. Otherwise load either one.
 
 <b>If you have a buzzer:</b>
 Next, connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do much wrong, it does not matter which cable you attach to which pin. On the website connect to your micro:bit, type "M1:", "M2:" or "M3:" (without the quotation marks) in the input field and click send. You should hear the robot play a melody.
