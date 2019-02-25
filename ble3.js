@@ -82,6 +82,12 @@ function sendData(){
         return;
     }
     msg = inputField.value;
+    let max_length = 19;
+    //check if input is longer than 20 byte and trim
+    if(msg.length > max_length){
+        msg = msg.substring(0, max_length);
+        msg = msg + ':';
+    }
     let encoder = new TextEncoder('utf-8');
     let data = encoder.encode(msg);
     characteristicCache_rx.writeValue(data);
@@ -92,14 +98,15 @@ function sendData(){
 /*
 //reconnect
 function onReconnectButtonClick(){
-    if (!deviceCache) {
+    
+    if (!deviceCache){
         return;
     }
     if (deviceCache.gatt.connected) {
         log("Bluetooth device is already connected");
         return;
     }
-    connect()
+    onConnectButtonClick()
     .catch(error => {
         log(error);
     });

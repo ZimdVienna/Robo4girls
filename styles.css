@@ -17,5 +17,16 @@
 }
 
 #terminal div.in {
-    color: blue;
+    color: turquoise;
+}
+
+div.term{
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-left: 20px;
+    background-color: black;
+    max-width: 500px;
+    max-height: 400px;
+    overflow: auto;
+    float: right;
 }
