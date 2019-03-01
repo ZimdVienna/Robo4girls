@@ -69,7 +69,9 @@
         
         <!-- blockly webview -->
         <script>
-            var demoWorkspace = Blockly.inject('blocklyDiv',         {media:'C:\Users\erisa\Documents\GitHub\Robo4girls\media', toolbox: document.getElementById('toolbox')});
+            var demoWorkspace = Blockly.inject('blocklyDiv', {
+                media:'/media', 
+                toolbox: document.getElementById('toolbox')});
         </script>
         
         <!-- play melodie -->
@@ -81,9 +83,9 @@
         </script>
         
         <!-- scripts for unknown stuff, please comment -->
-        <script src="scripts\main.js"></script>
-        <script src="scripts\music_maker.js"></script>
-        <script src="scripts\sound_blocks.js"></script>
+        <script src="scripts/main.js"></script>
+        <script src="scripts/music_maker.js"></script>
+        <script src="scripts/sound_blocks.js"></script>
         <!-- all scripts needed? -->
         
     </body>
