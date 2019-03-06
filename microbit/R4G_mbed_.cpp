@@ -54,11 +54,11 @@ DEALINGS IN THE SOFTWARE.
             |  |                 1..X Melodie (melody number = index in SONG array with X entries)
             Parameter Values:
                |     
-               |    Befehl:          Grenzwerte:     Description:
-               |    directions:      0.0 .. 9.9      Dauer in Sekunden und hundertstel Sekunden 
-               |                                     (duration in seconds as float value, eg. 1.2)
+               |    Befehl:              Grenzwerte:      Description:
+               |    directions:          0.0 .. 9.9       Dauer in Sekunden und hundertstel Sekunden 
+               |                                          (duration in seconds as float value, eg. 1.2)
                |     
-               |    movements:         1 .. 9        Wiederholungen in ganzen Zahlen (Repetitions as integer value)
+               |    combinations / Melody:     1 .. 9        Wiederholungen in ganzen Zahlen (Repetitions as integer value)
                |    
                |    velocity motors: 400 .. 1024     Geschwindigkeit als ganze Zahl (Velocity as integer value from slowest to fastest)
                |
