@@ -17,8 +17,10 @@ You can test out the bluetooth communication between our website and a micro:bit
 
 Connect your micro:bit to your computer via USB and load one of the R4G_MICROBIT.hex files on to your micro:bit. The R4G_MICROBIT.hex files are in the microbit folder of this repository. If you have either a motor driver board from <a href="https://wiki.keyestudio.com/Ks0308_keyestudio_Motor_Drive_Breakout_Board_for_micro_bit">Keyestudio</a> or <a href="https://www.instructables.com/id/Elecfreaks-Motorbit-User-Guide/">ElecFreaks</a> choose the respective <i>..._KS.hex</i> or <i>.._EF.hex</i> file. Otherwise choose either one. If you do not know how to upload a program to your micro:bit you can look it up <a href="https://makecode.microbit.org/device/usb">here</a>.
 
+On the website click the <i>connect</i> button and choose your micro:bit from the list. Don't forget to activate Bluetooth on your device! Wait a bit until it says <i>Notification started</i> in the Terminal. 
+
 <b>If you have a buzzer:</b>
-Next, connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do much wrong, it does not matter which cable you attach to which pin. On the website click the <i>connect</i> button and choose your micro:bit from the list. Don't forget to activate Bluetooth on your device! Type <b>M1:</b>, <b>M2:</b>, <b>M3:</b> or <b>M4:</b> in the <i>input</i> field and click <i>send</i>. You should hear the micro:bit play a melody.
+Connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do much wrong, it does not matter which cable you attach to which pin. Type <b>M1:</b>, <b>M2:</b>, <b>M3:</b> or <b>M4:</b> in the <i>input</i> field and click <i>send</i>. You should hear the micro:bit play a melody.
 
 for example, write this in the input field: <b>M1:</b>, then press <i>send</i>.
 
