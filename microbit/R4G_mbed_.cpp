@@ -42,25 +42,26 @@ DEALINGS IN THE SOFTWARE.
             |  |                R   Rechtskehre (turn around own middle axis: right)
             |  |                L   Linkskehre  (turn around own middle axis: left)
             |  |  K combinations:
-            |  |                T   tanz (dance)
-            |  |                Z   Zick-Zack
-            |  |                P   Pirhouette
+            |  |                T   Tanzen (dance)
+            |  |                Z   Zickzack (Zigzag)
+            |  |                P   Pirouette
+            |  |                S   Schütteln (Shake)
             |  |    
             |  |  G velocity motors:
-            |  |
             |  |                 1   Motor 1
             |  |                 2   Motor 2
+            |  |                 b   Both
             |  |  M Melody:
             |  |                 1..X Melodie (melody number = index in SONG array with X entries)
             Parameter Values:
                |     
                |    Befehl:              Grenzwerte:      Description:
-               |    directions:          0.0 .. 9.9       Dauer in Sekunden und hundertstel Sekunden 
+               |    directions:           0.0 .. 9.9      Dauer in Sekunden und hundertstel Sekunden 
                |                                          (duration in seconds as float value, eg. 1.2)
                |     
-               |    combinations / Melody:     1 .. 9        Wiederholungen in ganzen Zahlen (Repetitions as integer value)
+               |    combinations / Melody:  1 .. 9        Wiederholungen in ganzen Zahlen (Repetitions as integer value)
                |    
-               |    velocity motors: 400 .. 1024     Geschwindigkeit als ganze Zahl (Velocity as integer value from slowest to fastest)
+               |    velocity motors:      400 .. 1024     Geschwindigkeit als ganze Zahl (Velocity as integer value from slowest to fastest)
                |
                : = Ende des Kommandos (end of command)
                 
