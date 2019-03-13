@@ -15,14 +15,28 @@
         <script src="en.js"></script>
         <script src="javascript_compressed.js"></script>
         
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        
         <!-- put style in styles.css file -->
         
     </head>
-    
+     <!--header -->
+     <div class="container-fluid bg-1 text-center">
+        <h3>R4G</h3>
+        <img src="media/r4g.PNG" class="img-circle" style="float:center;width:100px;height:100px;">
+        <h3>Robo4Girls</h3>
+    </div>
+
 
     <body ontouchstart="" id='i2'><!-- ontouchstart="" enables low-delay CSS transitions. -->
   
     <!-- Bluetooth communication -->
+    <div class="container-fluid bg-2 ">
+       
+      <h3>Connect to Bluetooth</h3>
+
         <button id="connect" type="button">Connect</button>
         <button id="disconnect" type="button">Disconnect</button>
  
@@ -36,9 +50,12 @@
         <!-- script for bluetooth communication -->
         <script src="ble3.js"></script>
  
-  
+  </div>
     <!-- R4G programming environment -->
-        
+    <div class="container-fluid bg-3 text-center">
+      <main>
+      <h3>Start programmimng</h3>
+
         <!-- play button starts program -->
         <button onclick="main.handlePlay()" type="button">Play</button>
         
@@ -46,48 +63,25 @@
         <div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
         
     <!-- R4G blocks design --> 
-        <xml id="toolbox" style="display: none">
-            
-            <!-- Repetition / Loop block -->
-            <category name="Loops" colour="120">
-                <block type="controls_repeat_ext">
-                    <value name="TIMES">
-                        <shadow type="math_number">
-                            <field name="NUM">5</field>
-                        </shadow>
-                    </value>
-                </block>
-            </category>
-            
-            <!-- play Sound block -->
-            <category name="Sounds" colour="355">
-                    <block id="sound" type="play_sound"></block>
-            </category>
-            
-        </xml>     
-    <!-- scripts --> <!-- thoroughly comment all the scripts --> 
+    <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+      <category name="Category 1">
+        <block type="controls_if"></block>
+        <block type="vorwaerts"></block>
+        <block type="colour_random"></block>
+      </category>
+    </xml>
+    <!--Making Toolbox visible in Web-browser-->
+    <script>
+      var workspace = Blockly.inject('blocklyDiv',
+          {toolbox: document.getElementById('toolbox')});
+    </script>
         
-        <!-- blockly webview -->
-        <script>
-            var demoWorkspace = Blockly.inject('blocklyDiv', {
-                media:'media/', 
-                toolbox: document.getElementById('toolbox')});
-        </script>
+       
         
-        <!-- play melodie -->
-        <script> 
-            var vid = block.getElementById("sound");
-            function playSound() { 
-                vid.play(); 
-            } 
-        </script>
-        
-        <!-- scripts for unknown stuff, please comment -->
-        <script src="scripts/main.js"></script>
-        <script src="scripts/music_maker.js"></script>
-        <script src="scripts/sound_blocks.js"></script>
-        <!-- all scripts needed? -->
-        
+        <!--footer-->
+        <footer class="container-fluid bg-4 text-center">
+          <p>   </p>
+         </footer>
     </body>
 
 </html>

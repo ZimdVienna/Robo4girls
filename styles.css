@@ -30,3 +30,26 @@ div.term{
     overflow: auto;
     float: right;
 }
+.bg-1 { 
+    background-image: url("media/bg.PNG");
+    color: #ffffff;
+    background-position: 100% 100%;
+    background-size: 100% 100%;
+    display: inline;
+    float: left;
+    height: 220px;
+    position: relative;
+    width: 100%;
+  }
+.bg-2 { 
+    background-color: #e066ff; 
+    color: #ffffff
+  }
+.bg-3 { 
+    background-color: #eeeee0; 
+    color: #555555;
+  }
+.bg-4 { 
+background-color: #eae6df;
+
+}
