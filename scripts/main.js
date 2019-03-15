@@ -22,7 +22,7 @@
     loadWorkspace(event.target);
     Blockly.JavaScript.addReservedWords('code');
     var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-    code += 'MusicMaker.play();';
+    //code += 'MusicMaker.play();';
     // Eval can be dangerous. For more controlled execution, check
     // https://github.com/NeilFraser/JS-Interpreter.
     try {
@@ -32,6 +32,7 @@
     }
   }
 
+/*
   function loadWorkspace(button) {
     let workspace = Blockly.getMainWorkspace();
     workspace.clear();
@@ -39,12 +40,16 @@
       Blockly.Xml.domToWorkspace(button.blocklyXml, workspace);
     }
   }
+*/
 
+/*
   function save(button) {
     let xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     button.blocklyXml = xml;
   }
+*/
 
+/*
   function handleSave() {
     document.body.setAttribute('mode', 'edit');
     save(currentButton);
@@ -57,7 +62,9 @@
       btn.addEventListener('click', enableBlocklyMode);
     });
   }
+*/
 
+/*	 
   function enableMakerMode() {
     document.body.setAttribute('mode', 'maker');
     document.querySelectorAll('.button').forEach(btn => {
@@ -65,19 +72,21 @@
       btn.removeEventListener('click', enableBlocklyMode);
     });
   }
-
+*/
+	 /*
   function enableBlocklyMode(e) {
     document.body.setAttribute('mode', 'blockly');
-    currentButton = e.target;
+    //currentButton = e.target;
     loadWorkspace(currentButton);
-  }
+  }*/
 
-  document.querySelector('#edit').addEventListener('click', enableEditMode);
-  document.querySelector('#done').addEventListener('click', enableMakerMode);
-  document.querySelector('#save').addEventListener('click', handleSave);
+  //document.querySelector('#edit').addEventListener('click', enableEditMode);
+  //document.querySelector('#done').addEventListener('click', enableMakerMode);
+  //document.querySelector('#save').addEventListener('click', handleSave);
+  //document.querySelector('#play').addEventListener('click', handlePlay);
 
-  enableMakerMode();
-
+  //enableMakerMode();
+/*
   Blockly.inject('blockly-div', {
     media: '../../../media/',
     toolbox: document.getElementById('toolbox'),
@@ -85,4 +94,5 @@
     horizontalLayout: true,
     scrollbars: false
   });
+  */
 })();

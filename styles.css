@@ -21,35 +21,33 @@
 }
 
 div.term{
-    margin-top: 20px;
+    margin-top: 90px;
     margin-right: 20px;
     padding-left: 20px;
     background-color: black;
-    max-width: 500px;
+	outline-width: 0;
+    max-width: 300px;
     max-height: 400px;
     overflow: auto;
     float: right;
 }
-.bg-1 { 
+.zimd_header { 
     background-image: url("media/bg.PNG");
-    color: #ffffff;
+    color: black;
     background-position: 100% 100%;
     background-size: 100% 100%;
     display: inline;
-    float: left;
+    float: middle;
     height: 220px;
     position: relative;
     width: 100%;
   }
-.bg-2 { 
+.bluetooth { 
     background-color: #e066ff; 
-    color: #ffffff
+    color: black;
   }
-.bg-3 { 
-    background-color: #eeeee0; 
-    color: #555555;
-  }
-.bg-4 { 
-background-color: #eae6df;
-
+.workspace{ 
+	background-color: #eae6df;
+	padding-bottom: 20px;
+	float: left;
 }
