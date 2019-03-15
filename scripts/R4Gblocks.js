@@ -20,7 +20,7 @@
 	Blockly.JavaScript['forward'] = function(block) {
 	  var number_forward_duration = block.getFieldValue('forward_duration');
 	  // TODO: Assemble JavaScript into code variable.	
-	  var code = "Bv" + number_forward_duration +":";
+	  var code = "Bv" + number_forward_duration +".0:";
 	  console.log("forward block duration:"+ code);	
 	  return code;
 	};
