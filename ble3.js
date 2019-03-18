@@ -45,6 +45,8 @@ sendButton.addEventListener('click', function(){
 // Output to terminal
 function log(data, type = '') {
     terminalContainer.insertAdjacentHTML('beforeend','<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
+    // auto scroll... we always see the last in-/out-put
+    terminalContainer.scrollTop = terminalContainer.scrollHeight;
 }
 
 /* BUTTON FUNCTIONS */

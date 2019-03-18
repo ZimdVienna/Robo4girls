@@ -10,6 +10,7 @@
 
 #terminal div {
     color: gray;
+    overflow: auto;
 }
 
 #terminal div.out {
@@ -37,10 +38,10 @@ div.term{
     background-position: 100% 100%;
     background-size: 100% 100%;
     display: inline;
-    float: middle;
-    height: 220px;
+    /*float: middle;
+    height: 220px;*/
     position: relative;
-    width: 100%;
+   /* width: 100%;*/
   }
 .bluetooth { 
     background-color: #e066ff; 
@@ -50,4 +51,8 @@ div.term{
 	background-color: #eae6df;
 	padding-bottom: 20px;
 	float: left;
+}
+#blocklyDiv{
+    height:50%;
+    width: 100%;
 }
