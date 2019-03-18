@@ -32,7 +32,7 @@ div.term{
 }
 .bg-1 { 
     background-image: url("media/bg.PNG");
-    color: #ffffff;
+    color: black;
     background-position: 100% 100%;
     background-size: 100% 100%;
     display: inline;
