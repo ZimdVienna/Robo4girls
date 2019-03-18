@@ -2,20 +2,22 @@
 
 	//forward	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
 	Blockly.Blocks['forward'] = {
-	  init: function() {
-		this.appendDummyInput()
-			.appendField("Vorwärts")
-			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "forward_duration")
-			.appendField("Sekunden");
-		this.setInputsInline(false);
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour(230);
+		init: function() {
+			this.appendDummyInput()
+					.appendField("Vorwärts")
+					.appendField("für")
+					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "forward_duration")
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"));
+			this.setInputsInline(false);
+			this.setPreviousStatement(true, null);
+			this.setNextStatement(true, null);
+			this.setColour(230);
 	 this.setTooltip("");
 	 this.setHelpUrl("");
-	  }
+		}
 	};
+	
 
 	Blockly.JavaScript['forward'] = function(block) {
 	  var number_forward_duration = block.getFieldValue('forward_duration');
@@ -38,7 +40,8 @@
 					.appendField("Rückwärts")
 					.appendField("für")
 					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "back_duration")
-					.appendField("Sekunden");
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"));
 			this.setInputsInline(false);
 			this.setPreviousStatement(true, null);
 			this.setNextStatement(true, null);
@@ -66,7 +69,8 @@
 					.appendField("Links")
 					.appendField("für")
 					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "left_duration")
-					.appendField("Sekunden");
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/left.gif", 20, 20, "*"));
 			this.setInputsInline(false);
 			this.setPreviousStatement(true, null);
 			this.setNextStatement(true, null);
@@ -94,7 +98,8 @@
 					.appendField("Rechts")
 					.appendField("für")
 					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "right_duration")
-					.appendField("Sekunden");
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/right.gif", 20, 20, "*"));
 			this.setInputsInline(false);
 			this.setPreviousStatement(true, null);
 			this.setNextStatement(true, null);
@@ -122,7 +127,8 @@
 					.appendField("Linkskehre")
 					.appendField("für")
 					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "turn_left_duration")
-					.appendField("Sekunden");
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/turn_left.gif", 20, 20, "*"));
 			this.setInputsInline(false);
 			this.setPreviousStatement(true, null);
 			this.setNextStatement(true, null);
@@ -131,7 +137,7 @@
 	 this.setHelpUrl("");
 		}
 	};
-	 // Rechtskehre (R) 
+	
 	 Blockly.JavaScript['turn_left'] = function(block) {
 		var number_turn_left_duration = block.getFieldValue('turn_left_duration');
 		// TODO: Assemble JavaScript into code variable.
@@ -151,7 +157,8 @@
 					.appendField("Rechtskehre")
 					.appendField("für")
 					.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "turn_right_duration")
-					.appendField("Sekunden");
+					.appendField("Sekunden")
+					.appendField(new Blockly.FieldImage("./media/turn_right.gif", 20, 20, "*"));
 			this.setInputsInline(false);
 			this.setPreviousStatement(true, null);
 			this.setNextStatement(true, null);
@@ -175,6 +182,121 @@
 	 // Stopp (s)
 
 /******* Combinations (Kombinationen K) **********/
+//Dance
+Blockly.Blocks['dance'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Tanze")
+        .appendField(new Blockly.FieldNumber(1, 0, 9), "Repetition")
+        .appendField("mal")
+        .appendField(new Blockly.FieldDropdown([["sanft","easy"], ["mittel","middle"], ["stark","strong"]]), "itensity");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['dance'] = function(block) {
+  var number_repetition = block.getFieldValue('Repetition');
+  var dropdown_itensity = block.getFieldValue('itensity');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+//Zigzag
+Blockly.Blocks['zigzag'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Zickzack")
+        .appendField(new Blockly.FieldNumber(1, 0, 9), "repeat")
+        .appendField("mal")
+        .appendField(new Blockly.FieldDropdown([["sanft","easy"], ["mittel","middle"], ["stark","strong"]]), "itensity");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['zigzag'] = function(block) {
+  var number_repeat = block.getFieldValue('repeat');
+  var dropdown_itensity = block.getFieldValue('itensity');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
+//shake
+Blockly.Blocks['shake'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Schütteln")
+        .appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
+        .appendField("mal")
+        .appendField(new Blockly.FieldDropdown([["sanft","easy"], ["mittel","middle"], ["stark","strong"]]), "itensity");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['shake'] = function(block) {
+  var number_repeat = block.getFieldValue('repeat');
+  var dropdown_itensity = block.getFieldValue('itensity');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+ //Pirouette
+ Blockly.Blocks['pirouette'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Pirouette")
+        .appendField(new Blockly.FieldNumber(1, 0, 9, 1), "Repetition")
+        .appendField("mal")
+        .appendField(new Blockly.FieldDropdown([["Links","left"], ["Rechts","right"]]), "itensity");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(330);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['pirouette'] = function(block) {
+  var number_repetition = block.getFieldValue('Repetition');
+  var dropdown_itensity = block.getFieldValue('itensity');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+/*********** Melody (Melodie M) ********************/
+Blockly.Blocks['melody'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Melodie  abspielen")
+        .appendField(new Blockly.FieldDropdown([["Tusch","M1"], ["Romantisch","M2"], ["Star Wars","M3"]]), "melody");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(0);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+Blockly.JavaScript['melody'] = function(block) {
+  var dropdown_melody = block.getFieldValue('melody');
+  // TODO: Assemble JavaScript into code variable.
+  var code = '...;\n';
+  return code;
+};
+
 
 
 

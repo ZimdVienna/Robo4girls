@@ -91,16 +91,49 @@
 			<!-- R4G blocks design --> 
 			<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 				<!-- Category Movements -->
-				<category name="Bewegungen" color="210">
+				<category name="Bewegungen" colour="#5b5ba5">
 					<block type="forward">
 						<field name="forward_duration">0.1</field>
 					</block>
-					
-          <block type="repetition">
-            <field name="repetition">0.1</field>
-           </block>
-        </category>
-        
+					<block type="back">
+						<field name="back_duration">0.1</field>
+					</block>
+					<block type="left">
+						<field name="left_duration">0.1</field>
+					</block>
+					<block type="right">
+						<field name="right_duration">0.1</field>
+					</block>
+					<block type="turn_left">
+						<field name="turn_left_duration">0.1</field>
+					</block>
+					<block type="turn_right">
+						<field name="turn_right_duration">0.1</field>
+					</block>
+				</category>
+				<category name="Kombinationen" colour="#a55b6d">
+					<block type="dance">
+						<field name="Repetition">1</field>
+						<field name="itensity">easy</field>
+					</block>
+					<block type="zigzag">
+						<field name="repeat">1</field>
+						<field name="itensity">easy</field>
+					</block>
+					<block type="shake">
+						<field name="repeat">1</field>
+						<field name="itensity">easy</field>
+					</block>
+					<block type="pirouette">
+						<field name="Repetition">1</field>
+						<field name="itensity">left</field>
+					</block>
+				</category>
+				<category name="Melodie" colour="#a55b5b">
+					<block type="melody">
+						<field name="melody">M1</field>
+					</block>
+				</category>
 			</xml>
 			
     		<!-- Making Toolbox visible in Web-browser -->
