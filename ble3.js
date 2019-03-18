@@ -85,10 +85,12 @@ function sendData(msg){
     }
     let max_length = 19;
     //check if input is longer than 20 byte and trim
-    if(msg.length > max_length){
+    /*
+	if(msg.length > max_length){
         msg = msg.substring(0, max_length);
         msg = msg + ':';
     }
+	*/
     let encoder = new TextEncoder('utf-8');
     let data = encoder.encode(msg);
     characteristicCache_rx.writeValue(data);

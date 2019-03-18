@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 
     <head>
@@ -58,26 +58,24 @@
       		<h3>Start programmimng</h3>
 
 			<script>
-				
 				function handlePlay(event){
     				Blockly.JavaScript.addReservedWords('code');
     				var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
     				
-            var splitCode = code.split(" ");
-            //saves every code till to the : in an index of the splitCode Array
-            for(i = 0; i < splitCode.length; i++){
-              try {
-                  console.log("function handle Play:" + splitCode[i]);
-                  // Eval can be dangerous. For more controlled execution, check
-    				      // https://github.com/NeilFraser/JS-Interpreter.
-									eval(sendData(splitCode[i]));
-								  sleep(3000);
+					
+            		var splitCode = code.split(" ");
+            		//saves every code till to the : in an index of the splitCode Array
+            		for(i = 0; i < splitCode.length-1; i++){
+              			try {
+                  			console.log("function handle Play:" + splitCode[i]);
+                  			// Eval can be dangerous. For more controlled execution, check
+    				    	// https://github.com/NeilFraser/JS-Interpreter.
+							eval(sendData(splitCode[i]));
+							//sleep(3000);
 				    	} catch (error) {
 					        console.log(error);
 				    	}
-            }
-						
-					
+            		}
 				}
 			</script>
 			
@@ -95,10 +93,13 @@
 					<block type="forward">
 						<field name="forward_duration">0.1</field>
 					</block>
+					<block type="back">
+						<field name="back_duration">0.1</field>
+					</block>
 					
-          <block type="repetition">
-            <field name="repetition">0.1</field>
-           </block>
+          			<block type="repetition">
+            			<field name="repetition">0.1</field>
+           			</block>
         </category>
         
 			</xml>

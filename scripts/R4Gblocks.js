@@ -1,22 +1,38 @@
 /******** Movements (Bewegungen B) **********/
 
-	//forward	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
-	Blockly.Blocks['forward'] = {
-	  init: function() {
-		this.appendDummyInput()
-			.appendField("Vorwärts")
-			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "forward_duration")
-			.appendField("Sekunden");
-		this.setInputsInline(false);
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour(230);
-	 this.setTooltip("");
-	 this.setHelpUrl("");
-	  }
-	};
+//forward	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
+Blockly.Blocks['forward'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Vorwärts")
+        .appendField("für")
+        .appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "forward_duration")
+        .appendField("Sekunden")
+        .appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"));
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
 
+Blockly.JavaScript['forward'] = function(block) {
+  	var number_forward_duration = block.getFieldValue('forward_duration');
+	// TODO: Assemble JavaScript into code variable.
+	// Checking if a number is a float
+	if (number_forward_duration %1 != 0) {
+		var code = "Bv" + number_forward_duration +": ";
+		console.log("forward block duration:"+ code);	
+	}	else {
+		var code = "Bv" + number_forward_duration +".0: ";
+		console.log("forward block duration:"+ code);	
+	}
+  	return code;
+};
+
+/*
 	Blockly.JavaScript['forward'] = function(block) {
 	  var number_forward_duration = block.getFieldValue('forward_duration');
 		// TODO: Assemble JavaScript into code variable.
@@ -30,7 +46,40 @@
 		}
 	  return code;
 	};
+*/
 
+// backwards	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#xf4grh
+Blockly.Blocks['back'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Rückwärts")
+        .appendField("für")
+        .appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "back_duration")
+        .appendField("Sekunden")
+        .appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"));
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['back'] = function(block) {
+  var number_back_duration = block.getFieldValue('back_duration');
+  // TODO: Assemble JavaScript into code variable.
+  if (number_back_duration %1 != 0) {
+	var code = "Bz" + number_back_duration +": ";
+	console.log("back block duration:"+ code);	
+	} else {
+		var code = "Bz" + number_back_duration +".0: ";
+		console.log("back block duration:"+ code);	
+	}
+  return code;
+};
+
+/*
 	//backwards
 	Blockly.Blocks['back'] = {
 		init: function() {
@@ -47,6 +96,7 @@
 	 this.setHelpUrl("");
 		}
 	};
+
 	Blockly.JavaScript['back'] = function(block) {
 		var number_back_duration = block.getFieldValue('back_duration');
 		// TODO: Assemble JavaScript into code variable.
@@ -175,7 +225,6 @@
 	 // Stopp (s)
 
 /******* Combinations (Kombinationen K) **********/
-
 
 
 
