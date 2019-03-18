@@ -37,7 +37,7 @@ reconnectButton.addEventListener('click', function(){
 
 // Send data to device
 sendButton.addEventListener('click', function(){
-    sendData();
+    sendData(inputField.value);
 });
 
 /* ******************* FUNCTIONS ******************* */
@@ -77,11 +77,10 @@ function onDisconnectButtonClick(){
 }
 
 // write to characteristic
-function sendData(){
-    if(!inputField.value && !uart_characteristic_rx) {
+function sendData(msg){
+    if(!msg && !uart_characteristic_rx) {
         return;
     }
-    msg = inputField.value;
     let max_length = 19;
     //check if input is longer than 20 byte and trim
     if(msg.length > max_length){

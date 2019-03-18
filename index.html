@@ -9,79 +9,104 @@
         <link href="styles.css" rel="stylesheet">
         
         <title>R4G</title>
-        
-        <script src="blockly_compressed.js"></script>
+		  
+		<!-- scripts for blockly code -->
+		<script src="blockly_compressed.js"></script>
         <script src="blocks_compressed.js"></script>
-        <script src="en.js"></script>
+        <script src="js/en.js"></script>
         <script src="javascript_compressed.js"></script>
-        
+		
+		<!-- something here seems to disturb bluetooth connection
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-        
-        <!-- put style in styles.css file -->
+		-->	
         
     </head>
-     <!--header -->
-     <div class="container-fluid bg-1 text-center">
-        <h3>R4G</h3>
-        <img src="media/r4g.PNG" class="img-circle" style="float:center;width:100px;height:100px;">
-        <h3>Robo4Girls</h3>
-    </div>
+	
+    <!-- header -->
+	<div class="container-fluid zimd_header text-center">
+     	<h3>R4G</h3>
+      	<img src="media/r4g.PNG" class="img-circle" style="float:center;width:100px;height:100px;">
+      	<h3>Robo4Girls</h3>
+	</div>
 
-
+	<!-- body -->
     <body ontouchstart="" id='i2'><!-- ontouchstart="" enables low-delay CSS transitions. -->
   
-    <!-- Bluetooth communication -->
-    <div class="container-fluid bg-2 ">
-       
-      <h3>Connect to Bluetooth</h3>
+		<!-- Bluetooth communication -->
+		<!--<div class="container-fluid bluetooth "> -->
+		  <h3>Connect to Bluetooth</h3>
 
-        <button id="connect" type="button">Connect</button>
-        <button id="disconnect" type="button">Disconnect</button>
- 
-        <!-- input file and button for sending data -->
-        <input id="input" type="text"/>
-        <button id="sendData" type="button">Send</button>
-        
-        <!-- terminal, text color changes: debug=grey, input=blue, output=red -->
-        <div class="term" id="terminal"></div>
-        
-        <!-- script for bluetooth communication -->
-        <script src="ble3.js"></script>
- 
-  </div>
-    <!-- R4G programming environment -->
-    <div class="container-fluid bg-3 text-center">
-      <main>
-      <h3>Start programmimng</h3>
+			<button id="connect" type="button">Connect</button>
+			<button id="disconnect" type="button">Disconnect</button>
 
-        <!-- play button starts program -->
-        <button onclick="main.handlePlay()" type="button">Play</button>
+			<!-- input file and button for sending data -->
+			<input id="input" type="text"/>
+			<button id="sendData" type="button">Send</button>
+
+			<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
+			<div class="term" id="terminal"></div>
+
+			<!-- script for bluetooth communication -->
+			<script type="text/javascript" src="ble3.js"></script>
+
+	 	<!--</div> -->
+		
+    	<!-- R4G programming environment -->
+   		<!--<div class="container-fluid workspace text-center">-->
+      		<h3>Start programmimng</h3>
+
+			<script>
+				
+				function handlePlay(event){
+    				Blockly.JavaScript.addReservedWords('code');
+    				var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+    				// Eval can be dangerous. For more controlled execution, check
+    				// https://github.com/NeilFraser/JS-Interpreter.
+					
+					try {
+						console.log("function handle Play: " + code);
+						eval(sendData(code));
+					} catch (error) {
+					console.log(error);
+					}
+					
+				}
+			</script>
+			
+			<!-- play button starts program -->
+			<button onclick="handlePlay()" type="button">Play</button>
+			
+
+			<!-- blockly programming window -->
+			<div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
         
-        <!-- blockly programming window -->
-        <div id="blocklyDiv" style="height: 400px; width: 600px;"></div>
-        
-    <!-- R4G blocks design --> 
-    <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
-      <category name="Category 1">
-        <block type="controls_if"></block>
-        <block type="vorwaerts"></block>
-        <block type="colour_random"></block>
-      </category>
-    </xml>
-    <!--Making Toolbox visible in Web-browser-->
-    <script>
-      var workspace = Blockly.inject('blocklyDiv',
-          {toolbox: document.getElementById('toolbox')});
-    </script>
-        
-       
-        
-        <!--footer-->
-        <footer class="container-fluid bg-4 text-center">
-          <p>   </p>
-         </footer>
+			<!-- R4G blocks design --> 
+			<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+				<!-- Category Movements -->
+				<category name="Bewegungen" color="210">
+					<block type="forward">
+						<field name="forward_duration">0.1</field>
+					</block>
+				</category>
+			</xml>
+			
+    		<!-- Making Toolbox visible in Web-browser -->
+			<script>
+		  		var workspace = Blockly.inject('blocklyDiv',{
+					media: 'media/',
+					toolbox:document.getElementById('toolbox')
+				});
+			</script>
+			
+			
+			<!-- Blockly scripts -->
+			<script src="scripts/R4Gblocks.js"></script>
+			
+		<!--</div>	<!-- container workspace -->
+		
+
     </body>
 
 </html>
