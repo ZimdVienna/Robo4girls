@@ -61,8 +61,6 @@
 			    function handlePlay(event){
     				Blockly.JavaScript.addReservedWords('code');
     				var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-    				
-					
             			var splitCode = code.split(" ");
             			//saves every code till to the : in an index of the splitCode Array
             			for(i = 0; i < splitCode.length-1; i++){
