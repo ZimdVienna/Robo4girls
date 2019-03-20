@@ -301,7 +301,9 @@ Blockly.Blocks['melody'] = {
 Blockly.JavaScript['melody'] = function (block) {
 	var dropdown_melody = block.getFieldValue('melody');
 	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
+	
+	var code = dropdown_melody + ':';
+	console.log(code);
 	return code;
 };
 /*********Settings (Einstellungen G)*****************/
