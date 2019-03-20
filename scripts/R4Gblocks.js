@@ -173,7 +173,7 @@ Blockly.JavaScript['turn_right'] = function (block) {
 	var number_turn_right_duration = block.getFieldValue('turn_right_duration');
 	// TODO: Assemble JavaScript into code variable.
 	if (number_turn_right_duration % 1 != 0) {
-		var code = "BR" + number_forward_duration + ": ";
+		var code = "BR" + number_turn_right_duration + ": ";
 
 	} else {
 		var code = "BR" + number_turn_right_duration + ".0: ";
@@ -301,7 +301,6 @@ Blockly.Blocks['melody'] = {
 Blockly.JavaScript['melody'] = function (block) {
 	var dropdown_melody = block.getFieldValue('melody');
 	// TODO: Assemble JavaScript into code variable.
-	
 	var code = dropdown_melody + ':';
 	console.log(code);
 	return code;
@@ -309,24 +308,25 @@ Blockly.JavaScript['melody'] = function (block) {
 /*********Settings (Einstellungen G)*****************/
 //LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#6rdmxe
 Blockly.Blocks['motor'] = {
-	init: function () {
-		this.appendDummyInput()
-			.appendField("Motor")
-			.appendField(new Blockly.FieldDropdown([["1", "motor1"], ["2", "motor2"], ["option", "OPTIONNAME"]]), "motor")
-			.appendField("Leistung:")
-			.appendField(new Blockly.FieldNumber(400, 400, 1024, 400), "velocity");
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour(60);
-		this.setTooltip("");
-		this.setHelpUrl("");
-	}
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Motor")
+        .appendField(new Blockly.FieldDropdown([["1","1"], ["2","2"], ["1+2","b"]]), "motor")
+        .appendField("Leistung:")
+        .appendField(new Blockly.FieldNumber(400, 400, 1024, 400), "velocity");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(60);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
 };
 Blockly.JavaScript['motor'] = function (block) {
 	var dropdown_motor = block.getFieldValue('motor');
 	var number_velocity = block.getFieldValue('velocity');
 	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
+	var code = 'G'+dropdown_motor+ number_velocity+":";
+	console.log(code);
 	return code;
 };
 /****************LED-Display */
