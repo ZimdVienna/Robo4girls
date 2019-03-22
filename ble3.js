@@ -1,7 +1,6 @@
 
 const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
-//const reconnectButton = document.getElementById("reconnect");
 const terminalContainer = document.getElementById("terminal");
 
 const sendButton = document.getElementById("sendData");
@@ -17,7 +16,6 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
-
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
@@ -27,13 +25,6 @@ connectButton.addEventListener('click', function(){
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
 });
-
-/*
-// Reconnect to last device on Reconnect button click
-reconnectButton.addEventListener('click', function(){
-    onReconnectButtonClick();
-});
-*/
 
 // Send data to device
 sendButton.addEventListener('click', function(){
@@ -95,26 +86,6 @@ function sendData(msg) {
     log(msg, 'out');
     inputField.value = "";
 }
-
-/*
-//reconnect
-function onReconnectButtonClick(){
-    
-    if (!deviceCache){
-        return;
-    }
-    if (deviceCache.gatt.connected) {
-        log("Bluetooth device is already connected");
-        return;
-    }
-    onConnectButtonClick()
-    .catch(error => {
-        log(error);
-    });
-}
-*/
-
-/* BLE FUNCTIONS */
 
 //checks for connection loss
 function onDisconnected(event) {

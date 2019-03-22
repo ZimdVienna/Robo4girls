@@ -61,7 +61,6 @@
 	<h3>Start programming</h3>
 
 	<script>
-
 		function handlePlay(event) {
 			Blockly.JavaScript.addReservedWords('code');
 			var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
@@ -70,12 +69,10 @@
 				// Eval can be dangerous. For more controlled execution, check
 				// https://github.com/NeilFraser/JS-Interpreter.
 				eval(sendData(code));
-			} 
-			catch (error) {
+			} catch (error) {
 				console.log(error);
 			}
 		}
-		
 	</script>
 
 	<!-- play button starts program -->
@@ -152,11 +149,7 @@
 				<field name="repetition">1</field>
 			</block>
 		</category>
-		<!--
-		<block type="repetition">
-			<field name="repetition">0.1</field>
-		</block>
-	</xml>-->
+	</xml>
 
 	<!-- Making Toolbox visible in Web-browser -->
 	<script>
@@ -166,12 +159,8 @@
 		})
 	</script>
 
-
 	<!-- Blockly scripts -->
 	<script src="scripts/R4Gblocks.js"></script>
-
-	<!--</div>	 container workspace -->
-
 
 </body>
 
