@@ -79,22 +79,20 @@ function onDisconnectButtonClick(){
 }
 
 // write to characteristic
-function sendData(msg){
-    if(!msg && !uart_characteristic_rx) {
+function sendData(msg) {
+    if (!msg && !uart_characteristic_rx) {
         return;
     }
     let max_length = 19;
     //check if input is longer than 20 byte and trim
-    /*
-	if(msg.length > max_length){
+    if (msg.length > max_length) {
         msg = msg.substring(0, max_length);
         msg = msg + ':';
     }
-	*/
     let encoder = new TextEncoder('utf-8');
     let data = encoder.encode(msg);
     characteristicCache_rx.writeValue(data);
-    log(msg,'out');
+    log(msg, 'out');
     inputField.value = "";
 }
 
