@@ -56,14 +56,30 @@
 		function handlePlay(event) {
 			Blockly.JavaScript.addReservedWords('code');
 			var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-			try {
-				console.log("function handle Play:" + code);
-				// Eval can be dangerous. For more controlled execution, check
-				// https://github.com/NeilFraser/JS-Interpreter.
-				eval(sendData(code));
-			} catch (error) {
-				console.log(error);
+			
+			var commands = code.split(":");
+			var max_length = 19;
+			for(var i = 0; i < commands.length; i++){
+				if(commands[i].length > max_length){
+					commands[i]= commands[i].substring(0, max_length);
+				}
+				commands[i] += ":";
+				console.log(commands[i]);
 			}
+			
+			return sendData(commands, 0);
+			/*
+			while(count < commands.length){
+				try {
+					console.log("function handle Play:" + commands[count]);
+					return sendData(commands[count],count);
+					console.log(status + " from index.html");
+				} catch (error) {
+					console.log(error);
+				}
+			}
+			*/
+			
 		}
 	</script>
 

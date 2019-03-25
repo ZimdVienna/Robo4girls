@@ -336,7 +336,7 @@ Blockly.Blocks['show_text'] = {
 Blockly.JavaScript['show_text'] = function (block) {
 	var text_led_text = block.getFieldValue('led_text');
 	// TODO: Assemble JavaScript into code variable.
-	var code = text_led_text + ':';
+	var code = text_led_text + ":";
 	return code;
 };
 // Show a picture LINK.https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#kbbzas

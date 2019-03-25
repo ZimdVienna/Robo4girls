@@ -68,22 +68,31 @@ function onDisconnectButtonClick(){
     }
 }
 
+
 // write to characteristic
-function sendData(msg) {
-    if (!msg && !uart_characteristic_rx) {
+function sendData(commands, counter) {
+    if (!commands && !characteristicCache_rx) {
         return;
     }
-    let max_length = 19;
-    //check if input is longer and trim
-    if (msg.length > max_length) {
-        msg = msg.substring(0, max_length);
-        msg = msg + ':';
-    }
-    let encoder = new TextEncoder('utf-8');
-    let data = encoder.encode(msg);
-    characteristicCache_rx.writeValue(data);
-    log(msg, 'out');
-    inputField.value = "";
+    	let encoder = new TextEncoder('utf-8');
+    	let data = encoder.encode(commands[counter]);
+    	characteristicCache_rx.writeValue(data);
+    	log(commands[counter], 'out');
+    	inputField.value = "";
+		var promise = new Promise(async function(resolve,reject){
+			characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
+				let decoder = new TextDecoder();
+				let value = decoder.decode(event.target.value);
+  				resolve(counter + 1);
+			});
+		})
+		.then(function(counter){
+			//send_next_command
+			log("success " + counter);
+			if(counter < commands.length-1){
+				sendData(commands, counter);
+			}
+		});
 }
 
 function onDisconnected(event) {
