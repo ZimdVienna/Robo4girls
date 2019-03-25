@@ -48,7 +48,7 @@ Blockly.Blocks['back'] = {
 		this.appendDummyInput()
 			.appendField("Rückwärts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "back_duration")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "back_duration")
 			.appendField("Sekunden")
 			//.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"))
 		;
@@ -75,7 +75,7 @@ Blockly.Blocks['left'] = {
 		this.appendDummyInput()
 			.appendField("Links")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "left_duration")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "left_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -96,7 +96,7 @@ Blockly.Blocks['right'] = {
 		this.appendDummyInput()
 			.appendField("Rechts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "right_duration")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "right_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -118,7 +118,7 @@ Blockly.Blocks['turn_left'] = {
 		this.appendDummyInput()
 			.appendField("Linkskehre")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "turn_left_duration")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "turn_left_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -142,7 +142,7 @@ Blockly.Blocks['turn_right'] = {
 		this.appendDummyInput()
 			.appendField("Rechtskehre")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "turn_right_duration")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "turn_right_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
