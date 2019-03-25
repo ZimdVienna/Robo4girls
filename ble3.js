@@ -48,6 +48,7 @@ function onConnectButtonClick() {
     .then(device => connectDeviceAndCacheCharacteristic(device))
     .then(characteristics => {
         startNotifications(characteristicCache_tx);
+		log('Notifications started!');
     })
     .catch(error => {
         log(error);
@@ -60,8 +61,6 @@ function onDisconnectButtonClick(){
         return;
     }
     log("Disconnecting from Bluetooth device...");
-    
-    // disconnect
     if(deviceCache.gatt.connected){
         deviceCache.gatt.disconnect();
     } else {
@@ -75,7 +74,7 @@ function sendData(msg) {
         return;
     }
     let max_length = 19;
-    //check if input is longer than 20 byte and trim
+    //check if input is longer and trim
     if (msg.length > max_length) {
         msg = msg.substring(0, max_length);
         msg = msg + ':';
@@ -87,9 +86,7 @@ function sendData(msg) {
     inputField.value = "";
 }
 
-//checks for connection loss
 function onDisconnected(event) {
-  // Object event.target is Bluetooth Device getting disconnected.
   log("Bluetooth Device disconnected");
 }
 
@@ -107,7 +104,7 @@ function requestBluetoothDevice() {
     .then(device => {
         deviceCache = device;
         deviceCache.addEventListener('gattserverdisconnected', onDisconnected); // watch connection
-        log('"' + deviceCache.name + '" bluetooth device selected');
+        log('"' + deviceCache.name);
         return deviceCache;
     })
     .catch(error => {
@@ -121,22 +118,18 @@ function connectDeviceAndCacheCharacteristic(device){
     if(device.gatt.connected && characteristicCache_rx) {
         return Promise.resolve(characteristicCache_rx);
     }
-    log("Connecting to GATT Server...");
+    //log("Connecting to GATT Server...");
     return device.gatt.connect()
     .then(server => {
-        log("GATT Server connected, getting service...");
         return server.getPrimaryService(uart_service);
     })
     .then(service => {
-        log("Service found, get characteristic...");
         return service.getCharacteristics();
     })
     .then(characteristics => {
-        log('> Characteristics: ' + characteristics.map(c => c.uuid));
+        //log('> Characteristics: ' + characteristics.map(c => c.uuid));
         characteristicCache_tx = characteristics[0];
         characteristicCache_rx = characteristics[1];
-        log(characteristicCache_rx);
-        log(characteristicCache_tx);
     })
     .catch(error => {
         log(error);
@@ -147,10 +140,8 @@ function connectDeviceAndCacheCharacteristic(device){
 // get notified when value in tx characteristic changes
 function startNotifications(characteristic){
     log('Starting notifications...');
-    
     return characteristic.startNotifications()
     .then(() => {
-        log('Notifications started');
         characteristic.addEventListener('characteristicvaluechanged',handleTxValueChange);
     });
 }

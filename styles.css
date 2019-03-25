@@ -1,11 +1,7 @@
 #body {
-    background-color: #fff;
-    font-family: sans-serif;
-}
-
-#h1 {
-    font-weight: normal;
-    font-size: 140%;
+	padding-left: 20px;
+	/*background-color: lightgoldenrodyellow;*/
+	font-family: sans-serif;
 }
 
 #terminal div {
@@ -22,37 +18,17 @@
 }
 
 div.term{
-    margin-top: 90px;
-    margin-right: 20px;
-    padding-left: 20px;
+	margin-bottom: 20px;
+	margin-top: 98px;
     background-color: black;
 	outline-width: 0;
     max-width: 300px;
-    max-height: 400px;
+    max-height: 200px;
     overflow: auto;
     float: right;
 }
-.zimd_header { 
-    background-image: url("media/bg.PNG");
-    color: black;
-    background-position: 100% 100%;
-    background-size: 100% 100%;
-    display: inline;
-    /*float: middle;
-    height: 220px;*/
-    position: relative;
-   /* width: 100%;*/
-  }
-.bluetooth { 
-    background-color: #e066ff; 
-    color: black;
-  }
-.workspace{ 
-	background-color: #eae6df;
-	padding-bottom: 20px;
-	float: left;
-}
+
 #blocklyDiv{
     height:50%;
-    width: 100%;
+    max-width: 100%;
 }
