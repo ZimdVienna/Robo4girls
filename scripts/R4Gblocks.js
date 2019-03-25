@@ -4,6 +4,7 @@ var float_delimiter = ".0:";
 var dance_array = ["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
 var shake_array = ["BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
 var zigzag_array = ["BL0.5:", "Bv1.0:", "BR1.0:", "Bv1.0:", "BL0.5:"];
+
 /*************Functions*************/
 //array function
 function give_an_array(array_name) {
@@ -22,7 +23,8 @@ Blockly.Blocks['forward'] = {
 			.appendField("für")
 			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration")
 			.appendField("Sekunden")
-			.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"));
+			//.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"))
+		;
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -48,7 +50,8 @@ Blockly.Blocks['back'] = {
 			.appendField("für")
 			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "back_duration")
 			.appendField("Sekunden")
-			.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"));
+			//.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"))
+		;
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
