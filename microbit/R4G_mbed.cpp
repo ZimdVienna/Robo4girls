@@ -69,8 +69,10 @@ const int *BEATS[] = {tusch_b,beat2,starWars_b,superMario_b};
 const MicroBitImage angry_face("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n0,255,255,255,0\n255,0,0,0,255\n");
 
 /***** Motorcontrol: choose your board or write your own motor control *****/
-int velocity = 800;
+uint32_t velocity_1 = 800;
+uint32_t velocity_2 = 800;
 
+/*
 // ElecFreaks Motor:bit Board
 void moveBot(ManagedString msg) {
     // Motor 1 PWM = P1,    Motor1 direction = P8 (LOW = CC, HIGH = C)
@@ -100,17 +102,17 @@ void moveBot(ManagedString msg) {
     //set the pin values according to direction
     uBit.io.P12.setDigitalValue((m2_dir & moveMask)/m2_dir);              //dir motor2
     uBit.io.P8.setDigitalValue((m1_dir & moveMask)/m1_dir);               //dir motor1
-    uBit.io.P1.setAnalogValue((m1_pwm & moveMask)* velocity);             //pwm motor1
-    uBit.io.P2.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity);   //pwm motor2
+    uBit.io.P1.setAnalogValue((m1_pwm & moveMask)* velocity_1);             //pwm motor1
+    uBit.io.P2.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity_2);   //pwm motor2
 }
-
-/*
+*/
 // Keyestudio Motor Driver Board v1.8
 void moveBot(ManagedString msg) {
     // Enable = pin14
     // Motor1 CW = pin12,   Motor1 CCW = pin13
     // Motor2 CW = pin15,   Motor2 CCW = pin16
     // Motor1 PWM = pin1,   Motor2 PWM = pin2
+    
     
     unsigned char moveMask = 0;   // Bitmask: X X X P15 P16 P12 P13 P14
     ManagedString direction(msg.charAt(1));
@@ -130,18 +132,20 @@ void moveBot(ManagedString msg) {
         moveMask = 0;   //stop
 
     // set motor pins according to direction
-    uBit.io.P1.setAnalogValue(velocity);
-    uBit.io.P2.setAnalogValue(velocity);
+    uBit.io.P1.setAnalogValue(velocity_1);
+    uBit.io.P2.setAnalogValue(velocity_2);
     uBit.io.P12.setDigitalValue((4 & moveMask)/4);
     uBit.io.P13.setDigitalValue((2 & moveMask)/2);
     uBit.io.P15.setDigitalValue((16 & moveMask)/16);
     uBit.io.P16.setDigitalValue((8 & moveMask)/8);
     uBit.io.P14.setDigitalValue(1 & moveMask);
 }
-*/
 
-// Waveshare Motor Driver for micro:bit
 /*
+// Waveshare Motor Driver for micro:bit
+// pre configure pwm pins 8 and 16
+MicroBitPin P8(MICROBIT_ID_IO_P8, MICROBIT_PIN_P8, PIN_CAPABILITY_ANALOG);
+MicroBitPin P16(MICROBIT_ID_IO_P16, MICROBIT_PIN_P16, PIN_CAPABILITY_ANALOG);
 void moveBot(ManagedString msg) {
     // Motor A in1 = pin 13
     // Motor A in2 = pin 12
@@ -149,9 +153,38 @@ void moveBot(ManagedString msg) {
     // Motor B in2 = pin 15
     // Motor A PWM = pin 8
     // Motor B PWM = pin 16
+    
+    //0 0 P16 P15 P14 P8 P12 P13
+    unsigned char m1_pin1 = 1, m1_pin2 = 2, m1_pwm = 4;
+    unsigned char m2_pin1 = 8, m2_pin2 = 16, m2_pwm = 32;
+    unsigned char moveMask = 0;
+    
+    ManagedString direction(msg.charAt(1));
+    if(direction == forward)
+        moveMask = 45;  //00101101
+    else if(direction == backwards)
+        moveMask = 54;  //00110110
+    else if(direction == curveLeft)
+        moveMask = 40;  //00101000 
+    else if(direction == curveRight)
+        moveMask = 5;   //00000101
+    else if(direction == turnLeft)
+        moveMask = 46;  //00101110 
+    else if(direction == turnRight)
+        moveMask = 53;  //00110101
+    else
+        moveMask = 0;   //stop
+    //set the pin values according to direction
+    uBit.io.P13.setDigitalValue(m1_pin1 & moveMask);                //dir motor1
+    uBit.io.P12.setDigitalValue((m1_pin2 & moveMask)/m1_pin2);
+    uBit.io.P14.setDigitalValue((m2_pin1 & moveMask)/m2_pin1);      //dir motor2
+    uBit.io.P15.setDigitalValue((m2_pin2 & moveMask)/m2_pin2);
+    //pwm motor1 and motor2
+    //if((P8.setAnalogValue(((m1_pwm & moveMask)/m1_pwm) * velocity)) != MICROBIT_OK){uBit.display.scroll("P8");}
+    P8.setAnalogValue(((m1_pwm & moveMask)/m1_pwm) * velocity_1);
+    P16.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity_2);
 }
 */
-
 
 /******************** Functions ***************************/
 
@@ -191,6 +224,7 @@ void onConnected(MicroBitEvent e) {
                 moveBot("s");
                 break;
             }   
+            // play Melody
             case 'M': {
                 //check if input is valid melody input:
                 if((msg.charAt(1)-'0') < 1 || (msg.charAt(1)-'0') > storedSongs){
@@ -200,7 +234,44 @@ void onConnected(MicroBitEvent e) {
                 int songidx = (int)(msg.charAt(1)-'0') - 1; //song index in SONGS array
                 playMelody(songidx);
                 break;
-            }    
+            } 
+            // change Motorgeschwindigkeit (Motor Velocity)
+            case 'G': {
+                char motor = msg.charAt(1);
+                uint32_t val = (uint32_t)((msg.charAt(2)-'0') * 10 + (msg.charAt(3)-'0'));
+                // check if number is valid
+                if(val < 1 || val > 16){
+                    uBit.display.scroll(msg);
+                    break;
+                }
+                // scale to velocity
+                int vel = int((val * 64)-1);
+                switch(motor){
+                    case '1': {
+                        velocity_1 = vel;
+                        break;
+                    }
+                    case '2': {
+                        velocity_2 = vel;
+                        break;
+                    }
+                    case 'b': {
+                        velocity_1 = vel;
+                        velocity_2 = vel;
+                        break;
+                    }
+                    default: {
+                        uBit.display.scroll(msg);
+                        break;
+                    }
+                }
+                break;
+            }  
+            // LED Anzeige (show LED picture)
+            case 'A': {  
+                uBit.display.scroll(msg); 
+                break;
+            }  
             default: {
                 uBit.display.scroll(msg);
                 break;

@@ -13,9 +13,9 @@ function give_an_array(array_name) {
 	}
 }
 
-/******** Movements (Bewegungen B) **********/
+/******** MOVEMENTS B (Bewegungen) **********/
 
-//forward	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
+//forward LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
 Blockly.Blocks['forward'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -33,7 +33,6 @@ Blockly.Blocks['forward'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['forward'] = function (block) {
 	var number_forward_duration = block.getFieldValue('forward_duration');
 
@@ -60,14 +59,12 @@ Blockly.Blocks['back'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['back'] = function (block) {
 	var number_back_duration = block.getFieldValue('back_duration');
 	var code = "Bz" + number_back_duration + (number_back_duration % 1 == 0 ? float_delimiter : delimiter);
 	console.log("back block duration:" + code);
 	return code;
 };
-
 
 //Left  LINK : https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2g3h6f
 Blockly.Blocks['left'] = {
@@ -90,6 +87,7 @@ Blockly.JavaScript['left'] = function (block) {
 	var code = "Bl" + number_left_duration + (number_left_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
+
 //Right  LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#qgqs5i
 Blockly.Blocks['right'] = {
 	init: function () {
@@ -112,7 +110,8 @@ Blockly.JavaScript['right'] = function (block) {
 
 	return code;
 };
-//Linkskehre (L) LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ofugw8
+
+//Left-turn (L) LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ofugw8
 Blockly.Blocks['turn_left'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -128,7 +127,6 @@ Blockly.Blocks['turn_left'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['turn_left'] = function (block) {
 	var number_turn_left_duration = block.getFieldValue('turn_left_duration');
 
@@ -136,7 +134,8 @@ Blockly.JavaScript['turn_left'] = function (block) {
 
 	return code;
 };
-// Rechtskehre (R) LINK :https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ttnvhb
+
+// Right-turn (R) LINK: https://blocklydemo.appspot.com/static/demos/blockfactory/index.html#ttnvhb
 Blockly.Blocks['turn_right'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -159,9 +158,8 @@ Blockly.JavaScript['turn_right'] = function (block) {
 
 	return code;
 };
-// Stopp (s)
 
-/******* Combinations (Kombinationen K) **********/
+/******* COMBINATIONS K (Kombinationen) **********/
 
 //Dance LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#tvm4by
 Blockly.Blocks['dance'] = {
@@ -180,7 +178,6 @@ Blockly.Blocks['dance'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['dance'] = function (block) {
 	var number_repeat = block.getFieldValue('Repetition');
 	var dropdown_itensity = block.getFieldValue('itensity');
@@ -213,7 +210,6 @@ Blockly.Blocks['zigzag'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_itensity = block.getFieldValue('itensity');
@@ -221,6 +217,7 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	var code = '...;\n';
 	return code;
 };
+
 //Shake LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#77ndmh
 Blockly.Blocks['shake'] = {
 	init: function () {
@@ -237,7 +234,6 @@ Blockly.Blocks['shake'] = {
 		this.setHelpUrl("");
 	}
 };
-
 Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_itensity = block.getFieldValue('itensity');
@@ -246,7 +242,7 @@ Blockly.JavaScript['shake'] = function (block) {
 	return code;
 };
 
-//pirouette LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2imkdz
+//Pirouette LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2imkdz
 Blockly.Blocks['pirouette'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -269,8 +265,10 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	var code = '...;\n';
 	return code;
 };
-/********* Melody (Melodie M) ****************/
-//LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5zmrse
+
+/********* MELODY (Melodie M) ****************/
+
+//Play Melody LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5zmrse
 Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -291,7 +289,9 @@ Blockly.JavaScript['melody'] = function (block) {
 	console.log(code);
 	return code;
 };
-/*********Settings (Einstellungen G)*****************/
+
+/********* SETTINGS G (Einstellungen) *****************/
+
 //LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#6rdmxe
 Blockly.Blocks['motor'] = {
 	init: function () {
@@ -299,7 +299,7 @@ Blockly.Blocks['motor'] = {
 			.appendField("Motor")
 			.appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["1+2", "b"]]), "motor")
 			.appendField("Leistung:")
-			.appendField(new Blockly.FieldNumber(400, 400, 1024, 400), "velocity");
+			.appendField(new Blockly.FieldNumber(12, 1, 16), "velocity");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(60);
@@ -310,11 +310,13 @@ Blockly.Blocks['motor'] = {
 Blockly.JavaScript['motor'] = function (block) {
 	var dropdown_motor = block.getFieldValue('motor');
 	var number_velocity = block.getFieldValue('velocity');
-	// TODO: Assemble JavaScript into code variable.
-	var code = 'G' + dropdown_motor + number_velocity + ":";
+	//number must have two digits: 01 to 16
+	let velocity = number_velocity < 10 ? '0' + number_velocity : number_velocity;
+	var code = 'G' + dropdown_motor + velocity + delimiter;
 	console.log(code);
 	return code;
 };
+
 /****************LED-Display */
 //Write a text LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#kt997q
 Blockly.Blocks['show_text'] = {
@@ -339,6 +341,7 @@ Blockly.JavaScript['show_text'] = function (block) {
 	var code = text_led_text + ":";
 	return code;
 };
+
 // Show a picture LINK.https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#kbbzas
 Blockly.Blocks['show_picture'] = {
 	init: function () {
