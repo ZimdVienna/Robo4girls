@@ -8,14 +8,13 @@ var combinations = [dance_array, zigzag_array, shake_array];
 
 /*************Functions*************/
 
-// send combination
 function send_combination(index, repetitions, intensity){
 	var code = "Gb05:";	//slow	
 	if(intensity == "strong")
 		code = "Gb16:";
 	if(intensity == "middle")
 		code = "Gb10:";
-	// send cominations various times
+	// send comination various times
 	for(var l = 0; l < repetitions; l++){
 		for(var k = 0; k < combinations[index].length; k++){
 			code += combinations[index][k];
