@@ -37,9 +37,10 @@
 	<button id="connect" type="button">Verbinden</button>
 	<button id="disconnect" type="button">Trennen</button>
 
-	<!-- input file and button for sending data -->
+	<!-- input file and button for sending data
 	<input id="input" type="text" />
 	<button id="sendData" type="button">Senden</button>
+	 -->
 
 	<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
 	<div class="term" id="terminal"></div>
@@ -68,18 +69,6 @@
 			}
 			
 			return sendData(commands, 0);
-			/*
-			while(count < commands.length){
-				try {
-					console.log("function handle Play:" + commands[count]);
-					return sendData(commands[count],count);
-					console.log(status + " from index.html");
-				} catch (error) {
-					console.log(error);
-				}
-			}
-			*/
-			
 		}
 	</script>
 
@@ -115,20 +104,20 @@
 		</category>
 		<category name="Kombinationen" colour="#a55b6d">
 			<block type="dance">
-				<field name="Repetition">1</field>
-				<field name="itensity">sanft</field>
+				<field name="repeat">1</field>
+				<field name="intensity">sanft</field>
 			</block>
 			<block type="zigzag">
 				<field name="repeat">1</field>
-				<field name="itensity">sanft</field>
+				<field name="intensity">sanft</field>
 			</block>
 			<block type="shake">
 				<field name="repeat">1</field>
-				<field name="itensity">sanft</field>
+				<field name="intensity">sanft</field>
 			</block>
 			<block type="pirouette">
-				<field name="Repetition">1</field>
-				<field name="itensity">sanft</field>
+				<field name="repeat">1</field>
+				<field name="direction">Links</field>
 			</block>
 		</category>
 		<category name="Melodie" colour="#a55b5b">

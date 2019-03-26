@@ -3,8 +3,8 @@ const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
 
-const sendButton = document.getElementById("sendData");
-const inputField = document.getElementById("input");
+//const sendButton = document.getElementById("sendData");
+//const inputField = document.getElementById("input");
 
 const name_prefix = "BBC micro:bit";
 const uart_service = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
@@ -26,10 +26,11 @@ disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
 });
 
-// Send data to device
+/* Send data from input field to device
 sendButton.addEventListener('click', function(){
     sendData(inputField.value);
 });
+*/
 
 /* ******************* FUNCTIONS ******************* */
 
@@ -78,7 +79,7 @@ function sendData(commands, counter) {
     	let data = encoder.encode(commands[counter]);
     	characteristicCache_rx.writeValue(data);
     	log(commands[counter], 'out');
-    	inputField.value = "";
+    	//inputField.value = "";
 		var promise = new Promise(async function(resolve,reject){
 			characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
 				let decoder = new TextDecoder();

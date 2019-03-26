@@ -4,13 +4,24 @@ var float_delimiter = ".0:";
 var dance_array = ["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
 var shake_array = ["BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
 var zigzag_array = ["BL0.5:", "Bv1.0:", "BR1.0:", "Bv1.0:", "BL0.5:"];
+var combinations = [dance_array, zigzag_array, shake_array];
 
 /*************Functions*************/
-//array function
-function give_an_array(array_name) {
-	for (i = 0; i < array_name.length; i++) {
-		return array_name;
+
+// send combination
+function send_combination(index, repetitions, intensity){
+	var code = "Gb05:";	//slow	
+	if(intensity == "strong")
+		code = "Gb16:";
+	if(intensity == "middle")
+		code = "Gb10:";
+	// send cominations various times
+	for(var l = 0; l < repetitions; l++){
+		for(var k = 0; k < combinations[index].length; k++){
+			code += combinations[index][k];
+		}
 	}
+	return code;
 }
 
 /******** MOVEMENTS B (Bewegungen) **********/
@@ -166,10 +177,9 @@ Blockly.Blocks['dance'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Tanze")
-			.appendField(new Blockly.FieldNumber(1, 0, 9), "Repetition")
+			.appendField(new Blockly.FieldNumber(1, 0, 9), "repeat")
 			.appendField("mal")
-			// easy--550, middle--800, strong--1024
-			.appendField(new Blockly.FieldDropdown([["sanft", "Gb550:"], ["mittel", "Gb800:"], ["stark", "Gb1024:"]]), "itensity"); // easy,middle... wie versteht der Micro:bit die?
+			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity"); // the 2nd option is written in xml code when saved
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -179,19 +189,10 @@ Blockly.Blocks['dance'] = {
 	}
 };
 Blockly.JavaScript['dance'] = function (block) {
-	var number_repeat = block.getFieldValue('Repetition');
-	var dropdown_itensity = block.getFieldValue('itensity');
-	// TODO: Assemble JavaScript into code variable.
-	/*	function repeat_an_array(number_repeat){
-		for(var i =0; i< number_repeat;i++){
-			var array_out = give_an_array(dance_array);
-			
-		} return array_out;
-		}
-		var func= repeat_an_array(number_repeat);*/
-		var code = dropdown_itensity +" \n"+ give_an_array +" \n";
-		console.log(code);
-	return code;
+	var number_repeat = block.getFieldValue('repeat');
+	var dropdown_intensity = block.getFieldValue('intensity');
+	console.log(dropdown_intensity);
+	return send_combination(0,number_repeat,dropdown_intensity);
 };
 
 //Zigzag LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#q7rnrx
@@ -201,7 +202,7 @@ Blockly.Blocks['zigzag'] = {
 			.appendField("Zickzack")
 			.appendField(new Blockly.FieldNumber(1, 0, 9), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "itensity");
+			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -212,10 +213,8 @@ Blockly.Blocks['zigzag'] = {
 };
 Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
-	var dropdown_itensity = block.getFieldValue('itensity');
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
-	return code;
+	var dropdown_intensity = block.getFieldValue('intensity');
+	return send_combination(1,number_repeat,dropdown_intensity);
 };
 
 //Shake LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#77ndmh
@@ -225,7 +224,7 @@ Blockly.Blocks['shake'] = {
 			.appendField("Schütteln")
 			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "itensity");
+			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -236,20 +235,19 @@ Blockly.Blocks['shake'] = {
 };
 Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
-	var dropdown_itensity = block.getFieldValue('itensity');
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
-	return code;
+	var dropdown_intensity = block.getFieldValue('intensity');
+	return send_combination(2,number_repeat,dropdown_intensity);
 };
+
 
 //Pirouette LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2imkdz
 Blockly.Blocks['pirouette'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Pirouette")
-			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "Repetition")
+			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["Links", "left"], ["Rechts", "right"]]), "itensity");
+			.appendField(new Blockly.FieldDropdown([["Links", "left"], ["Rechts", "right"]]), "direction");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -259,12 +257,18 @@ Blockly.Blocks['pirouette'] = {
 	}
 };
 Blockly.JavaScript['pirouette'] = function (block) {
-	var number_repetition = block.getFieldValue('Repetition');
-	var dropdown_itensity = block.getFieldValue('itensity');
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
+	var number_repetition = block.getFieldValue('repeat');
+	var dropdown_direction = block.getFieldValue('direction');
+	var code = "Gb14:";
+	for(var r = 0; r < number_repetition; r++){
+		if(dropdown_direction == "Links")
+			code += "BL4.3:";
+		else
+			code += "BR4.3:";
+	}
 	return code;
 };
+
 
 /********* MELODY (Melodie M) ****************/
 
@@ -284,7 +288,6 @@ Blockly.Blocks['melody'] = {
 };
 Blockly.JavaScript['melody'] = function (block) {
 	var dropdown_melody = block.getFieldValue('melody');
-	// TODO: Assemble JavaScript into code variable.
 	var code = dropdown_melody + ':';
 	console.log(code);
 	return code;
@@ -317,7 +320,8 @@ Blockly.JavaScript['motor'] = function (block) {
 	return code;
 };
 
-/****************LED-Display */
+/**************** LED-Display A (Anzeige) *************/
+
 //Write a text LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#kt997q
 Blockly.Blocks['show_text'] = {
 	init: function () {
@@ -337,7 +341,6 @@ Blockly.Blocks['show_text'] = {
 };
 Blockly.JavaScript['show_text'] = function (block) {
 	var text_led_text = block.getFieldValue('led_text');
-	// TODO: Assemble JavaScript into code variable.
 	var code = text_led_text + ":";
 	return code;
 };
@@ -365,8 +368,7 @@ Blockly.Blocks['show_picture'] = {
 Blockly.JavaScript['show_picture'] = function (block) {
 	var dropdown_pic = block.getFieldValue('pic');
 	var number_show_duration = block.getFieldValue('show_duration');
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
+	var code = ";-):";
 	return code;
 };
 
