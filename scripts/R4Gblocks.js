@@ -340,7 +340,7 @@ Blockly.Blocks['show_text'] = {
 };
 Blockly.JavaScript['show_text'] = function (block) {
 	var text_led_text = block.getFieldValue('led_text');
-	var code = text_led_text + ":";
+	var code = text_led_text + delimiter;
 	return code;
 };
 
@@ -350,10 +350,10 @@ Blockly.Blocks['show_picture'] = {
 		this.appendDummyInput()
 			.appendField("Zeige");
 		this.appendDummyInput()
-			.appendField(new Blockly.FieldDropdown([["Smiley", "happy_face"], ["Trauriges Smiley", "sad_face"], ["Herz", "heart"]]), "pic");
+			.appendField(new Blockly.FieldDropdown([["Smiley", "1"], ["Herz", "2"]]), "pic")
 		this.appendDummyInput()
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0, 0, 10, 1), "show_duration");
+			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "show_duration");
 		this.appendDummyInput()
 			.appendField("Sekunden");
 		this.setInputsInline(true);
@@ -365,9 +365,13 @@ Blockly.Blocks['show_picture'] = {
 	}
 };
 Blockly.JavaScript['show_picture'] = function (block) {
-	var dropdown_pic = block.getFieldValue('pic');
+	var dropdown_pic = block.getFieldValue("pic");
+	if(dropdown_pic == "Wähle ein Bild"){
+		alert("Bitte wähle ein Bild aus");
+		return "?" + delimiter;
+	}
 	var number_show_duration = block.getFieldValue('show_duration');
-	var code = ";-):";
+	var code = "A" + dropdown_pic + number_show_duration + delimiter;
 	return code;
 };
 
