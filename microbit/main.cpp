@@ -27,11 +27,9 @@ DEALINGS IN THE SOFTWARE.
 // Project repository: https://github.com/ZimdVienna/Robo4girls
 
 #include "MicroBit.h"
-#include "MicroBitSamples.h"
 #include "MicroBitUARTService.h"
 #include "MusicalNotes.h"
 
-#ifdef MICROBIT_R4G_SENSOREN
 
 MicroBit uBit;                  // instance of the microbit class
 MicroBitUARTService *uart;      // serial communication via Bluetooth Low Energy
@@ -39,7 +37,7 @@ MicroBitUARTService *uart;      // serial communication via Bluetooth Low Energy
 // use of constants gets stored in flash memory (saves RAM)
 
 // constant variables for directions
-const ManagedString forward("v");
+const ManagedString forwards("v");      //name forwards to delineate from std::forward
 const ManagedString backwards("z");
 const ManagedString curveRight("r");
 const ManagedString curveLeft("l");
@@ -59,14 +57,24 @@ const int beat2[]       =   {160, 160, 160, 800, 800, 160, 160, 160, 160, 800, 8
 const int starWars_b[]  =   {160, 160, 160,800,800,160,160,160,800,400,160,160,160,800,400,160,160,160,800,0};
 const int superMario_b[]=   {160, 160, 250, 160,160,400,250,0};
 
-const int storedSongs = 4;
-
 // Songbook
 const int *SONGS[] = {tusch,song2,starWars,superMario};
 const int *BEATS[] = {tusch_b,beat2,starWars_b,superMario_b};
+const int storedSongs = 4;
 
 // Pictures
-const MicroBitImage angry_face("0,255,0,255, 0\n0,255,0,255,0\n0,0,0,0,0\n0,255,255,255,0\n255,0,0,0,255\n");
+// microbit images get normally stored in sram, to store them in flash:
+const uint8_t heart[] __attribute__ ((aligned (4))) = { 0xff, 0xff, 10, 0, 5, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
+const uint8_t smiley[] __attribute__((aligned (4))) = { 0xff, 0xff, 5, 0, 5, 0, 0,1,0,1,0, 0,1,0,1,0, 0,0,0,0,0, 1,0,0,0,1, 0,1,1,1,0 };
+
+// load image from flash and show it:
+// MicroBitImage i((ImageData*)heart);
+// uBit.display.print(MicroBitImage, int x, int y, int alpha , int delay);
+
+// Picturebook
+const uint8_t *PICTURES[] = {smiley, heart};
+const int storedPictures = 2;
+
 
 /***** Motorcontrol: choose your board or write your own motor control *****/
 uint32_t velocity_1 = 800;
@@ -85,7 +93,7 @@ void moveBot(ManagedString msg) {
     unsigned char m1_pwm = 1, m1_dir = 2, m2_pwm = 4, m2_dir = 8;
        
     ManagedString direction(msg.charAt(1));
-    if(direction == forward)
+    if(direction == forwards)
         moveMask = 15;
     else if(direction == backwards)
         moveMask = 5;
@@ -106,6 +114,7 @@ void moveBot(ManagedString msg) {
     uBit.io.P2.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity_2);   //pwm motor2
 }
 */
+/*
 // Keyestudio Motor Driver Board v1.8
 void moveBot(ManagedString msg) {
     // Enable = pin14
@@ -116,7 +125,7 @@ void moveBot(ManagedString msg) {
     
     unsigned char moveMask = 0;   // Bitmask: X X X P15 P16 P12 P13 P14
     ManagedString direction(msg.charAt(1));
-    if(direction == forward)
+    if(direction == forwards)
         moveMask = 11;
     else if(direction == backwards)
         moveMask = 21;
@@ -140,8 +149,8 @@ void moveBot(ManagedString msg) {
     uBit.io.P16.setDigitalValue((8 & moveMask)/8);
     uBit.io.P14.setDigitalValue(1 & moveMask);
 }
+*/
 
-/*
 // Waveshare Motor Driver for micro:bit
 // pre configure pwm pins 8 and 16
 MicroBitPin P8(MICROBIT_ID_IO_P8, MICROBIT_PIN_P8, PIN_CAPABILITY_ANALOG);
@@ -160,7 +169,7 @@ void moveBot(ManagedString msg) {
     unsigned char moveMask = 0;
     
     ManagedString direction(msg.charAt(1));
-    if(direction == forward)
+    if(direction == forwards)
         moveMask = 45;  //00101101
     else if(direction == backwards)
         moveMask = 54;  //00110110
@@ -184,7 +193,7 @@ void moveBot(ManagedString msg) {
     P8.setAnalogValue(((m1_pwm & moveMask)/m1_pwm) * velocity_1);
     P16.setAnalogValue(((m2_pwm & moveMask)/m2_pwm) * velocity_2);
 }
-*/
+
 
 /******************** Functions ***************************/
 
@@ -200,7 +209,7 @@ void playMelody(int songidx) {
 }
 
 
-void onConnected(MicroBitEvent e) {
+void onConnected(MicroBitEvent) {
     //>! receives commands, controls robot and returns "OK" if successfull
     ManagedString msg = "R4G";
     ManagedString eom(":");
@@ -268,10 +277,24 @@ void onConnected(MicroBitEvent e) {
                 break;
             }  
             // LED Anzeige (show LED picture)
-            case 'A': {  
-                uBit.display.scroll(msg); 
+            case 'A': {
+                int idx = msg.charAt(1) - '0';
+                if(idx > storedPictures){
+                    uBit.display.scroll(msg);
+                    break;
+                }
+                int time_to_shine = (msg.charAt(2) - '0') * 1000;
+                if(time_to_shine < 0 || time_to_shine > 9000){
+                    uBit.display.scroll(msg);
+                    break;
+                }
+                MicroBitImage i((ImageData*)PICTURES[idx-1]);
+                uBit.display.print(i,0,0,0,time_to_shine);
+                //uBit.display.print(smiley,0,0, 400, 1000);
+                //uBit.sleep(time_to_shine);
+                uBit.display.clear();
                 break;
-            }  
+            }
             default: {
                 uBit.display.scroll(msg);
                 break;
@@ -283,24 +306,25 @@ void onConnected(MicroBitEvent e) {
     }
 }
 
-void onDisconnected(MicroBitEvent e) {
+void onDisconnected(MicroBitEvent) {
     uBit.display.scroll("D");
 }
 
 //touchSensor ON: micro:bit ran into something
-void onTouch(MicroBitEvent e) {
+void onTouch(MicroBitEvent) {
      int sensorLeft = uBit.io.P4.getAnalogValue();
      int sensorRight = uBit.io.P11.getAnalogValue();
      if(!sensorLeft || !sensorRight){
          // shows angry face when bump into something
-         uBit.display.print(angry_face);
+         MicroBitImage s = ((ImageData*)smiley);
+         uBit.display.print(s,5);
      }
      else{
         uBit.display.clear();
      }
 }
 
-void onButtonB(MicroBitEvent e) {
+void onButtonB(MicroBitEvent) {
     //<! stops motors when ButtonB is clicked long
     uBit.display.scroll("stop");
     moveBot("s");
@@ -338,4 +362,3 @@ int main()
     release_fiber();
 }
 
-#endif
