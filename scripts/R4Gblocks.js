@@ -388,10 +388,17 @@ Blockly.Blocks['repetition'] = {
 		this.setHelpUrl("");
 	}
 };
+
+function strip(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+}
+
 Blockly.JavaScript['repetition'] = function (block) {
 	var number_repetition = block.getFieldValue('repetition');
-	var statements_repeat = Blockly.JavaScript.statementToCode(block, 'repeat');
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
+	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
+	var code = statements_repeat;
+	for(var n = 1; n < number_repetition; n++){
+		code += statements_repeat;
+	}
 	return code;
 };
