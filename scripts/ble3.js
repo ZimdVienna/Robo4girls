@@ -37,7 +37,7 @@ sendButton.addEventListener('click', function(){
 // Output to terminal
 function log(data, type = '') {
     terminalContainer.insertAdjacentHTML('beforeend','<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
-    // auto scroll... we always see the last in-/out-put
+    // auto scroll... we always see the last in-/output
     terminalContainer.scrollTop = terminalContainer.scrollHeight;
 }
 
@@ -45,11 +45,11 @@ function log(data, type = '') {
 
 //connect
 function onConnectButtonClick() {
+	// connect to device and start notifications for characteristic changes
     return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
     .then(device => connectDeviceAndCacheCharacteristic(device))
     .then(characteristics => {
         startNotifications(characteristicCache_tx);
-		log('Notifications started!');
     })
     .catch(error => {
         log(error);
@@ -77,18 +77,20 @@ function sendData(commands, counter) {
     }
     	let encoder = new TextEncoder('utf-8');
     	let data = encoder.encode(commands[counter]);
+		// send pending command
     	characteristicCache_rx.writeValue(data);
     	log(commands[counter], 'out');
-    	//inputField.value = "";
+	
+		// wait for status input from microbit
 		var promise = new Promise(async function(resolve,reject){
 			characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
 				let decoder = new TextDecoder();
 				let value = decoder.decode(event.target.value);
-  				resolve(counter + 1);
+  				resolve(counter + 1);	// if successfull prepare to send next command
 			});
 		})
 		.then(function(counter){
-			//send_next_command
+			// send_next_command if more commands pending
 			log("success " + counter);
 			if(counter < commands.length-1){
 				sendData(commands, counter);
@@ -97,11 +99,11 @@ function sendData(commands, counter) {
 }
 
 function onDisconnected(event) {
-  log("Bluetooth Device disconnected");
+  	log("Bluetooth Device disconnected");
 }
 
-//request Bluetooth device with name prefix "BBC micro:bit
 function requestBluetoothDevice() {
+	//request Bluetooth device with name prefix "BBC micro:bit
     let options = {
     filters: [
         {namePrefix: name_prefix}
@@ -114,7 +116,7 @@ function requestBluetoothDevice() {
     .then(device => {
         deviceCache = device;
         deviceCache.addEventListener('gattserverdisconnected', onDisconnected); // watch connection
-        log('"' + deviceCache.name);
+        log(deviceCache.name);
         return deviceCache;
     })
     .catch(error => {
@@ -122,13 +124,12 @@ function requestBluetoothDevice() {
     });
 }
 
-//get Service and all characteristics rx/tx from device
 function connectDeviceAndCacheCharacteristic(device){
-    // if already connected
+	//get Service and characteristics rx/tx from device
     if(device.gatt.connected && characteristicCache_rx) {
         return Promise.resolve(characteristicCache_rx);
     }
-    //log("Connecting to GATT Server...");
+    // Connect to GATT Server
     return device.gatt.connect()
     .then(server => {
         return server.getPrimaryService(uart_service);
@@ -147,13 +148,17 @@ function connectDeviceAndCacheCharacteristic(device){
     
 }
 
-// get notified when value in tx characteristic changes
 function startNotifications(characteristic){
     log('Starting notifications...');
     return characteristic.startNotifications()
     .then(() => {
+		// get notified when value in tx characteristic changes
         characteristic.addEventListener('characteristicvaluechanged',handleTxValueChange);
-    });
+		log('Notifications started');
+    })
+	.catch(error => {
+		log(error);
+	});
 }
 
 // Data receiving

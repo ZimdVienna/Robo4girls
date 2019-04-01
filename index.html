@@ -12,10 +12,10 @@
 	<title>R4G</title>
 
 	<!-- scripts for blockly code -->
-	<script src="blockly_compressed.js"></script>
-	<script src="blocks_compressed.js"></script>
-	<script src="js/en.js"></script>
-	<script src="javascript_compressed.js"></script>
+	<script src="blockly/blockly_compressed.js"></script>
+	<script src="blockly/blocks_compressed.js"></script>
+	<script src="blockly/js/de.js"></script>
+	<script src="blockly/javascript_compressed.js"></script>
 
 </head>
 
@@ -39,14 +39,14 @@
 
 	<!-- input file and button for sending data
 	<input id="input" type="text" />-->
-	<button id="saveData" onclick="save()" type="button">Save</button>
-	<button id="restoreData" onclick="restore()" type="button">Restore</button>
+	<button id="saveData" onclick="save()" type="button">Programm speichern</button>
+	<button id="restoreData" onclick="restore()" type="button">Programm laden</button>
 
 	<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
 	<div class="term" id="terminal"></div>
 
 	<!-- script for bluetooth communication -->
-	<script type="text/javascript" src="ble3.js"></script>
+	<script type="text/javascript" src="scripts/ble3.js"></script>
 
 	<!--</div> -->
 
@@ -67,30 +67,30 @@
 				commands[i] += ":";
 				console.log(commands[i]);
 			}
-			
 			return sendData(commands, 0);
 		}
+		
 		function save(){
 			var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
 			var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
 
 			localStorage.setItem("Blockly.xml", xmlText);
-			alert("Die Blöcke wurden gespeichert");
-			
+			alert("Programm gespeichert");	
 		}
+		
 		function restore() {
 			var xmlText = localStorage.getItem("Blockly.xml");
 			if (xmlText) {
 				xmlDom = Blockly.Xml.textToDom(xmlText);
 				Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
-				alert("Die Blöcke wurden (restored)");
+				alert("Programm wird geladen...");
 			}
 		}
 		
 	</script>
 
 	<!-- play button starts program -->
-	<button onclick="handlePlay();" type="button">Play</button>
+	<button onclick="handlePlay();" type="button">Start</button>
 	
 
 	<!-- blockly programming window -->
@@ -165,18 +165,19 @@
 		</category>
 		-->
 	</xml>
+	
 
 	<!-- Making Toolbox visible in Web-browser -->
-	<script>
+		<script>
 		var workspace = Blockly.inject('blocklyDiv', {
 			media: 'media/',
 			toolbox: document.getElementById('toolbox')
 		})
 		// An href with #key trigers an AJAX call to retrieve saved blocks.
 		if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-      BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-    }
-	</script>
+      		BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    	}
+		</script>
 
 	<!-- Blockly scripts -->
 	<script src="scripts/R4Gblocks.js"></script>
