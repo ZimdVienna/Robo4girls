@@ -25,7 +25,7 @@ function send_combination(index, repetitions, intensity){
 
 /******** MOVEMENTS B (Bewegungen) **********/
 
-//forward LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#k8p8mh
+//forward 
 Blockly.Blocks['forward'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -51,7 +51,7 @@ Blockly.JavaScript['forward'] = function (block) {
 	return code;
 };
 
-// backwards	LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#xf4grh
+// backwards	
 Blockly.Blocks['back'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -76,7 +76,7 @@ Blockly.JavaScript['back'] = function (block) {
 	return code;
 };
 
-//Left  LINK : https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2g3h6f
+//Left  
 Blockly.Blocks['left'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -98,7 +98,7 @@ Blockly.JavaScript['left'] = function (block) {
 	return code;
 };
 
-//Right  LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#qgqs5i
+//Right  
 Blockly.Blocks['right'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -121,7 +121,7 @@ Blockly.JavaScript['right'] = function (block) {
 	return code;
 };
 
-//Left-turn (L) LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ofugw8
+//Left-turn (L) 
 Blockly.Blocks['turn_left'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -145,7 +145,7 @@ Blockly.JavaScript['turn_left'] = function (block) {
 	return code;
 };
 
-// Right-turn (R) LINK: https://blocklydemo.appspot.com/static/demos/blockfactory/index.html#ttnvhb
+// Right-turn (R) 
 Blockly.Blocks['turn_right'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -171,7 +171,7 @@ Blockly.JavaScript['turn_right'] = function (block) {
 
 /******* COMBINATIONS K (Kombinationen) **********/
 
-//Dance LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#tvm4by
+//Dance
 Blockly.Blocks['dance'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -194,7 +194,7 @@ Blockly.JavaScript['dance'] = function (block) {
 	return send_combination(0,number_repeat,dropdown_intensity);
 };
 
-//Zigzag LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#q7rnrx
+//Zigzag 
 Blockly.Blocks['zigzag'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -216,7 +216,7 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	return send_combination(1,number_repeat,dropdown_intensity);
 };
 
-//Shake LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#77ndmh
+//Shake 
 Blockly.Blocks['shake'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -239,7 +239,7 @@ Blockly.JavaScript['shake'] = function (block) {
 };
 
 
-//Pirouette LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#2imkdz
+//Pirouette 
 Blockly.Blocks['pirouette'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -271,7 +271,7 @@ Blockly.JavaScript['pirouette'] = function (block) {
 
 /********* MELODY (Melodie M) ****************/
 
-//Play Melody LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#5zmrse
+//Play Melody 
 Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -294,7 +294,6 @@ Blockly.JavaScript['melody'] = function (block) {
 
 /********* SETTINGS G (Einstellungen) *****************/
 
-//LINK: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#6rdmxe
 Blockly.Blocks['motor'] = {
 	init: function () {
 		this.appendDummyInput()
