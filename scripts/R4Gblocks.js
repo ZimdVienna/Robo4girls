@@ -390,6 +390,7 @@ Blockly.Blocks['repetition'] = {
 };
 
 function strip(str) {
+	//remove unwanted whitespaces
     return str.replace(/^\s+|\s+$/g, '');
 }
 
