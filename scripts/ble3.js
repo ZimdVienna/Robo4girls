@@ -16,6 +16,8 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
+//var auto_reconnect = true;
+
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
@@ -75,27 +77,28 @@ function sendData(commands, counter) {
     if (!commands && !characteristicCache_rx) {
         return;
     }
-    	let encoder = new TextEncoder('utf-8');
-    	let data = encoder.encode(commands[counter]);
-		// send pending command
-    	characteristicCache_rx.writeValue(data);
-    	log(commands[counter], 'out');
 	
-		// wait for status input from microbit
-		var promise = new Promise(async function(resolve,reject){
-			characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
-				let decoder = new TextDecoder();
-				let value = decoder.decode(event.target.value);
-  				resolve(counter + 1);	// if successfull prepare to send next command
-			});
-		})
-		.then(function(counter){
-			// send_next_command if more commands pending
-			log("success " + counter);
-			if(counter < commands.length-1){
-				sendData(commands, counter);
-			}
+	let encoder = new TextEncoder('utf-8');
+	let data = encoder.encode(commands[counter]);
+	// send pending command
+	characteristicCache_rx.writeValue(data);
+	log(commands[counter], 'out');
+
+	// wait for status input from microbit
+	var promise = new Promise(async function(resolve,reject){
+		characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
+			let decoder = new TextDecoder();
+			let value = decoder.decode(event.target.value);
+			resolve(counter + 1);	// if successfull prepare to send next command
 		});
+	})
+	.then(function(counter){
+		// send_next_command if more commands pending
+		log("success " + counter);
+		if(counter < commands.length-1){
+			sendData(commands, counter);
+		}
+	});
 }
 
 function onDisconnected(event) {

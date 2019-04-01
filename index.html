@@ -85,21 +85,25 @@
 			alert("Programm " + eingabe + " gespeichert");  
 		}
 		
-		function restore() {
-			
+		function restore() {	
 			var storage_items = "";
 			for (let i = 0; i < localStorage.length; i++) {
-				if (localStorage.key(i).includes("R4G_"))
-					storage_items += localStorage.key(i) + "\n";
+				if (localStorage.key(i).includes("R4G_")){
+					let key_i = localStorage.key(i).replace("R4G_","");
+					storage_items += key_i + "\n";
+				}
 
 			}
 			if (storage_items === "") {
 				alert("Keine gespeicherten Programme vorhanden");
 				return 1;
 			}
-			storage_items.replace("R4G_","");
 
 			var eingabe = prompt(storage_items + '\nProgramm laden:','');
+			if(!storage_items.includes(eingabe)){
+				alert("Kein Programm mit Namen " + eingabe + " vorhanden");
+				return 1;
+			}
 			var xmlText = localStorage.getItem("R4G_" + eingabe);
 			var xmlDom = Blockly.Xml.textToDom(xmlText);
 			Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
