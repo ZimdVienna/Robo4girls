@@ -104,7 +104,7 @@
 			var eingabe = prompt(storage_items + '\nProgramm laden:','');
 			if(eingabe != null){
 				if(eingabe === "" || !storage_items.includes(eingabe)){
-					alert("Kein Programm mit Namen " + eingabe + " vorhanden");
+					alert('Kein Programm mit Namen " ' + eingabe + '" vorhanden');
 					return 1;
 				}
 				var xmlText = localStorage.getItem("R4G_" + eingabe);
