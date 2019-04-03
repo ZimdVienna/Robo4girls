@@ -79,7 +79,7 @@
 					eingabe = prompt('Bitte Programm benennen:','');
 				}
 			}
-			if(eingabe == true){
+			if(eingabe != null){
 				var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
         localStorage.setItem("R4G_" + eingabe, xmlText);
