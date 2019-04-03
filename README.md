@@ -20,13 +20,10 @@ Connect your micro:bit to your computer via USB and load one of the R4G_MICROBIT
 On the website click the <i>connect</i> button and choose your micro:bit from the list. Don't forget to activate Bluetooth on your device! Wait a bit until it says <i>Notification started</i> in the Terminal. 
 
 <b>If you have a buzzer:</b>
-Connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do much wrong, it does not matter which cable you attach to which pin. Type <b>M1:</b>, <b>M2:</b>, <b>M3:</b> or <b>M4:</b> in the <i>input</i> field and click <i>send</i>. You should hear the micro:bit play a melody.
+Connect pin0 and GND Pin of your micro:bit to the buzzer (you cannot do much wrong, it does not matter which cable you attach to which pin.
 
-for example, write this in the input field: <b>M1:</b>, then press <i>send</i>.
+You can now program the micro:bit by connecting the blocks in the blockly workspace. If you click on one of the 6 sections in the toolbox it will list all blocks available in this section.
+Inline-style: 
+![alt text](https://github.com/zimdVienna/Robo4girls/media/blockly_toolbox_foto.png "Blockly Toolbox")
+You can then just drag and drop the block you want in the workspace. To write a program you can connect different blocks. You should hear a click sound when the blocks connect. To start the program click start. Melodies and Movements will only work if you have a buzzer and motors connected to your micro:bit.
 
-<b>If you do not have a buzzer:</b>
-If you do not have a buzzer you can still test the setup and play "the parrot game" with your Micro:bit. Write what ever short text you like and click the send button. The micro:bit will scroll the text you send it over its LED Matrix and returns <b>OK</b> when finished.
-
-for example, write this in the input field: <b>You are fun!:</b>, then press <i>send</i>.
-
-If your text is more than 19 letters long, the micro:bit will only scroll the first 19 letters.
