@@ -41,7 +41,7 @@
 	<input id="input" type="text" />-->
 	<button id="saveData" onclick="save()" type="button">Programm speichern</button>
 	<button id="restoreData" onclick="restore()" type="button">Programm laden</button>
-
+	<button onclick=" fnc_clear_program()" type="button">Programm Beenden</button>
 	<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
 	<div class="term" id="terminal"></div>
 
@@ -112,6 +112,11 @@
 				Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
 				alert("Programm "+ eingabe +" wird geladen...");
 			}
+		}
+		function fnc_clear_program(){
+			
+			deviceCache.gatt.disconnect();
+			
 		}
 		
 	</script>
