@@ -88,6 +88,7 @@
 		}
 		
 		function restore() {	
+			workspace.clear();
 			var storage_items = "";
 			for (let i = 0; i < localStorage.length; i++) {
 				if (localStorage.key(i).includes("R4G_")){
@@ -114,6 +115,7 @@
 			}
 		}
 		function fnc_clear_program(){
+			
 			workspace.clear();
 			deviceCache.gatt.disconnect();
 			

@@ -279,9 +279,9 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	var code = "Gb16:";
 	for(var r = 0; r < number_repetition; r++){
 		if(dropdown_direction == "Links" || dropdown_direction == "left")
-			code += "BL2.7:";
+			code += "BL2.8:";
 		else
-			code += "BR2.0:";
+			code += "BR2.9:";
 	}
 	return code;
 };
