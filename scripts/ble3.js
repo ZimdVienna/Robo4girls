@@ -52,6 +52,7 @@ function onConnectButtonClick() {
     .then(device => connectDeviceAndCacheCharacteristic(device))
     .then(characteristics => {
         startNotifications(characteristicCache_tx);
+		sendData(["C:"]);
     })
     .catch(error => {
         log(error);
@@ -73,7 +74,7 @@ function onDisconnectButtonClick(){
 
 
 // write to characteristic
-function sendData(commands, counter) {
+function sendData(commands, counter=0) {
     if (!commands && !characteristicCache_rx) {
         return;
     }

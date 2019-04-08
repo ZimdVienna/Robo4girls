@@ -83,7 +83,7 @@
 				var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
         var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
         localStorage.setItem("R4G_" + eingabe, xmlText);
-				alert("Programm " + eingabe + " gespeichert");  
+				alert("Programm '" + eingabe + "' gespeichert");  
 			}
 		}
 		
@@ -104,13 +104,13 @@
 			var eingabe = prompt(storage_items + '\nProgramm laden:','');
 			if(eingabe != null){
 				if(eingabe === "" || !storage_items.includes(eingabe)){
-					alert('Kein Programm mit Namen " ' + eingabe + '" vorhanden');
+					alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
 					return 1;
 				}
 				var xmlText = localStorage.getItem("R4G_" + eingabe);
 				var xmlDom = Blockly.Xml.textToDom(xmlText);
 				Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
-				alert("Programm "+ eingabe +" wird geladen...");
+				alert("Programm '"+ eingabe +"' wird geladen...");
 			}
 		}
 		function fnc_clear_program(){
