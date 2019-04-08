@@ -37,10 +37,6 @@
 	<button id="connect" type="button">Verbinden</button>
 	<button id="disconnect" type="button">Trennen</button>
 
-	<!-- buttons for program flow -->
-	<button id="saveData" onclick="save()" type="button">Programm speichern</button>
-	<button id="restoreData" onclick="restore()" type="button">Programm laden</button>
-	<button onclick=" fnc_clear_program()" type="button">Programm Beenden</button>
 	<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
 	<div class="term" id="terminal"></div>
 
@@ -111,7 +107,7 @@
 				alert("Programm '"+ eingabe +"' wird geladen...");
 			}
 		}
-		function fnc_clear_program(){
+		function end_program(){
 			workspace.clear();
 			onDisconnectButtonClick();
 		}
@@ -120,6 +116,10 @@
 
 	<!-- play button starts program -->
 	<button onclick="handlePlay();" type="button">Start</button>
+	<!-- buttons for program flow -->
+	<button id="saveData" onclick="save()" type="button">Programm speichern</button>
+	<button id="restoreData" onclick="restore()" type="button">Programm laden</button>
+	<button onclick=" end_program()" type="button">Programm Beenden</button>
 	
 
 	<!-- blockly programming window -->
