@@ -17,18 +17,21 @@ connectButton.addEventListener('click', function(){
     onConnectButtonClick();
 });
 
-// Disconnect from the device on Disconnect button click
+//Disconnect from the device on Disconnect button click
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
 });
 
 /* ******************* FUNCTIONS ******************* */
 
-// Output to terminal
 function log(data, type = '') {
-    terminalContainer.insertAdjacentHTML('beforeend','<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
+	console.log(data + type);
+    /* 
+	//Output to terminal object on web app for debugging
+	terminalContainer.insertAdjacentHTML('beforeend','<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
     // auto scroll... we always see the last in-/output
     terminalContainer.scrollTop = terminalContainer.scrollHeight;
+	*/
 }
 
 /* BUTTON FUNCTIONS */
@@ -50,14 +53,15 @@ function onConnectButtonClick() {
 //disconnect
 function onDisconnectButtonClick(){
     if (!deviceCache) {
+		alert("Kein Bluetooth Gerät verbunden");
         return;
     }
     log("Disconnecting from Bluetooth device...");
     if(deviceCache.gatt.connected){
         deviceCache.gatt.disconnect();
     } else {
-        log("Bluetooth device is already disconnected");
-		alert("Kein Bluetooth Gerät verbunden")
+        //log("Bluetooth device is already disconnected");
+		alert("Verbindung zu Bluetooth Gerät verloren");
     }
 }
 
@@ -68,6 +72,7 @@ function sendData(commands, counter=0) {
     }
 	if(!deviceCache){
 		alert("Kein Bluetooth Gerät verbunden");
+		return;
 	}
 	
 	let encoder = new TextEncoder('utf-8');
