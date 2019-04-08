@@ -57,6 +57,7 @@ function onDisconnectButtonClick(){
         deviceCache.gatt.disconnect();
     } else {
         log("Bluetooth device is already disconnected");
+		alert("Kein Bluetooth Gerät verbunden")
     }
 }
 
@@ -65,6 +66,9 @@ function sendData(commands, counter=0) {
     if (!commands && !characteristicCache_rx) {
         return;
     }
+	if(!deviceCache){
+		alert("Kein Bluetooth Gerät verbunden");
+	}
 	
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
@@ -91,6 +95,7 @@ function sendData(commands, counter=0) {
 
 function onDisconnected(event) {
   	log("Bluetooth Device disconnected");
+	alert("Verbindung zu Bluetooth Gerät getrennt");
 	deviceCache = null;
 }
 
@@ -147,6 +152,7 @@ function startNotifications(characteristic){
 		// get notified when value in tx characteristic changes
         characteristic.addEventListener('characteristicvaluechanged',handleTxValueChange);
 		log('Notifications started');
+		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
     })
 	.catch(error => {
 		log(error);
