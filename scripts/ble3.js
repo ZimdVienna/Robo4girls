@@ -26,12 +26,6 @@ disconnectButton.addEventListener('click', function() {
 
 function log(data, type = '') {
 	console.log(data + type);
-    /* 
-	//Output to terminal object on web app for debugging
-	terminalContainer.insertAdjacentHTML('beforeend','<div' + (type ? ' class="' + type + '"' : '') + '>' + data + '</div>');
-    // auto scroll... we always see the last in-/output
-    terminalContainer.scrollTop = terminalContainer.scrollHeight;
-	*/
 }
 
 /* BUTTON FUNCTIONS */
@@ -74,15 +68,15 @@ function sendData(commands, counter=0) {
 		alert("Kein Bluetooth Gerät verbunden");
 		return;
 	}
-	
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
 	// send pending command
 	characteristicCache_rx.writeValue(data);
 	log(commands[counter], 'out');
-
+	
 	// wait for status input from microbit
 	var promise = new Promise(async function(resolve,reject){
+		// subscribe to changes to transceiver characteristic (messages from microbit)
 		characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
 			let decoder = new TextDecoder();
 			let value = decoder.decode(event.target.value);
@@ -154,18 +148,10 @@ function startNotifications(characteristic){
     log('Starting notifications...');
     return characteristic.startNotifications()
     .then(() => {
-		// get notified when value in tx characteristic changes
-        characteristic.addEventListener('characteristicvaluechanged',handleTxValueChange);
 		log('Notifications started');
 		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
     })
 	.catch(error => {
 		log(error);
 	});
-}
-
-// Data receiving
-function handleTxValueChange(event) {
-  let value = new TextDecoder().decode(event.target.value);
-  log(value, 'in');
 }

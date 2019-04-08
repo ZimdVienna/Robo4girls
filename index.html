@@ -50,7 +50,6 @@
 		function handlePlay(event) {
 			Blockly.JavaScript.addReservedWords('code');
 			var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-			
 			var commands = code.split(":");
 			var max_length = 19;
 			for(var i = 0; i < commands.length; i++){
@@ -60,7 +59,7 @@
 				commands[i] += ":";
 				console.log(commands[i]);
 			}
-			return sendData(commands, 0);
+			return sendData(commands);
 		}
 
 		function save(){
@@ -73,9 +72,9 @@
 				}
 			}
 			if(eingabe != null){
-				var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-        localStorage.setItem("R4G_" + eingabe, xmlText);
+			var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        	localStorage.setItem("R4G_" + eingabe, xmlText);
 				alert("Programm '" + eingabe + "' gespeichert");  
 			}
 		}
@@ -94,7 +93,6 @@
 				alert("Keine gespeicherten Programme vorhanden");
 				return 1;
 			}
-
 			var eingabe = prompt(storage_items + '\nProgramm laden:','');
 			if(eingabe != null){
 				if(eingabe === "" || !storage_items.includes(eingabe)){
@@ -107,11 +105,11 @@
 				alert("Programm '"+ eingabe +"' wird geladen...");
 			}
 		}
+		
 		function end_program(){
 			workspace.clear();
 			onDisconnectButtonClick();
 		}
-		
 	</script>
 
 	<!-- play button starts program -->
