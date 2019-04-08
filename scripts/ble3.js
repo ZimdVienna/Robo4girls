@@ -104,6 +104,7 @@ function sendData(commands, counter=0) {
 
 function onDisconnected(event) {
   	log("Bluetooth Device disconnected");
+	deviceCache = null;
 }
 
 function requestBluetoothDevice() {
