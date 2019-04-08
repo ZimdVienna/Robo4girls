@@ -2,6 +2,10 @@
 const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
+
+//const sendButton = document.getElementById("sendData");
+//const inputField = document.getElementById("input");
+
 const name_prefix = "BBC micro:bit";
 const uart_service = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';  //messages from micro:bit
@@ -12,6 +16,8 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
+//var auto_reconnect = true;
+
 //connect to device on button click
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
@@ -21,6 +27,12 @@ connectButton.addEventListener('click', function(){
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
 });
+
+/* Send data from input field to device
+sendButton.addEventListener('click', function(){
+    sendData(inputField.value);
+});
+*/
 
 /* ******************* FUNCTIONS ******************* */
 
