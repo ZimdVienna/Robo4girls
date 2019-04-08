@@ -1,22 +1,24 @@
 //Global variables needed in different functions
 var delimiter = ":";
 var float_delimiter = ".0:";
-var dance_array = ["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
-var shake_array = ["BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.5:"];
-var zigzag_array = ["BL0.5:", "Bv1.0:", "BR1.0:", "Bv1.0:", "BL0.5:"];
-var combinations = [dance_array, zigzag_array, shake_array];
+var dance_array_slow = ["Bv0.3:", "Bz0.3:", "BL0.3:", "BR0.6:", "BL0.6:", "BR0.6:", "BL0.19:"];
+var dance_array_middle = ["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.35:"];
+var dance_array_strong = ["Bv1.0:", "Bz1.0:", "BL0.8:", "BR1.5:", "BL1.5:", "BR1.5:", "BL0.5:"];
+var shake_array_slow = ["BL0.21:", "BR0.4:", "BL0.4:", "BR0.4:", "BL0.1:"];
+var shake_array_middle = ["BL0.4:", "BR0.8:", "BL0.8:", "BR0.8:", "BL0.26:"];
+var shake_array_strong = ["BL0.8:", "BR1.6:", "BL1.6:", "BR1.6:", "BL0.56:"];
+var zigzag_array_slow = ["BL0.2:", "Bv0.5:", "BR0.4:", "Bv0.5:", "BL0.15:"];
+var zigzag_array_middle = ["BL0.3:", "Bv1.0:", "BR0.7:", "Bv1.0:", "BL0.28:"];
+var zigzag_array_strong = ["BL0.38:", "Bv1.3:", "BR0.75:", "Bv1.3:", "BL0.28:"];
+var combinations = [dance_array_slow, dance_array_middle, dance_array_strong, zigzag_array_slow, zigzag_array_middle, zigzag_array_strong, shake_array_slow, shake_array_middle, shake_array_strong];
 
 /*************Functions*************/
 
-function send_combination(index, repetitions, intensity){
-	var code = "Gb05:";	//slow	
-	if(intensity == "strong")
-		code = "Gb16:";
-	if(intensity == "middle")
-		code = "Gb10:";
+function send_combination(index, repetitions, intensity) {
+	var code = "Gb16:";
 	// send comination various times
-	for(var l = 0; l < repetitions; l++){
-		for(var k = 0; k < combinations[index].length; k++){
+	for (var l = 0; l < repetitions; l++) {
+		for (var k = 0; k < combinations[index].length; k++) {
 			code += combinations[index][k];
 		}
 	}
@@ -191,7 +193,12 @@ Blockly.JavaScript['dance'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	console.log(dropdown_intensity);
-	return send_combination(0,number_repeat,dropdown_intensity);
+	if (dropdown_intensity === 'sanft' || dropdown_intensity === 'easy')
+		return send_combination(0, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'middle')
+		return send_combination(1, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'strong')
+		return send_combination(2, number_repeat, dropdown_intensity);
 };
 
 //Zigzag 
@@ -213,7 +220,13 @@ Blockly.Blocks['zigzag'] = {
 Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
-	return send_combination(1,number_repeat,dropdown_intensity);
+	if (dropdown_intensity === 'sanft' || dropdown_intensity === 'easy')
+		return send_combination(3, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'middle')
+		return send_combination(4, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'strong')
+		return send_combination(5, number_repeat, dropdown_intensity);
+
 };
 
 //Shake 
@@ -235,7 +248,12 @@ Blockly.Blocks['shake'] = {
 Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
-	return send_combination(2,number_repeat,dropdown_intensity);
+	if (dropdown_intensity === 'sanft' || dropdown_intensity === 'easy')
+		return send_combination(6, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'middle')
+		return send_combination(7, number_repeat, dropdown_intensity);
+	if (dropdown_intensity === 'strong')
+		return send_combination(8, number_repeat, dropdown_intensity);
 };
 
 
@@ -258,12 +276,12 @@ Blockly.Blocks['pirouette'] = {
 Blockly.JavaScript['pirouette'] = function (block) {
 	var number_repetition = block.getFieldValue('repeat');
 	var dropdown_direction = block.getFieldValue('direction');
-	var code = "Gb14:";
+	var code = "Gb16:";
 	for(var r = 0; r < number_repetition; r++){
-		if(dropdown_direction == "Links")
-			code += "BL4.3:";
+		if(dropdown_direction == "Links" || dropdown_direction == "left")
+			code += "BL2.7:";
 		else
-			code += "BR4.3:";
+			code += "BR2.0:";
 	}
 	return code;
 };
