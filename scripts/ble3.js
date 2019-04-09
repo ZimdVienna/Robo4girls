@@ -3,6 +3,7 @@
 const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
+const stopButton = document.getElementById("stop");
 const name_prefix = "BBC micro:bit";
 const uart_service = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';  //messages from micro:bit
@@ -12,6 +13,7 @@ const uart_characteristic_rx = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';  //messag
 var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
+var stopButtonClicked = false;
 
 //event listeners for connect/disconnect button clicks
 connectButton.addEventListener('click', function(){
@@ -20,6 +22,10 @@ connectButton.addEventListener('click', function(){
 
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
+});
+
+stopButton.addEventListener('click', function(){
+	stopButtonClicked = true;
 });
 
 /* ******************* FUNCTIONS ******************* */
@@ -87,6 +93,11 @@ function sendData(commands, counter=0) {
 		// send_next_command recursively if more commands are pending
 		log("success " + counter);
 		if(counter < commands.length-1){
+			if(stopButtonClicked){
+				stopButtonClicked = false;
+				log("Program stopped");
+				return;
+			}
 			sendData(commands, counter);
 		}
 	});

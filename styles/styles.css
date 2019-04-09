@@ -20,12 +20,12 @@
 div.term{
 	margin-bottom: 20px;
 	margin-top: 98px;
-    background-color: black;
+  background-color: black;
 	outline-width: 0;
-    max-width: 300px;
-    max-height: 200px;
-    overflow: auto;
-    float: right;
+  max-width: 300px;
+  max-height: 200px;
+  overflow: auto;
+  float: right;
 }
 
 #blocklyDiv{
