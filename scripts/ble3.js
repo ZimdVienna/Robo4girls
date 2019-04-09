@@ -1,3 +1,4 @@
+/**** Bluetooth connection and communication with micro:bit ****/
 
 const connectButton = document.getElementById("connect");
 const disconnectButton = document.getElementById("disconnect");
@@ -12,12 +13,11 @@ var deviceCache = null;
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 
-//connect to device on button click
+//event listeners for connect/disconnect button clicks
 connectButton.addEventListener('click', function(){
     onConnectButtonClick();
 });
 
-//Disconnect from the device on Disconnect button click
 disconnectButton.addEventListener('click', function() {
     onDisconnectButtonClick();
 });
@@ -84,7 +84,7 @@ function sendData(commands, counter=0) {
 		});
 	})
 	.then(function(counter){
-		// send_next_command if more commands pending
+		// send_next_command recursively if more commands are pending
 		log("success " + counter);
 		if(counter < commands.length-1){
 			sendData(commands, counter);

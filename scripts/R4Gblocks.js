@@ -1,6 +1,7 @@
-//Global variables needed in different functions
+// delimiter for messages to micro:bit
 var delimiter = ":";
 var float_delimiter = ".0:";
+// movement combinations
 var dance = [	["Bv0.3:", "Bz0.3:", "BL0.3:", "BR0.6:", "BL0.6:", "BR0.6:", "BL0.19:"],	// weak
 				["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.35:"],	// middle
 				["Bv1.0:", "Bz1.0:", "BL0.8:", "BR1.5:", "BL1.5:", "BR1.5:", "BL0.5:"]		// strong
@@ -15,7 +16,7 @@ var shake = [	["BL0.21:", "BR0.4:", "BL0.4:", "BR0.4:", "BL0.1:"],	//weak
 			];			
 var combinations = [dance, zigzag, shake];
 
-/*************Functions*************/
+/************* R4G blocks and functions*************/
 
 function send_combination(index=0, repetitions=1, intensity) {
 	var code = "Gb16:";
@@ -37,7 +38,7 @@ function send_combination(index=0, repetitions=1, intensity) {
 
 /******** MOVEMENTS B (Bewegungen) **********/
 
-//forward 
+//Forward 
 Blockly.Blocks['forward'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -63,7 +64,7 @@ Blockly.JavaScript['forward'] = function (block) {
 	return code;
 };
 
-// backwards	
+//Backwards	
 Blockly.Blocks['back'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -308,6 +309,7 @@ Blockly.JavaScript['melody'] = function (block) {
 
 /********* SETTINGS G (Einstellungen) *****************/
 
+//Motor Velocity
 Blockly.Blocks['motor'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -388,7 +390,9 @@ Blockly.JavaScript['show_picture'] = function (block) {
 	return code;
 };
 
-/******* Repeat (Wiederholung Wh) **********/
+/******* Program control (Steuerung) **********/
+
+//Repeat (Wiederholung)
 Blockly.Blocks['repetition'] = {
 	init: function () {
 		this.appendDummyInput()
