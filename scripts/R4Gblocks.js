@@ -2,17 +2,17 @@
 var delimiter = ":";
 var float_delimiter = ".0:";
 // movement combinations
-var dance = [	["Bv0.3:", "Bz0.3:", "BL0.3:", "BR0.6:", "BL0.6:", "BR0.6:", "BL0.19:"],	// weak
-				["Bv0.5:", "Bz0.5:", "BL0.5:", "BR1.0:", "BL1.0:", "BR1.0:", "BL0.35:"],	// middle
-				["Bv1.0:", "Bz1.0:", "BL0.8:", "BR1.5:", "BL1.5:", "BR1.5:", "BL0.5:"]		// strong
+var dance = [	["Bv0.3", "Bz0.3", "BL0.3", "BR0.6", "BL0.6", "BR0.6", "BL0.1"],	// weak
+				["Bv0.5", "Bz0.5", "BL0.5", "BR1.0", "BL1.0", "BR1.0", "BL0.3"],	// middle
+				["Bv1.0", "Bz1.0", "BL0.8", "BR1.5", "BL1.5", "BR1.5", "BL0.5"]		// strong
 			];
-var zigzag = [	["BL0.2:", "Bv0.5:", "BR0.4:", "Bv0.5:", "BL0.15:"],	//weak
-				["BL0.3:", "Bv1.0:", "BR0.7:", "Bv1.0:", "BL0.28:"],	//middle
-				["BL0.38:", "Bv1.3:", "BR0.75:", "Bv1.3:", "BL0.28:"]	//strong
+var zigzag = [	["BL0.2", "Bv0.5", "BR0.4", "Bv0.5", "BL0.1"],	//weak
+				["BL0.3", "Bv1.0", "BR0.7", "Bv1.0", "BL0.2"],	//middle
+				["BL0.3", "Bv1.3", "BR0.7", "Bv1.3", "BL0.2"]	//strong
 			];
-var shake = [	["BL0.21:", "BR0.4:", "BL0.4:", "BR0.4:", "BL0.1:"],	//weak
-				["BL0.4:", "BR0.8:", "BL0.8:", "BR0.8:", "BL0.26:"],	//middle
-				["BL0.8:", "BR1.6:", "BL1.6:", "BR1.6:", "BL0.56:"]		//strong
+var shake = [	["BL0.2", "BR0.4", "BL0.4", "BR0.4", "BL0.1"],	//weak
+				["BL0.4", "BR0.8", "BL0.8", "BR0.8", "BL0.2"],	//middle
+				["BL0.8", "BR1.6", "BL1.6", "BR1.6", "BL0.5"]		//strong
 			];			
 var combinations = [dance, zigzag, shake];
 
@@ -30,7 +30,7 @@ function send_combination(index=0, repetitions=1, intensity) {
 	// send comination various times
 	for (var l = 0; l < repetitions; l++) {
 		for (var k = 0; k < combinations[index][inner_index].length; k++) {
-			code += combinations[index][inner_index][k];
+			code += combinations[index][inner_index][k] + delimiter;
 		}
 	}
 	return code;
