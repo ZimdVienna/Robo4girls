@@ -189,7 +189,7 @@ Blockly.Blocks['dance'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Tanze")
-			.appendField(new Blockly.FieldNumber(1, 0, 9), "repeat")
+			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
 			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity"); // the 2nd option is written in xml code when saved
 		this.setInputsInline(false);
@@ -212,7 +212,7 @@ Blockly.Blocks['zigzag'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Zickzack")
-			.appendField(new Blockly.FieldNumber(1, 0, 9), "repeat")
+			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
 			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity");
 		this.setInputsInline(false);
