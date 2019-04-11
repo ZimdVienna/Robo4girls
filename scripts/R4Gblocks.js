@@ -316,7 +316,7 @@ Blockly.Blocks['motor'] = {
 			.appendField("Motor")
 			.appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["1+2", "b"]]), "motor")
 			.appendField("Leistung:")
-			.appendField(new Blockly.FieldNumber(12, 1, 16), "velocity");
+			.appendField(new Blockly.FieldNumber(12, 1, 16, 1), "velocity");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(60);
