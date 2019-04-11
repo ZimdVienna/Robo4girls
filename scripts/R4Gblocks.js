@@ -368,7 +368,7 @@ Blockly.Blocks['show_picture'] = {
 			.appendField(new Blockly.FieldDropdown([["Fröhlich", "1"], ["Herz", "2"], ["Herz klein", "3"], ["Traurig", "4"], ["Böse", "5"], ["Müde", "6"], ["Überrascht", "7"], ["Richtig", "8"], ["Falsch", "9"]]), "pic")
 		this.appendDummyInput()
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "show_duration");
+			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "show_duration");
 		this.appendDummyInput()
 			.appendField("Sekunden");
 		this.setInputsInline(true);
