@@ -19,7 +19,7 @@ var combinations = [dance, zigzag, shake];
 /************* R4G blocks and functions*************/
 
 function send_combination(index=0, repetitions=1, intensity) {
-	var code = "Gb16:";
+	var code = "Gb16" + delimiter;
 	var inner_index = 0;
 	if(intensity == "middle"){
 		inner_index = 1;
@@ -44,8 +44,7 @@ Blockly.Blocks['forward'] = {
 		this.appendDummyInput()
 			.appendField("Vorwärts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration")
-			.appendField("Sekunden")
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration");
 			//.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"))
 		;
 		this.setInputsInline(false);
@@ -58,7 +57,6 @@ Blockly.Blocks['forward'] = {
 };
 Blockly.JavaScript['forward'] = function (block) {
 	var number_forward_duration = block.getFieldValue('forward_duration');
-
 	var code = "Bv" + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
 
 	return code;
