@@ -54,7 +54,7 @@
 		function handlePlay(event) {
 			let delimiter_microbit = ":";
 			Blockly.JavaScript.addReservedWords('code');
-			var code = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+			var code = "Gb16" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
 			var commands = code.split(delimiter_microbit);
 			var max_length = 19;
 			for(var i = 0; i < commands.length; i++){
