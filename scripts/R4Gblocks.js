@@ -44,7 +44,8 @@ Blockly.Blocks['forward'] = {
 		this.appendDummyInput()
 			.appendField("Vorwärts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration");
+			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration")
+			.appendField("Sekunden")
 			//.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"))
 		;
 		this.setInputsInline(false);
