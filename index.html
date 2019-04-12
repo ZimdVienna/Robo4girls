@@ -91,7 +91,6 @@
 		}
 		
 		function restore() {	
-			workspace.clear();
 			var storage_items = "";
 			for (let i = 0; i < localStorage.length; i++) {
 				if (localStorage.key(i).includes("R4G_")){
@@ -110,6 +109,7 @@
 					alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
 					return 1;
 				}
+				workspace.clear();
 				var xmlText = localStorage.getItem("R4G_" + eingabe);
 				var xmlDom = Blockly.Xml.textToDom(xmlText);
 				Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
