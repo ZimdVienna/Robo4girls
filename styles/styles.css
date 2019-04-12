@@ -1,22 +1,63 @@
-#body {
-	padding-left: 20px;
-	/*background-color: lightgoldenrodyellow;*/
-	font-family: sans-serif;
+html,body{
+	height: 100%;
+	margin: 0;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 20px;
 }
 
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+
+h1 {
+	font-weight: normal;
+	font-size: 140%;
+}
+
+table {
+	height: 70%;
+	width: 100%;
+}
+
+button {
+	margin-right: 5px;
+}
+
+#blocklyArea {
+    height: 99%;
+}
+
+#start {
+	float: left;
+}
+
+#stop {
+	float: right;
+}
+
+#endProgram {
+	float: right;
+}
+
+.bluetooth {
+	font-size: smaller;
+	font-weight: lighter;
+	color: black;
+}
+
+/*
 #terminal div {
     color: gray;
     overflow: auto;
 }
-
 #terminal div.out {
     color: red;
 }
-
 #terminal div.in {
     color: turquoise;
 }
-
 div.term{
 	margin-bottom: 20px;
 	margin-top: 98px;
@@ -27,8 +68,4 @@ div.term{
   overflow: auto;
   float: right;
 }
-
-#blocklyDiv{
-    height:50%;
-    max-width: 100%;
-}
+*/
