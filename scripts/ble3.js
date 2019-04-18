@@ -43,7 +43,7 @@ function onConnectButtonClick() {
     .then(device => connectDeviceAndCacheCharacteristic(device))
     .then(characteristics => {
         startNotifications(characteristicCache_tx);
-		sendData(["C:"]);
+				//sendData(["C:"]);
     })
     .catch(error => {
         log(error);
@@ -159,8 +159,9 @@ function startNotifications(characteristic){
     log('Starting notifications...');
     return characteristic.startNotifications()
     .then(() => {
-		log('Notifications started');
-		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
+			log('Notifications started');
+			alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
+			sendData(["C:"]);
     })
 	.catch(error => {
 		log(error);
