@@ -192,17 +192,50 @@ table {
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
 }
 
-/*
-#terminal div {
-    color: gray;
-    overflow: auto;
+/* Dropdown Menu */
+
+/* Dropdown Button */
+.dropbtn {
+  cursor: pointer;
 }
-#terminal div.out {
-    color: red;
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
 }
-#terminal div.in {
-    color: turquoise;
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
 }
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.tablinks {
+	width:100%;
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+	
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
 div.term{
 	margin-bottom: 20px;
 	margin-top: 98px;

@@ -19,6 +19,7 @@
 <!-- body -->
 <body ontouchstart="" id="body">
 	<!-- ontouchstart="" enables low-delay CSS transitions. -->
+	
 	<table>
 		<tr>
 		<!-- Title, Logo and Program commands 
@@ -29,36 +30,55 @@
 				<button id="connect" type="button" class="button blue">Verbinden</button>
 				<!--<button id="disconnect" type="button">Trennen</button> -->
 			</div>
-		</tr>
+			<div class="dropdown" style="float:right;">
+				<button onclick="showMenu()" class="dropbtn button black" style="margin-top:20px;margin-right:15px;">Menu</button>
+				<div id="myDropdown" class= "dropdown-content">
+					<button id ="saveData" class="tablinks gray" onclick="save()">Programm speichern</button>
+					<button id ="restoreData" class="tablinks gray" onclick="restore()">Programm laden</button>
+					<button id ="endProgram" class="tablinks gray" onclick=" end_program()">Beenden</button>
+				</div>
+			</div>
+		</tr>		
 		<tr>
 		<!-- buttons for program flow -->	
-			<!--<h4>Viel Spaß beim programmieren!</h4>-->
 			<!-- play/stop button starts/stops blockly code execution -->
 			<td>
-				<div class="control_buttons" style="margin-top:20px;">
+				<div class="control_buttons">
 					<button id="start" onclick="handlePlay();" type="button" class= "button green" style="float:left;">Start</button>
 					<button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;">Stopp</button>
-					<button id="saveData" onclick="save()" type="button" class="button gray" style="float: right;margin-left:20px;">Programm speichern</button>
-					<button id="restoreData" onclick="restore()" type="button" class="button gray" style="float: right;">Programm laden</button>
 				</div>
 			</td>
-			<!-- terminal, text color changes: debug=grey, input=blue, output=red -->
-			<!-- <div class="term" id="terminal"></div> -->
 		</tr>
 		<tr>
 			<!-- Area for blockly workspace -->
-      <td id="blocklyArea" style="margin-top:10px">
+      <td id="blocklyArea">
       </td>
 		</tr>
-			<td>
-				<button id="endProgram" onclick=" end_program()" type="button" class="button black" style="float:right;">Beenden</button>	
-			</td>
 	</table>
 
 	<!-- script for bluetooth communication -->
 	<script type="text/javascript" src="scripts/ble3.js"></script>
 
 	<script>
+		/* toggle between hiding and showing the dropdown content */
+		function showMenu() {
+			document.getElementById("myDropdown").classList.toggle("show");
+		}
+		// Close the dropdown menu if the user clicks outside of it
+		window.onclick = function(event) {
+			if (!event.target.matches('.dropbtn')) {
+				var dropdowns = document.getElementsByClassName("dropdown-content");
+				var i;
+				for (i = 0; i < dropdowns.length; i++) {
+					var openDropdown = dropdowns[i];
+					if (openDropdown.classList.contains('show')) {
+						openDropdown.classList.remove('show');
+					}
+				}
+			}
+		}
+		
+		/* on Start button clicked */	
 		function handlePlay(event) {
 			let delimiter_microbit = ":";
 			Blockly.JavaScript.addReservedWords('code');
@@ -74,7 +94,8 @@
 			}
 			return sendData(commands);
 		}
-
+		
+		/* Menu functions */
 		function save(){
 			console.log(localStorage);
 			var eingabe = "";
@@ -99,7 +120,6 @@
 					let key_i = localStorage.key(i).replace("R4G_","");
 					storage_items += key_i + "\n";
 				}
-
 			}
 			if (storage_items === "") {
 				alert("Keine gespeicherten Programme vorhanden");
