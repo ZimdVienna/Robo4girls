@@ -290,7 +290,7 @@ Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Melodie abspielen")
-			.appendField(new Blockly.FieldDropdown([["Tusch", "M1"], ["Romantisch", "M2"], ["Star Wars", "M3"],["Super Mario", "M4"],["Donauwalzer", "M5"],["Tango", "M6"]]), "melody");
+			.appendField(new Blockly.FieldDropdown([["Tusch", "M1"], ["Romantisch", "M2"], ["Star Wars", "M3"],["Super Mario", "M4"],["Donauwalzer", "M5"],["Tango Kriminalis", "M6"],["Don't Worry be Happy", "M7"],["Somewhere over the Rainbow", "M8"]]), "melody");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
