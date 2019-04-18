@@ -1,7 +1,7 @@
 /**** Bluetooth connection and communication with micro:bit ****/
 
 const connectButton = document.getElementById("connect");
-const disconnectButton = document.getElementById("disconnect");
+//const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
 const stopButton = document.getElementById("stop");
 const name_prefix = "BBC micro:bit";
@@ -17,11 +17,11 @@ var stopButtonClicked = false;
 
 //event listeners for connect/disconnect button clicks
 connectButton.addEventListener('click', function(){
-    onConnectButtonClick();
+	onConnectButtonClick();
 });
 
 disconnectButton.addEventListener('click', function() {
-    onDisconnectButtonClick();
+	onDisconnectButtonClick();
 });
 
 stopButton.addEventListener('click', function(){
@@ -39,37 +39,37 @@ function log(data, type = '') {
 //connect
 function onConnectButtonClick() {
 	// connect to device and start notifications for characteristic changes
-    return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
-    .then(device => connectDeviceAndCacheCharacteristic(device))
-    .then(characteristics => {
-        startNotifications(characteristicCache_tx);
-				//sendData(["C:"]);
-    })
-    .catch(error => {
-        log(error);
-    });
+	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
+	.then(device => connectDeviceAndCacheCharacteristic(device))
+	.then(characteristics => {
+			startNotifications(characteristicCache_tx);
+			//sendData(["C:"]);
+	})
+	.catch(error => {
+			log(error);
+	});
 }
 
 //disconnect
 function onDisconnectButtonClick(){
-    if (!deviceCache) {
-		alert("Kein Bluetooth Gerät verbunden");
-        return;
-    }
-    log("Disconnecting from Bluetooth device...");
-    if(deviceCache.gatt.connected){
-        deviceCache.gatt.disconnect();
-    } else {
-        //log("Bluetooth device is already disconnected");
-		alert("Verbindung zu Bluetooth Gerät verloren");
-    }
+	if (!deviceCache) {
+	alert("Kein Bluetooth Gerät verbunden");
+			return;
+	}
+	log("Disconnecting from Bluetooth device...");
+	if(deviceCache.gatt.connected){
+			deviceCache.gatt.disconnect();
+	} else {
+			//log("Bluetooth device is already disconnected");
+	alert("Verbindung zu Bluetooth Gerät verloren");
+	}
 }
 
 // write to characteristic
 function sendData(commands, counter=0) {
-    if (!commands && !characteristicCache_rx) {
-        return;
-    }
+	if (!commands && !characteristicCache_rx) {
+			return;
+	}
 	if(!deviceCache){
 		alert("Kein Bluetooth Gerät verbunden");
 		return;
@@ -79,7 +79,7 @@ function sendData(commands, counter=0) {
 	// send pending command
 	characteristicCache_rx.writeValue(data);
 	log(commands[counter], 'out');
-	
+
 	// wait for status input from microbit
 	var promise = new Promise(async function(resolve,reject){
 		// subscribe to changes to transceiver characteristic (messages from microbit)
@@ -104,65 +104,70 @@ function sendData(commands, counter=0) {
 }
 
 function onDisconnected(event) {
-  	log("Bluetooth Device disconnected");
+	log("Bluetooth Device disconnected");
 	alert("Verbindung zu Bluetooth Gerät getrennt");
 	deviceCache = null;
+	connectButton.innerHTML = "Verbinden";
+	connectButton.className = "button blue";
 }
 
 function requestBluetoothDevice() {
 	//request Bluetooth device with name prefix "BBC micro:bit
-    let options = {
-    filters: [
-        {namePrefix: name_prefix}
-    ],
-    optionalServices: [uart_service] 
-    }
-    log("Requesting Bluetooth device...");
-    
-    return navigator.bluetooth.requestDevice(options)
-    .then(device => {
-        deviceCache = device;
-        deviceCache.addEventListener('gattserverdisconnected', onDisconnected); // watch connection
-        log(deviceCache.name);
-        return deviceCache;
-    })
-    .catch(error => {
-        log(error);
-    });
+	let options = {
+	filters: [
+			{namePrefix: name_prefix}
+	],
+	optionalServices: [uart_service] 
+	}
+	log("Requesting Bluetooth device...");
+
+	return navigator.bluetooth.requestDevice(options)
+	.then(device => {
+			deviceCache = device;
+			deviceCache.addEventListener('gattserverdisconnected', onDisconnected); // watch connection
+			log(deviceCache.name);
+			return deviceCache;
+	})
+	.catch(error => {
+			log(error);
+	});
 }
 
 function connectDeviceAndCacheCharacteristic(device){
 	//get Service and characteristics rx/tx from device
-    if(device.gatt.connected && characteristicCache_rx) {
-        return Promise.resolve(characteristicCache_rx);
-    }
-    // Connect to GATT Server
-    return device.gatt.connect()
-    .then(server => {
-        return server.getPrimaryService(uart_service);
-    })
-    .then(service => {
-        return service.getCharacteristics();
-    })
-    .then(characteristics => {
-        //log('> Characteristics: ' + characteristics.map(c => c.uuid));
-        characteristicCache_tx = characteristics[0];
-        characteristicCache_rx = characteristics[1];
-    })
-    .catch(error => {
-        log(error);
-    });
-    
+	if(device.gatt.connected && characteristicCache_rx) {
+			return Promise.resolve(characteristicCache_rx);
+	}
+	// Connect to GATT Server
+	return device.gatt.connect()
+	.then(server => {
+			return server.getPrimaryService(uart_service);
+	})
+	.then(service => {
+			return service.getCharacteristics();
+	})
+	.then(characteristics => {
+			//log('> Characteristics: ' + characteristics.map(c => c.uuid));
+			characteristicCache_tx = characteristics[0];
+			characteristicCache_rx = characteristics[1];
+	})
+	.catch(error => {
+			log(error);
+	});
+
 }
 
 function startNotifications(characteristic){
-    log('Starting notifications...');
-    return characteristic.startNotifications()
-    .then(() => {
-			log('Notifications started');
-			alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
-			sendData(["C:"]);
-    })
+	log('Starting notifications...');
+	return characteristic.startNotifications()
+	.then(() => {
+		log('Notifications started');
+		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
+		sendData(["C:"]);
+		//change button text and color when connected
+		connectButton.innerHTML = "Verbunden";
+		connectButton.className = "button green";
+	})
 	.catch(error => {
 		log(error);
 	});
