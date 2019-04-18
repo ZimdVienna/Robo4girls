@@ -22,8 +22,7 @@
 	
 	<table>
 		<tr>
-		<!-- Title, Logo and Program commands 
-				<h3>Robo4Girls</h3>-->	
+		<!-- Title, Logo and Program commands -->
 			<img src="media/roberta_logo.png" class="logo" style="float:left;height:80px;margin-top:15px;margin-left: 10px;">
 			<!-- Bluetooth communication -->
 			<div class="bluetooth">
@@ -40,9 +39,9 @@
 			</div>
 		</tr>		
 		<tr>
-		<!-- buttons for program flow -->	
-			<!-- play/stop button starts/stops blockly code execution -->
+		<!-- buttons for program flow -->
 			<td>
+				<!-- play/stop button starts/stops blockly code execution -->
 				<div class="control_buttons">
 					<button id="start" onclick="handlePlay();" type="button" class= "button green" style="float:left;">Start</button>
 					<button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;">Stopp</button>
@@ -50,9 +49,9 @@
 			</td>
 		</tr>
 		<tr>
-			<!-- Area for blockly workspace -->
-      <td id="blocklyArea">
-      </td>
+		<!-- Area for blockly workspace -->
+      			<td id="blocklyArea">
+      			</td>
 		</tr>
 	</table>
 
@@ -217,32 +216,34 @@
 	<!-- Making Toolbox visible and resizable in Web-browser -->
 	<script>
 		var blocklyArea = document.getElementById('blocklyArea');
-  	var blocklyDiv = document.getElementById('blocklyDiv');
+  		var blocklyDiv = document.getElementById('blocklyDiv');
 		var workspace = Blockly.inject('blocklyDiv', {
 			media: 'media/',
 			toolbox: document.getElementById('toolbox')
 		})
-		var onresize = function(e) {
-    // Compute the absolute coordinates and dimensions of blocklyArea.
-    	var element = blocklyArea;
-    	var x = 0;
-    	var y = 0;
-    	do {
-      	x += element.offsetLeft;
-      	y += element.offsetTop;
-      	element = element.offsetParent;
-    	} while (element);
-    	// Position blocklyDiv over blocklyArea.
-    	blocklyDiv.style.left = x + 'px';
-    	blocklyDiv.style.top = y + 'px';
-    	blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-    	blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-    	Blockly.svgResize(workspace);
-  	};
 		
-  	window.addEventListener('resize', onresize, false);
-  	onresize();
-  	Blockly.svgResize(workspace);
+		var onresize = function(e) {
+    			// Compute the absolute coordinates and dimensions of blocklyArea.
+    			var element = blocklyArea;
+    			var x = 0;
+    			var y = 0;
+    			do {
+      				x += element.offsetLeft;
+      				y += element.offsetTop;
+      				element = element.offsetParent;
+    			} while (element);
+    		
+			// Position blocklyDiv over blocklyArea.
+    			blocklyDiv.style.left = x + 'px';
+    			blocklyDiv.style.top = y + 'px';
+    			blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+    			blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+    			Blockly.svgResize(workspace);
+  		};
+		
+  		window.addEventListener('resize', onresize, false);
+  		onresize();
+  		Blockly.svgResize(workspace);
 		
 		// An href with #key trigers an AJAX call to retrieve saved blocks.
 		if ('BlocklyStorage' in window && window.location.hash.length > 1) {
@@ -250,7 +251,7 @@
    	}
 		
 	</script>
-	<!-- Blockly scripts -->
+	<!-- Blockly R4G blocks script -->
 	<script src="scripts/R4Gblocks.js"></script>
 
 </body>
