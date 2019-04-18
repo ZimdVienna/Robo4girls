@@ -7,8 +7,6 @@ html,body{
 }
 
 body {
-	/*background-image: url(/media/qbkls.png);
-	*/
 	background-image: url(/media/textures/cubes.png);
 	background-repeat:repeat;
   	font-family: sans-serif;
@@ -232,17 +230,3 @@ table {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
-
-/*
-div.term{
-	margin-bottom: 20px;
-	margin-top: 98px;
-  background-color: black;
-	outline-width: 0;
-  max-width: 300px;
-  max-height: 200px;
-  overflow: auto;
-  float: right;
-}
-*/
-

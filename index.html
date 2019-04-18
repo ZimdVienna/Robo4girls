@@ -39,7 +39,6 @@
 			</div>
 		</tr>		
 		<tr>
-		<!-- buttons for program flow -->
 			<td>
 				<!-- play/stop button starts/stops blockly code execution -->
 				<div class="control_buttons">
@@ -50,8 +49,7 @@
 		</tr>
 		<tr>
 		<!-- Area for blockly workspace -->
-      			<td id="blocklyArea">
-      			</td>
+      		<td id="blocklyArea"></td>
 		</tr>
 	</table>
 
@@ -142,6 +140,8 @@
 			workspace.clear();
 			onDisconnectButtonClick();
 		}
+		
+		
 	</script>
 	
 	<!-- blockly programming window -->
@@ -248,7 +248,7 @@
 		// An href with #key trigers an AJAX call to retrieve saved blocks.
 		if ('BlocklyStorage' in window && window.location.hash.length > 1) {
       		BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-   	}
+   		}
 		
 	</script>
 	<!-- Blockly R4G blocks script -->
