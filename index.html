@@ -34,6 +34,8 @@
 				<div id="myDropdown" class= "dropdown-content">
 					<button id ="saveData" class="tablinks gray" onclick="save()">Programm speichern</button>
 					<button id ="restoreData" class="tablinks gray" onclick="restore()">Programm laden</button>
+					<button class="tablinks gray" onclick="deleteItem()">Programm löschen</button>
+					<button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
 					<button id ="endProgram" class="tablinks gray" onclick=" end_program()">Beenden</button>
 				</div>
 			</div>
@@ -136,7 +138,47 @@
 			}
 		}
 		
-		function end_program(){
+		function deleteAll() {
+			var count = 0;
+			for (let i = 0; i < localStorage.length; i++) {
+				var keyName = localStorage.key(i);
+				if (keyName.includes("R4G_")){
+					count ++;
+					if(confirm('Programm ' + keyName + ' löschen?')) {
+						localStorage.removeItem(keyName);
+					}
+				}
+			}
+			if(count == 0){
+				alert("Keine gespeicherten Programme vorhanden");
+			}
+		}
+		
+		function deleteItem() {
+			var storage_items = "";
+			for (let i = 0; i < localStorage.length; i++) {
+				if (localStorage.key(i).includes("R4G_")){
+					let key_i = localStorage.key(i).replace("R4G_","");
+					storage_items += key_i + "\n";
+				}
+			}
+			if(storage_items === ""){
+				alert("Keine gespeicherten Programme vorhanden");
+				return 1;
+			}
+			var eingabe = prompt(storage_items + '\nProgramm löschen:','');
+			if(eingabe != null){
+				if(eingabe === "" || !storage_items.includes(eingabe)){
+					alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
+					return 1;
+				}
+				if(confirm('Programm ' + eingabe + ' löschen?')) {
+					localStorage.removeItem("R4G_"+eingabe);
+				}
+			}
+		}
+		
+		function end_program() {
 			workspace.clear();
 			onDisconnectButtonClick();
 		}
