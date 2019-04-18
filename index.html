@@ -98,16 +98,27 @@
 		function save(){
 			console.log(localStorage);
 			var eingabe = "";
+			var double = false;
 			eingabe = prompt('Speichern unter:','');
 			if(eingabe === ""){
 				while(eingabe === ""){
 					eingabe = prompt('Bitte Programm benennen:','');
 				}
 			}
+			for(let i = 0; i < localStorage.length; i++){
+				if(localStorage.key(i).includes("R4G_"+eingabe)){
+					double = true;
+				}
+			}
+			if(double){
+				if(!confirm("Programm ist bereits vorhanden\nSoll es überschrieben werden?")){
+					return 1;
+				}
+			}
 			if(eingabe != null){
-			var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-        	var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-        	localStorage.setItem("R4G_" + eingabe, xmlText);
+				var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+        		var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+        		localStorage.setItem("R4G_" + eingabe, xmlText);
 				alert("Programm '" + eingabe + "' gespeichert");  
 			}
 		}
