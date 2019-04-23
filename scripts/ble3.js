@@ -1,7 +1,7 @@
 /**** Bluetooth connection and communication with micro:bit ****/
 
 const connectButton = document.getElementById("connect");
-//const disconnectButton = document.getElementById("disconnect");
+const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
 const stopButton = document.getElementById("stop");
 const name_prefix = "BBC micro:bit";
