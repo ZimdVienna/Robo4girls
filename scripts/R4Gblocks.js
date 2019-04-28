@@ -190,7 +190,7 @@ Blockly.Blocks['dance'] = {
 			.appendField("Tanze")
 			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity"); // the 2nd option is written in xml code when saved
+			.appendField(new Blockly.FieldDropdown([["kurz", "easy"], ["mittel", "middle"], ["groß", "strong"]]), "intensity"); // the 2nd option is written in xml code when saved
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -213,7 +213,7 @@ Blockly.Blocks['zigzag'] = {
 			.appendField("Zickzack")
 			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity");
+			.appendField(new Blockly.FieldDropdown([["kurz", "easy"], ["mittel", "middle"], ["groß", "strong"]]), "intensity");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
@@ -236,7 +236,7 @@ Blockly.Blocks['shake'] = {
 			.appendField("Schütteln")
 			.appendField(new Blockly.FieldNumber(1, 0, 9, 1), "repeat")
 			.appendField("mal")
-			.appendField(new Blockly.FieldDropdown([["sanft", "easy"], ["mittel", "middle"], ["stark", "strong"]]), "intensity");
+			.appendField(new Blockly.FieldDropdown([["kurz", "easy"], ["mittel", "middle"], ["groß", "strong"]]), "intensity");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
