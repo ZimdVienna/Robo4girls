@@ -2,6 +2,8 @@
 
 With this code you can control our micro:bit R4G robot platform through Bluetooth from this website: https://zimdvienna.github.io/Robo4girls/
 
+![R4G System overview](Dokumentation/Diagramme/r4g_system_overview.png)
+
 ## Testing the setup 
 You can test out the bluetooth communication between our website and a micro:bit, you do not need our R4G platform for this.
 
