@@ -1,7 +1,7 @@
 # Robo4girls
 Web application and micro:bit program to wirelessly control a micro:bit robot platform.
 
-![R4G System overview](Dokumentation/Diagramme/r4g_system_overview.png)
+![R4G System overview](Dokumentation/Diagramme/r4g_system_overview_.png)
 
 ## About the project
 The [ZIMD](www.zimd.at) (Center for Interaction, Media & Social Diversity) offers a workshop format, where girls build and program robots from Lego bricks. The workshops are offered for girls in fifth grade. The aim of the workshops is to inspire the 10- to 11-year old girls in technology and especially robotics. 
