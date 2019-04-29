@@ -24,7 +24,7 @@ You can test our R4G App with a computer, a Micro:bit and an USB cable.
 #### Prepare the Micro:bit
 Connect your Micro:bit to your computer via USB and load one of the R4G_MICROBIT.hex files on to your Micro:bit. The R4G_MICROBIT.hex files are in the [microbit](microbit) folder of this repository. If you have connected motors via a Micro:bit motor driver board from [Keyestudio](https://wiki.keyestudio.com/Ks0308_keyestudio_Motor_Drive_Breakout_Board_for_micro_bit), from [Elecfreaks](https://www.instructables.com/id/Elecfreaks-Motorbit-User-Guide/) or from [Waveshare](https://www.waveshare.com/wiki/Motor_Driver_for_micro:bit), choose the respective hex file (<i>ks</i>, <i>ef</i> or <i>ws</i>). Otherwise choose either one. If you do not know how to upload a program to your Micro:bit you can look it up [here](https://makecode.microbit.org/device/usb).
 <b>If you have a buzzer:</b>
-Connect Pin 0 and GND-Pin of your micro:bit to the piezo buzzer like [here](http://www.teachwithict.com/piezo.html).
+Connect Pin 0 and GND-Pin of your micro:bit to the piezo buzzer like shown in this [fritzing wiring diagram](Dokumentation/Wiring/buzzer_wiring.png)
 
 #### Connect and program the Micro:bit with the R4G web app
 Open the google chrome browser on your mobile device and navigate to the [R4G web application](https://zimdvienna.github.io/Robo4girls/). Don't forget to activate Bluetooth on your device! 
