@@ -1,7 +1,7 @@
 # Robo4girls
 Web application and Micro:bit program to wirelessly control a Micro:bit robot platform.
 
-![R4G System overview](Dokumentation/Diagramme/r4g_system_overview_.png)
+![R4G System overview](Dokumentation/Diagramme/r4g_system_overview.png)
 
 ## About the project
 The [ZIMD](www.zimd.at) (Center for Interaction, Media & Social Diversity) offers a workshop format, where girls build and program robots from Lego bricks. The workshops are offered for girls in fifth grade. The aim of the workshops is to inspire the 10- to 11-year old girls in technology and especially robotics. 
@@ -21,11 +21,12 @@ You can test our R4G App with a computer, a Micro:bit and an USB cable.
 + optionally a [piezo buzzer](https://de.wikipedia.org/wiki/Summer_(Elektronik))
 + optionally 2 croco clamps to connect the buzzer to your Micro:bit. If you do not have croco clamps just use scotch tape and tape the ends of the buzzer cables to the pins of your Micro:bit.
 
-### Connect and program the robot
+#### Prepare the Micro:bit
 Connect your Micro:bit to your computer via USB and load one of the R4G_MICROBIT.hex files on to your Micro:bit. The R4G_MICROBIT.hex files are in the [microbit](microbit) folder of this repository. If you have connected motors via a Micro:bit motor driver board from [Keyestudio](https://wiki.keyestudio.com/Ks0308_keyestudio_Motor_Drive_Breakout_Board_for_micro_bit), from [Elecfreaks](https://www.instructables.com/id/Elecfreaks-Motorbit-User-Guide/) or from [Waveshare](https://www.waveshare.com/wiki/Motor_Driver_for_micro:bit), choose the respective hex file (<i>ks</i>, <i>ef</i> or <i>ws</i>). Otherwise choose either one. If you do not know how to upload a program to your Micro:bit you can look it up [here](https://makecode.microbit.org/device/usb).
 <b>If you have a buzzer:</b>
 Connect Pin 0 and GND-Pin of your micro:bit to the piezo buzzer like [here](http://www.teachwithict.com/piezo.html).
 
+#### Connect and program the Micro:bit with the R4G web app
 Open the google chrome browser on your mobile device and navigate to the [R4G web application](https://zimdvienna.github.io/Robo4girls/). Don't forget to activate Bluetooth on your device! 
 On the R4G website click the <i>Verbinden</i> button, choose your micro:bit from the list and click <i>Koppeln</i>. Wait a few seconds until a confirmation message pops up. If the connection is not established quickly, disconnect the Micro:bit from its power source (computer or battery) and wait for one minute, then try again. If you still cannot establish a connection restart your mobile device. If the Micro:bit is successfully connected, it scrolls a "C" over its LED display.
 
