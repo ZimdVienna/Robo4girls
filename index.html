@@ -23,13 +23,13 @@
 	<table>
 		<tr>
 		<!-- Title, Logo and Program commands -->
-			<img src="media/logo/R4G_Logo_silber_honig.png" class="logo" style="float:left;height:80px;width:160px;margin-bottom: 20px;">
+			<img src="media/logo/R4G_Logo_rose_gradient.png" class="logo" style="float:left;margin-top: 12px; margin-left: 5px; height:70px;width:140px;">
 			<!-- Bluetooth communication -->
-			<div class="bluetooth">
+			<div class="bluetooth" style="margin-top: 40px;">
 				<button id="connect" type="button" class="button blue">Verbinden</button>
 			</div>
-			<div class="dropdown" style="float:right;">
-				<button onclick="showMenu()" class="dropbtn button black" style="margin-top:20px;margin-right:15px;">Menu</button>
+			<div class="dropdown" style="float:right;margin-top: 40px;">
+				<button onclick="showMenu()" class="dropbtn button black" style="margin-right:15px;">Menu</button>
 				<div id="myDropdown" class= "dropdown-content">
 					<button id ="saveData" class="tablinks gray" onclick="save()">Programm speichern</button>
 					<button id ="restoreData" class="tablinks gray" onclick="restore()">Programm laden</button>
@@ -43,9 +43,9 @@
 		<tr>
 			<td>
 				<!-- play/stop button starts/stops blockly code execution -->
-				<div class="control_buttons">
-					<button id="start" onclick="handlePlay();" type="button" class= "button green" style="float:left;margin-left:20px;font-size: 14px;">Start</button>
-					<button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 14px;">Stopp</button>
+				<div class="control_buttons" style="margin-top: 10px;">
+					<button id="start" onclick="handlePlay();" type="button" class= "button green" style="float:left; margin-left:10px;font-size: 13px;padding-left:30px;padding-right: 30px;">Start</button>
+					<button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 13px;">Stopp</button>
 				</div>
 			</td>
 		</tr>
