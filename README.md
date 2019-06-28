@@ -37,3 +37,5 @@ Now you can program the R4G robot by selecting blocks from the Blockly toolbox a
 You can drag & drop the blocks you want in the workspace. To create a program connect the individual blocks to a chain. To connect the blocks drag a block close to another block until the background between them turns gray and then release it. The blocks snap in place and you should hear a clicking sound when they connect. To start the program click <i>Start</i>. Melodies and Movements will only work if you have a buzzer and motors connected to your Micro:bit.
 
 Have Fun!
+
+
