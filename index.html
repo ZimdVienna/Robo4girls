@@ -91,11 +91,8 @@
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
 			}
-			if(commands[0] = 1){
 			return sendData(commands);
-			} 
-			else prompt('Bitte ein Startblock einfügen');
-			}
+		}
 		
 		/* Menu functions */
 		function save(){
@@ -206,11 +203,6 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Start" colour="#5b5ba5">
-			<block type="start">
-				<field name="start">1</field>
-			</block>	
-		</category>
 		<category name="Bewegungen" colour="#5b5ba5">
 			<block type="forward">
 				<field name="forward_duration">0.1</field>
