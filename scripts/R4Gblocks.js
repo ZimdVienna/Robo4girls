@@ -430,7 +430,7 @@ Blockly.Blocks['start'] = {
 			.appendField("Start")
 			.appendField("mache");
 		this.setPreviousStatement(false, null);
-		this.setNextStatement(true, null);
+		this.setNextStatement(false, null);
 		this.setColour(120);
 		this.setTooltip("");
 		this.setHelpUrl("");
