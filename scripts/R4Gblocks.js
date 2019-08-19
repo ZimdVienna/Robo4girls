@@ -423,3 +423,25 @@ Blockly.JavaScript['repetition'] = function (block) {
 	}
 	return code;
 };
+//Start
+Blockly.Blocks['start'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("Start")
+			.appendField("mache");
+		this.setPreviousStatement(false, null);
+		this.setNextStatement(false, null);
+		this.setColour(120);
+		this.setTooltip("");
+		this.setHelpUrl("");
+	}
+};
+
+
+
+Blockly.JavaScript['repetition'] = function (block) {
+	
+	var code = 1;
+	
+	return code;
+};
