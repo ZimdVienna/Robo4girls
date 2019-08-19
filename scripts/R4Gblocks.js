@@ -429,7 +429,7 @@ Blockly.Blocks['start'] = {
 		this.appendDummyInput()
 			.appendField("Start")
 			.appendField("mache");
-		this.setPreviousStatement(true, null);
+		this.setPreviousStatement(false, null);
 		this.setNextStatement(true, null);
 		this.setColour(120);
 		this.setTooltip("");
