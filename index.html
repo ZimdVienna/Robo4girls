@@ -206,12 +206,6 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Start" colour="#5ba55b">
-			
-			<block type="start">
-				<field name="start">1</field>
-			</block>
-		</category>
 		<category name="Bewegungen" colour="#5b5ba5">
 			<block type="forward">
 				<field name="forward_duration">0.1</field>
@@ -272,7 +266,9 @@
 			<block type="repetition">
 				<field name="repetition">1</field>
 			</block>
-			
+			<block type="start">
+				<field name="start">1</field>
+			</block>
 		</category>
 	</xml>
 	
