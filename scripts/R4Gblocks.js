@@ -445,6 +445,6 @@ Blockly.Blocks['start'] = {
 
 
 Blockly.JavaScript['start'] = function (block) {
-	var code = "1";
-	return code;
+	var start = "1";
+	return start;
 };
