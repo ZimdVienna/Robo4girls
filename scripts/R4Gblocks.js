@@ -429,8 +429,8 @@ Blockly.Blocks['start'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Start")
-			.appendField(new Blockly.FieldNumber(1, 1, 1, 1), "repetition")
-			.appendField(" ");
+			.appendField(new Blockly.FieldNumber(1, 1, 1, 0), "repetition")
+			.appendField(" mal: ");
 		this.appendStatementInput("repeat")
 			.setCheck(null)
 			.appendField("mache");
