@@ -81,7 +81,6 @@
 		function handlePlay(event) {
 			let delimiter_microbit = ":";
 			Blockly.JavaScript.addReservedWords('code');
-			var start_code_value = Blockly.JavaScript.addReservedWords('start');
 			var code = "Gb16" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
 			var commands = code.split(delimiter_microbit);
 			var max_length = 19;
@@ -91,10 +90,8 @@
 				}
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
-			} 
-			if(start_code_value == "1")
+			}
 			return sendData(commands);
-			else prompt("Bitte Start einfügen","");
 		}
 		
 		/* Menu functions */
@@ -265,9 +262,6 @@
 		<category name="Steuerung" colour="#5ba55b">
 			<block type="repetition">
 				<field name="repetition">1</field>
-			</block>
-			<block type="start">
-				<field name="start">1</field>
 			</block>
 		</category>
 	</xml>
