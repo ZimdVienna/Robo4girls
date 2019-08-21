@@ -81,7 +81,7 @@
 		function handlePlay(event) {
 			let delimiter_microbit = ":";
 			Blockly.JavaScript.addReservedWords('code');
-			var start_code_value = Blockly.JavaScript.addReservedWords('start');
+			
 			var code = "Gb16" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
 			var commands = code.split(delimiter_microbit);
 			var max_length = 19;
@@ -92,9 +92,9 @@
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
 			} 
-			if(start_code_value == "1")
+			
 			return sendData(commands);
-			else prompt("Bitte Start einfügen","");
+		
 		}
 		
 		/* Menu functions */
@@ -206,10 +206,10 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Start" colour="#5ba55b">
+		<category name="Starten" colour="#5b5ba5">
 			<block type="start">
 				<field name="repetition">1</field>
-			</block>
+			</block>	
 		</category>
 		<category name="Bewegungen" colour="#5b5ba5">
 			<block type="forward">
