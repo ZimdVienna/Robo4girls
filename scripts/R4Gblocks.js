@@ -436,7 +436,7 @@ Blockly.Blocks['start'] = {
 			.appendField("mache");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour("#32a8a0");
+		this.setColour(120);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
