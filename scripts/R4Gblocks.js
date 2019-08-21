@@ -443,7 +443,7 @@ Blockly.Blocks['start'] = {
 };
 
 
-Blockly.JavaScript['repetition'] = function (block) {
+Blockly.JavaScript['start'] = function (block) {
 	var number_repetition = block.getFieldValue('repetition');
 	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
 	var code = statements_repeat;
