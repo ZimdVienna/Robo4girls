@@ -442,6 +442,10 @@ Blockly.Blocks['start'] = {
 	}
 };
 
+function strip(str) {
+	//remove unwanted whitespaces
+    return str.replace(/^\s+|\s+$/g, '');
+}
 
 Blockly.JavaScript['start'] = function (block) {
 	var number_repetition = block.getFieldValue('repetition');
