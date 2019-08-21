@@ -91,7 +91,7 @@
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
 			} 
-			if(commands[1] == "1"){
+			if(commands.startsWith("1")){
 				return sendData(commands);
 			}	
 			else {
@@ -209,7 +209,7 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Starten" colour="#5b5ba5">
+		<category name="Starten" colour="blau">
 			<block type="start">
 				<field name="repetition">1</field>
 			</block>	

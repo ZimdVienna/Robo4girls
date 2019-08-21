@@ -426,32 +426,23 @@ Blockly.JavaScript['repetition'] = function (block) {
 
 //Start
 Blockly.Blocks['start'] = {
-	init: function () {
-		this.appendDummyInput()
-			.appendField("Start")
-			.appendField(new Blockly.FieldNumber(1, 1, 1, 0), "repetition")
-			.appendField(" mal: ");
-		this.appendStatementInput("repeat")
-			.setCheck(null)
-			.appendField("mache");
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour("#32a8a0");
-		this.setTooltip("");
-		this.setHelpUrl("");
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("Start");
+	  this.setNextStatement(true, null);
+	  this.setColour(45);
+   this.setTooltip("");
+   this.setHelpUrl("");
 	}
-};
+  };
 
 function strip(str) {
 	//remove unwanted whitespaces
     return str.replace(/^\s+|\s+$/g, '');
 }
 
-Blockly.JavaScript['start'] = function (block) {
-	var number_repetition = block.getFieldValue('repetition');
-	
-	
-	var code = number_repetition + delimiter;
-	
+Blockly.JavaScript['start'] = function(block) {
+	// TODO: Assemble JavaScript into code variable.
+	var code = '1';
 	return code;
-};
+  };
