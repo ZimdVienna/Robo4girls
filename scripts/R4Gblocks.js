@@ -448,6 +448,7 @@ function strip(str) {
 }
 
 Blockly.JavaScript['start'] = function (block) {
+	var number_repetition = block.getFieldValue('repetition');
 	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
 	
 	var start = statements_repeat;
