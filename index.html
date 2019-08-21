@@ -92,7 +92,7 @@
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
 			} 
-			if(start_code.equals("1"))
+			if(start_code === "1")
 			return sendData(commands);
 			else prompt("Mit Start starten","");
 		
@@ -207,7 +207,7 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Starten" colour="#32a8a0">
+		<category name="Starten" colour="#32a877">
 			<block type="start">
 				<field name="repetition">1</field>
 			</block>	
