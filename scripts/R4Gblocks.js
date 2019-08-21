@@ -429,8 +429,7 @@ Blockly.Blocks['start'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Start")
-			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "repetition")
-			.appendField("mal:");
+			.appendField(" ");
 		this.appendStatementInput("repeat")
 			.setCheck(null)
 			.appendField("mache");
@@ -448,11 +447,9 @@ function strip(str) {
 }
 
 Blockly.JavaScript['start'] = function (block) {
-	var number_repetition = block.getFieldValue('repetition');
-	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
-	var code = statements_repeat;
-	for(var n = 1; n < number_repetition; n++){
-		code += statements_repeat;
-	}
-	return code;
+	
+	
+	var start = "1";
+	
+	return start;
 };
