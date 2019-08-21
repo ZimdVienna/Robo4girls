@@ -81,6 +81,7 @@
 		function handlePlay(event) {
 			let delimiter_microbit = ":";
 			Blockly.JavaScript.addReservedWords('code');
+			
 			var code = "Gb16" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
 			var commands = code.split(delimiter_microbit);
 			var max_length = 19;
@@ -91,7 +92,7 @@
 				commands[i] += delimiter_microbit;
 				console.log(commands[i]);
 			} 
-			if(commands[1] === "1"){
+			if(commands[0] === "1"){
 				return sendData(commands);
 			}	
 			else {
@@ -209,7 +210,7 @@
 	<!-- R4G blocks design -->
 	<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
 		<!-- Category Movements -->
-		<category name="Starten" colour="blau">
+		<category name="Starten" colour="#32a8a0">
 			<block type="start">
 				<field name="repetition">1</field>
 			</block>	
