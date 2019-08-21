@@ -451,7 +451,7 @@ Blockly.JavaScript['start'] = function (block) {
 	var number_repetition = block.getFieldValue('repetition');
 	
 	
-	var code = number_repetition + delimiter;
+	var start = number_repetition;
 	
-	return code;
+	return start;
 };
