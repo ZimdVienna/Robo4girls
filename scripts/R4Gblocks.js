@@ -444,6 +444,11 @@ Blockly.Blocks['start'] = {
 
 
 Blockly.JavaScript['repetition'] = function (block) {
-	code = "1";
+	var number_repetition = block.getFieldValue('repetition');
+	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
+	var code = statements_repeat;
+	for(var n = 1; n < number_repetition; n++){
+		code += statements_repeat;
+	}
 	return code;
 };
