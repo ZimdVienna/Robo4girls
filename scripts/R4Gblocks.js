@@ -428,12 +428,12 @@ Blockly.JavaScript['repetition'] = function (block) {
 Blockly.Blocks['start'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField("Start")
-			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "repetition")
-			.appendField("mal:");
-		this.appendStatementInput("repeat")
-			.setCheck(null)
-			.appendField("mache");
+			.appendField("Starte")
+			
+			
+		this.appendStatementInput("")
+			
+			
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(120);
@@ -443,7 +443,8 @@ Blockly.Blocks['start'] = {
 };
 
 
-Blockly.JavaScript['repetition'] = function (block) {
-	code = "1";
+
+Blockly.JavaScript['start'] = function (block) {
+	var code = "1";
 	return code;
 };
