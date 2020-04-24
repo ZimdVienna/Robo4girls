@@ -226,7 +226,7 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(1, number_repeat, dropdown_intensity);
-	
+
 };
 
 //Shake 
@@ -249,7 +249,7 @@ Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(2, number_repeat, dropdown_intensity);
-	
+
 };
 
 
@@ -389,6 +389,29 @@ Blockly.JavaScript['show_picture'] = function (block) {
 	return code;
 };
 
+
+// Turn display: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
+Blockly.Blocks['turn_display'] = {
+  init: function() {
+	this.appendDummyInput()
+		.appendField("Drehe die Anzeige auf")
+		.appendField(new Blockly.FieldDropdown([["90","90"],["180","180"],["270","270"],["0","0"]]), "degrees")
+		.appendField("Grad");
+	this.setInputsInline(true);
+	this.setPreviousStatement(true, null);
+	this.setNextStatement(true, null);
+	this.setColour(160);
+ 	this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
+ 	this.setHelpUrl("");
+  }
+};
+
+Blockly.JavaScript['turn_display'] = function(block) {
+  var dropdown_degrees = block.getFieldValue('degrees');
+  var code = "T" + dropdown_degrees + delimiter;
+  return code;
+};
+
 /******* Program control (Steuerung) **********/
 
 //Repeat (Wiederholung)
@@ -411,7 +434,7 @@ Blockly.Blocks['repetition'] = {
 
 function strip(str) {
 	//remove unwanted whitespaces
-    return str.replace(/^\s+|\s+$/g, '');
+	return str.replace(/^\s+|\s+$/g, '');
 }
 
 Blockly.JavaScript['repetition'] = function (block) {
