@@ -392,29 +392,52 @@ Blockly.JavaScript['show_picture'] = function (block) {
 
 // Turn display: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
 Blockly.Blocks['turn_display'] = {
-  init: function() {
-	this.appendDummyInput()
-		.appendField("Drehe die Anzeige auf")
-		.appendField(new Blockly.FieldDropdown([["90","90"],["180","180"],["270","270"],["0","0"]]), "degrees")
-		.appendField("Grad");
-	this.setInputsInline(true);
-	this.setPreviousStatement(true, null);
-	this.setNextStatement(true, null);
-	this.setColour(160);
- 	this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
- 	this.setHelpUrl("");
-  }
+	init: function() {
+		this.appendDummyInput()
+			.appendField("Drehe die Anzeige auf")
+			.appendField(new Blockly.FieldDropdown([["90","90"],["180","180"],["270","270"],["0","0"]]), "degrees")
+			.appendField("Grad");
+		this.setInputsInline(true);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(65);
+		this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
+		this.setHelpUrl("");
+	}
 };
 
 Blockly.JavaScript['turn_display'] = function(block) {
-  var dropdown_degrees = block.getFieldValue('degrees');
-  var code = "T" + dropdown_degrees + delimiter;
-  return code;
+  	var dropdown_degrees = block.getFieldValue('degrees');
+  	var code = "T" + dropdown_degrees + delimiter;
+	return code;
 };
 
 /******* Program control (Steuerung) **********/
 
-//Repeat (Wiederholung)
+// Wait
+Blockly.Blocks['wait_seconds'] = {
+	init: function() {
+		this.appendDummyInput()
+			.appendField("Warte für")
+			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "seconds_to_wait")
+			.appendField("Sekunden");
+		this.setInputsInline(true);
+	  	this.setPreviousStatement(true, null);
+	  	this.setNextStatement(true, null);
+	  	this.setColour(120);
+	  	this.setTooltip("");
+	  	this.setHelpUrl("");
+  	}
+};
+
+Blockly.JavaScript['wait_seconds'] = function(block) {
+  var number_seconds_to_wait = block.getFieldValue('seconds_to_wait');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'W'+ number_seconds_to_wait + delimiter;
+  return code;
+};
+
+// Repeat (Wiederholung)
 Blockly.Blocks['repetition'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -446,3 +469,4 @@ Blockly.JavaScript['repetition'] = function (block) {
 	}
 	return code;
 };
+

@@ -81,7 +81,7 @@
         function handlePlay(event) {
             let delimiter_microbit = ":";
             Blockly.JavaScript.addReservedWords('code');
-            var code = "Gb16" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+            var code = "Gb16" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
             var commands = code.split(delimiter_microbit);
             var max_length = 19;
             for (var i = 0; i < commands.length; i++) {
@@ -250,20 +250,23 @@
                 <field name="pic">Wähle ein Bild</field>
                 <field name="show_duration">1</field>
             </block>
-			<block type="turn_display" colour="#5ba593">
-				<field name="degrees">0</field>
-			</block>
         </category>
         <category name="Steuerung" colour="#5ba55b">
             <block type="repetition">
                 <field name="repetition">1</field>
             </block>
+			<block type="wait_seconds">
+				<field name="seconds">1</field>
+			</block>
         </category>
         <category name="Einstellungen" colour="#a5a55b">
             <block type="motor">
                 <field name="motor">1</field>
                 <field name="velocity">400</field>
             </block>
+			<block type="turn_display" colour="#5ba593">
+				<field name="degrees">0</field>
+			</block>
         </category>
     </xml>
 
