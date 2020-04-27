@@ -19,7 +19,7 @@ var combinations = [dance, zigzag, shake];
 /************* R4G blocks and functions*************/
 
 function send_combination(index=0, repetitions=1, intensity) {
-	var code = "Gb16" + delimiter;
+	var code = "Gb31" + delimiter;
 	var inner_index = 0;
 	if(intensity == "middle"){
 		inner_index = 1;
@@ -306,16 +306,16 @@ Blockly.JavaScript['melody'] = function (block) {
 	return code;
 };
 
-/********* SETTINGS G (Einstellungen) *****************/
+/********* SETTINGS (Einstellungen) *****************/
 
-//Motor Velocity
+//Motor Velocity 'G'
 Blockly.Blocks['motor'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Motor")
 			.appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["1+2", "b"]]), "motor")
 			.appendField("Leistung:")
-			.appendField(new Blockly.FieldNumber(12, 1, 16, 1), "velocity");
+			.appendField(new Blockly.FieldNumber(20, 1, 31, 1), "velocity");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(60);
@@ -330,6 +330,29 @@ Blockly.JavaScript['motor'] = function (block) {
 	let velocity = number_velocity < 10 ? '0' + number_velocity : number_velocity;
 	var code = 'G' + dropdown_motor + velocity + delimiter;
 	console.log(code);
+	return code;
+};
+
+
+// Turn display 'T': https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
+Blockly.Blocks['turn_display'] = {
+	init: function() {
+		this.appendDummyInput()
+			.appendField("Drehe die Anzeige auf")
+			.appendField(new Blockly.FieldDropdown([["90","90"],["180","180"],["270","270"],["0","0"]]), "degrees")
+			.appendField("Grad");
+		this.setInputsInline(true);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(65);
+		this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
+		this.setHelpUrl("");
+	}
+};
+
+Blockly.JavaScript['turn_display'] = function(block) {
+  	var dropdown_degrees = block.getFieldValue('degrees');
+  	var code = "T" + dropdown_degrees + delimiter;
 	return code;
 };
 
@@ -390,31 +413,9 @@ Blockly.JavaScript['show_picture'] = function (block) {
 };
 
 
-// Turn display: https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
-Blockly.Blocks['turn_display'] = {
-	init: function() {
-		this.appendDummyInput()
-			.appendField("Drehe die Anzeige auf")
-			.appendField(new Blockly.FieldDropdown([["90","90"],["180","180"],["270","270"],["0","0"]]), "degrees")
-			.appendField("Grad");
-		this.setInputsInline(true);
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour(65);
-		this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
-		this.setHelpUrl("");
-	}
-};
-
-Blockly.JavaScript['turn_display'] = function(block) {
-  	var dropdown_degrees = block.getFieldValue('degrees');
-  	var code = "T" + dropdown_degrees + delimiter;
-	return code;
-};
-
 /******* Program control (Steuerung) **********/
 
-// Wait
+// Wait 'W'
 Blockly.Blocks['wait_seconds'] = {
 	init: function() {
 		this.appendDummyInput()
@@ -456,10 +457,11 @@ Blockly.Blocks['repetition'] = {
 };
 
 function strip(str) {
-	//remove unwanted whitespaces
+	// remove unwanted whitespaces
 	return str.replace(/^\s+|\s+$/g, '');
 }
 
+// send commands to micro:bit repeatedly
 Blockly.JavaScript['repetition'] = function (block) {
 	var number_repetition = block.getFieldValue('repetition');
 	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
