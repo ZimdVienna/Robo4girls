@@ -54,14 +54,17 @@ function onConnectButtonClick() {
 function onDisconnectButtonClick(){
 	if (!deviceCache) {
 	alert("Kein Bluetooth Gerät verbunden");
-			return;
+		return;
 	}
-	log("Disconnecting from Bluetooth device...");
-	if(deviceCache.gatt.connected){
+	var confirmed = confirm("Willst du die Verbindung wirklich trennen?");
+	if (confirmed) {
+		log("Disconnecting from Bluetooth device...");
+		if(deviceCache.gatt.connected){
 			deviceCache.gatt.disconnect();
-	} else {
+		} else {
 			//log("Bluetooth device is already disconnected");
-	alert("Verbindung zu Bluetooth Gerät verloren");
+			alert("Verbindung zu Bluetooth Gerät verloren");
+		}
 	}
 }
 
