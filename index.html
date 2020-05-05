@@ -31,45 +31,28 @@
             <div class="dropdown" style="float:right;margin-top: 40px;">
                 <button onclick="showMenu()" class="dropbtn button black" style="margin-right:15px;">Menu</button>
                 <div id="myDropdown" class="dropdown-content">
-					<!--
-                    <button id="saveData" class="tablinks gray" onclick="save()">Programm speichern</button>
-                    <button id="restoreData" class="tablinks gray" onclick="restore()">Programm laden</button>
-                    <button class="tablinks gray" onclick="deleteItem()">Programm löschen</button>
-					-->
                     <button id="disconnect" class="tablinks gray">Trennen</button>
                     <button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
-					<!--
-					<div id="container" class="tablinks gray" >
-						Programm
-						<select id="generate" class="tablinks dropbtn button black" style="height:30px;" onclick="createMenu()"></select>
-						<p></p>
-						<button id="restoreData" class="tablinks button  green" onclick="restore()">Laden</button>
-						<p></p>
-						<button class="tablinks button rosy" onclick="deleteItem()">Löschen</button>
-						<p></p>
-						<button id="saveData" class="tablinks button blue" onclick="save()">Speichern</button>
-					</div>
-					-->
 					<button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
 					
 					<div class="dropdown" style="float:right;">
                         <button onclick="showMenu('programDropdown')" class="dropbtn tablinks gray" style="margin-right:60px;">Programm</button>
+						
                         <!-- Load/Save or Delete program from Dropdown menu -->
-				
                         <div id="programDropdown" class="dropdown-content" >
                             <div id="container" class="tablinks gray" >
-                                <select id="generate" class="tablinks dropbtn button black" style="height:30px;" onclick="createMenu()"></select>
-                                <p></p>
-                                <button id="restoreData" class="tablinks button  green" onclick="restore()">Laden</button>
-                                <p></p>
-                                <button class="tablinks button rosy" onclick="deleteItem()">Löschen</button>
-                                <p></p>
-                                <button id="saveData" class="tablinks button blue" onclick="save()">Speichern</button>
+								<p style="margin-bottom:5px;margin-top:5px;font-size: 13px; color: black;">Programm auswählen</p>
+                                <select id="generate" class="tablinks dropbtn button black select" onclick="createMenu()"></select>
+								
+                                <button id="saveData" class="tablinks button green programButtons" onclick="save()">Speichern</button>
+                                <button id="restoreData" class="tablinks button blue programButtons" onclick="restore()">Laden</button>
+                                <button class="tablinks button rosy programButtons" onclick="deleteItem()" >Löschen</button>
+                                
                             </div>
                         </div>
+						
                     </div>
-
-                </div>
+				</div>
             </div>
         </tr>
         <tr>

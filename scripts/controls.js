@@ -1,6 +1,5 @@
 
 // Global scope variables
-//const select = document.getElementById("programDropdown");
 const select = document.getElementById("generate");
 var storage_items = [];
 
@@ -58,7 +57,6 @@ function updateMenu() {
 			const option = document.createElement("option");
 			option.value = item;
 			option.text = item;
-			//option.classList += "tablinks black";
 			select.appendChild(option);
 		}
 	}
