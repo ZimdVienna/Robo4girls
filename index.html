@@ -31,13 +31,28 @@
             <div class="dropdown" style="float:right;margin-top: 40px;">
                 <button onclick="showMenu()" class="dropbtn button black" style="margin-right:15px;">Menu</button>
                 <div id="myDropdown" class="dropdown-content">
-                    <button id="saveData" class="tablinks gray" onclick="save()">Programm speichern</button>
-                    <button id="restoreData" class="tablinks gray" onclick="restore()">Programm laden</button>
-                    <button class="tablinks gray" onclick="deleteItem()">Programm löschen</button>
-                    <button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
                     <button id="disconnect" class="tablinks gray">Trennen</button>
                     <button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
-                </div>
+					<button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
+					
+					<div class="dropdown" style="float:right;">
+                        <button onclick="showMenu('programDropdown')" class="dropbtn tablinks gray" style="margin-right:60px;">Programm</button>
+						
+                        <!-- Load/Save or Delete program from Dropdown menu -->
+                        <div id="programDropdown" class="dropdown-content" >
+                            <div id="container" class="tablinks gray" >
+								<p style="margin-bottom:5px;margin-top:5px;font-size: 13px; color: black;">Programm auswählen</p>
+                                <select id="generate" class="tablinks dropbtn button black select" onclick="createMenu()"></select>
+								
+                                <button id="saveData" class="tablinks button green programButtons" onclick="save()">Speichern</button>
+                                <button id="restoreData" class="tablinks button blue programButtons" onclick="restore()">Laden</button>
+                                <button class="tablinks button rosy programButtons" onclick="deleteItem()" >Löschen</button>
+                                
+                            </div>
+                        </div>
+						
+                    </div>
+				</div>
             </div>
         </tr>
         <tr>
@@ -57,146 +72,7 @@
 
     <!-- script for bluetooth communication -->
     <script type="text/javascript" src="scripts/ble3.js"></script>
-
-    <script>
-        /* toggle between hiding and showing the dropdown content */
-        function showMenu() {
-            document.getElementById("myDropdown").classList.toggle("show");
-        }
-        // Close the dropdown menu if the user clicks outside of it
-        window.onclick = function(event) {
-            if (!event.target.matches('.dropbtn')) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        /* on Start button clicked */
-        function handlePlay(event) {
-            let delimiter_microbit = ":";
-            Blockly.JavaScript.addReservedWords('code');
-            var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-            var commands = code.split(delimiter_microbit);
-            var max_length = 19;
-            for (var i = 0; i < commands.length; i++) {
-                if (commands[i].length > max_length) {
-                    commands[i] = commands[i].substring(0, max_length);
-                }
-                commands[i] += delimiter_microbit;
-                console.log(commands[i]);
-            }
-            return sendData(commands);
-        }
-
-        /* Menu functions */
-        function save() {
-            console.log(localStorage);
-            var eingabe = "";
-            var double = false;
-            eingabe = prompt('Speichern unter:', '');
-            if (eingabe === "") {
-                while (eingabe === "") {
-                    eingabe = prompt('Bitte Programm benennen:', '');
-                }
-            }
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).includes("R4G_" + eingabe)) {
-                    double = true;
-                }
-            }
-            if (double) {
-                if (!confirm("Programm ist bereits vorhanden\nSoll es überschrieben werden?")) {
-                    return 1;
-                }
-            }
-            if (eingabe != null) {
-                var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-                var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-                localStorage.setItem("R4G_" + eingabe, xmlText);
-                alert("Programm '" + eingabe + "' gespeichert");
-            }
-        }
-
-        function restore() {
-            var storage_items = "";
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).includes("R4G_")) {
-                    let key_i = localStorage.key(i).replace("R4G_", "");
-                    storage_items += key_i + "\n";
-                }
-            }
-            if (storage_items === "") {
-                alert("Keine gespeicherten Programme vorhanden");
-                return 1;
-            }
-            var eingabe = prompt(storage_items + '\nProgramm laden:', '');
-            if (eingabe != null) {
-                if (eingabe === "" || !storage_items.includes(eingabe)) {
-                    alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
-                    return 1;
-                }
-                workspace.clear();
-                var xmlText = localStorage.getItem("R4G_" + eingabe);
-                var xmlDom = Blockly.Xml.textToDom(xmlText);
-                Blockly.Xml.domToWorkspace(xmlDom, Blockly.mainWorkspace);
-                alert("Programm '" + eingabe + "' wird geladen...");
-            }
-        }
-
-        function deleteAll() {
-            var count = 0;
-            for (let i = 0; i < localStorage.length; i++) {
-                var keyName = localStorage.key(i);
-                if (keyName.includes("R4G_")) {
-                    count++;
-                    if (confirm('Programm ' + keyName + ' löschen?')) {
-                        localStorage.removeItem(keyName);
-                    }
-                }
-            }
-            if (count == 0) {
-                alert("Keine gespeicherten Programme vorhanden");
-            }
-        }
-
-        function deleteItem() {
-            var storage_items = "";
-            for (let i = 0; i < localStorage.length; i++) {
-                if (localStorage.key(i).includes("R4G_")) {
-                    let key_i = localStorage.key(i).replace("R4G_", "");
-                    storage_items += key_i + "\n";
-                }
-            }
-            if (storage_items === "") {
-                alert("Keine gespeicherten Programme vorhanden");
-                return 1;
-            }
-            var eingabe = prompt(storage_items + '\nProgramm löschen:', '');
-            if (eingabe != null) {
-                if (eingabe === "" || !storage_items.includes(eingabe)) {
-                    alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
-                    return 1;
-                }
-                if (confirm('Programm ' + eingabe + ' löschen?')) {
-                    localStorage.removeItem("R4G_" + eingabe);
-                }
-            }
-        }
-
-        function end_program() {
-			var confirmed = confirm("Willst du das Programm wirklich beenden?");
-			if (confirmed) {
-				workspace.clear();
-            	onDisconnectButtonClick();
-			}
-        }
-    </script>
+	<script type="text/javascript" src="scripts/controls.js"></script>
 
     <!-- blockly programming window -->
     <div id="blocklyDiv" style="position: absolute"></div>
@@ -272,44 +148,10 @@
 			</block>
         </category>
     </xml>
-
-    <!-- Making Toolbox visible and resizable in Web-browser -->
-    <script>
-        var blocklyArea = document.getElementById('blocklyArea');
-        var blocklyDiv = document.getElementById('blocklyDiv');
-        var workspace = Blockly.inject('blocklyDiv', {
-            media: 'media/',
-            toolbox: document.getElementById('toolbox')
-        })
-
-        var onresize = function(e) {
-            // Compute the absolute coordinates and dimensions of blocklyArea.
-            var element = blocklyArea;
-            var x = 0;
-            var y = 0;
-            do {
-                x += element.offsetLeft;
-                y += element.offsetTop;
-                element = element.offsetParent;
-            } while (element);
-
-            // Position blocklyDiv over blocklyArea.
-            blocklyDiv.style.left = x + 'px';
-            blocklyDiv.style.top = y + 'px';
-            blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
-            blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-            Blockly.svgResize(workspace);
-        };
-
-        window.addEventListener('resize', onresize, false);
-        onresize();
-        Blockly.svgResize(workspace);
-
-        // An href with #key trigers an AJAX call to retrieve saved blocks.
-        if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-            BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-        }
-    </script>
+	
+	<!-- Making Toolbox visible and resizable in Web-browser -->
+    <script src="scripts/blocklyArea.js"></script>
+	
     <!-- Blockly R4G blocks script -->
     <script src="scripts/R4Gblocks.js"></script>
 
