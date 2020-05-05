@@ -420,7 +420,7 @@ Blockly.Blocks['wait_seconds'] = {
 	init: function() {
 		this.appendDummyInput()
 			.appendField("Warte für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9, 0.1), "seconds_to_wait")
+			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "seconds_to_wait")
 			.appendField("Sekunden");
 		this.setInputsInline(true);
 	  	this.setPreviousStatement(true, null);
