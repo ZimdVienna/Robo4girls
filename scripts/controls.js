@@ -1,17 +1,10 @@
-
-// Global scope variables
-const select = document.getElementById("generate");
-var storage_items = [];
-
-
-/* toggle between hiding and showing the dropdown content */
+/* Toggle to show/hide the dropdown content */
 function showMenu(element="myDropdown") {
-	// console.log(element);
 	document.getElementById(element).classList.toggle("show");
 }
 
 
-/* Close the dropdown menu if the user clicks outside of it*/
+/* Hide dropdown contents if user clicks somewhere else in the window */
 window.onclick = function(event) {
 	if (!event.target.matches('.dropbtn')) {
 		var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -26,8 +19,35 @@ window.onclick = function(event) {
 }
 
 
+/* On Start button clicked */
+function handlePlay(event) {
+	let delimiter_microbit = ":";
+	Blockly.JavaScript.addReservedWords('code');
+	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+	var commands = code.split(delimiter_microbit);
+	var max_length = 19;
+	for (var i = 0; i < commands.length; i++) {
+		if (commands[i].length > max_length) {
+			commands[i] = commands[i].substring(0, max_length);
+		}
+		commands[i] += delimiter_microbit;
+		console.log(commands[i]);
+	}
+	return sendData(commands);
+}
+
+
+
+/* PROGRAM DROPDOWN */
+
+
+/* Global scope variables */
+const select = document.getElementById("generate");
+var storage_items = [];
+
+
+/* Create program select options - get all saved R4G programs */
 function createMenu() {
-	
 	storage_items = [];
 	for (let i = 0; i < localStorage.length; i++) {
 		if (localStorage.key(i).includes("R4G_")) {
@@ -38,14 +58,13 @@ function createMenu() {
 	console.log(storage_items);
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
-	} else {
-		updateMenu();
 	}
+	updateMenu();
 }
 
 
+/* Update program select options */
 function updateMenu() {
-
 	for (item of storage_items) {
 		var duplicate = false;
 		for (child of select.children) {
@@ -63,29 +82,11 @@ function updateMenu() {
 }
 
 
-/* on Start button clicked */
-function handlePlay(event) {
-	
-	let delimiter_microbit = ":";
-	Blockly.JavaScript.addReservedWords('code');
-	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-	var commands = code.split(delimiter_microbit);
-	var max_length = 19;
-	for (var i = 0; i < commands.length; i++) {
-		if (commands[i].length > max_length) {
-			commands[i] = commands[i].substring(0, max_length);
-		}
-		commands[i] += delimiter_microbit;
-		console.log(commands[i]);
-	}
-	return sendData(commands);
-}
-
-
-/* Menu functions */
-
-function verifyUserInput(eingabe) {
-
+/* Save a blockly program */
+function save() {
+	var eingabe = "";
+	var selectElement = document.querySelector("#generate");
+	var eingabe = selectElement.value;
 	if (eingabe == "") {
 		eingabe = prompt('Bitte Programm benennen:', '');
 	}
@@ -96,37 +97,24 @@ function verifyUserInput(eingabe) {
 			}
 		}
 	}
-	return eingabe;
-}
-
-
-function save() {
-	var eingabe = "";
-	var selectElement = document.querySelector("#generate");
-	var eingabe = selectElement.value;
-	eingabe = verifyUserInput(eingabe);
-	
-	//var eingabe = prompt(storage_items + '\nProgramm speichern unter:', '');
 	if (eingabe !== null) {
 		if (confirm("Programm '"+ eingabe +"' speichern?")) {
 			var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
 			var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
 			localStorage.setItem("R4G_" + eingabe, xmlText);
 			createMenu();
-			alert("Programm '" + eingabe + "' gespeichert");
 		}
 	}
 }
 
 
+/* Load a blockly program into workspace */
 function restore() {
 	createMenu();
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
 		return 1;
 	}
-	//var eingabe = prompt(storage_items + '\nProgramm laden:', '');
-	
 	var selectElement = document.querySelector("#generate");
 	var eingabe = selectElement.value;
 	console.log(eingabe);
@@ -146,36 +134,14 @@ function restore() {
 }
 
 
-function deleteAll() {
-	
-	var count = 0;
-	for (let i = 0; i < localStorage.length; i++) {
-		var keyName = localStorage.key(i);
-		if (keyName.includes("R4G_")) {
-			count++;
-			if (confirm('Programm ' + keyName + ' löschen?')) {
-				localStorage.removeItem(keyName);
-			}
-		}
-	}
-	createMenu();
-	if (count == 0) {
-		alert("Keine gespeicherten Programme vorhanden");
-	}
-}
-
-
+/* Delete selected blockly program from local storage */
 function deleteItem() {
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
 		return 1;
 	}
-	
 	var selectElement = document.querySelector("#generate");
 	var eingabe = selectElement.value;
-	//console.log(eingabe);
-	
-	// var eingabe = prompt(storage_items + '\nProgramm löschen:', '');
 	if (eingabe != null) {
 		if (eingabe === "" || !storage_items.includes(eingabe)) {
 			alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
@@ -183,7 +149,6 @@ function deleteItem() {
 		}
 		if (confirm('Bist du sicher, dass du das Programm ' + eingabe + ' löschen willst?')) {
 			localStorage.removeItem("R4G_" + eingabe);
-			
 			for (child of select.children) {
 				if (child.value === eingabe) {
 					select.removeChild(child);
@@ -191,14 +156,40 @@ function deleteItem() {
 				}
 			}
 			createMenu();
-			
 		}
 	}
 }
 
 
+
+/* MENU DROPDOWN */
+
+
+/* Delete all blockly programs from local storage */
+function deleteAll() {	
+	if (storage_items.length === 0) {
+		alert("Keine gespeicherten Programme vorhanden");
+	} else {
+		if (confirm('Achtung! Alle R4G Programme werden gelöscht! Bist du sicher dass du fortfahren willst?')) {
+			for (key in localStorage) {
+				if (key.includes("R4G_")) {
+					let programName = key.replace("R4G_", "");
+					localStorage.removeItem(key);
+					for (child of select.children) {
+						if (child.value === programName) {
+							select.removeChild(child);
+						}
+					}
+				}
+			}
+			createMenu();
+		}
+	}
+}
+
+
+/* Clear workspace and disconnect micro:bit */
 function end_program() {
-	
 	var confirmed = confirm("Willst du das Programm wirklich beenden?");
 	if (confirmed) {
 		workspace.clear();
