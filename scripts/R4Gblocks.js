@@ -297,10 +297,10 @@ Blockly.Blocks['pirouette'] = {
 Blockly.JavaScript['pirouette'] = function (block) {
 	var number_repetition = block.getFieldValue('repeat');
 	var dropdown_direction = block.getFieldValue('direction');
-	var code = "Gb16:";
+	var code = "Gb31" + delimiter;
 	for(var r = 0; r < number_repetition; r++){
 		if(dropdown_direction == "Links" || dropdown_direction == "left")
-			code += "BL2.8:";
+			code += "BL2.9:";
 		else
 			code += "BR2.9:";
 	}
