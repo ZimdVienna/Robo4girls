@@ -1,10 +1,10 @@
-
 var blocklyArea = document.getElementById('blocklyArea');
 var blocklyDiv = document.getElementById('blocklyDiv');
 var workspace = Blockly.inject('blocklyDiv', {
 	media: 'media/',
 	toolbox: document.getElementById('toolbox')
 })
+
 
 var onresize = function(e) {
 	// Compute the absolute coordinates and dimensions of blocklyArea.
@@ -24,6 +24,7 @@ var onresize = function(e) {
 	blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 	Blockly.svgResize(workspace);
 };
+
 
 window.addEventListener('resize', onresize, false);
 onresize();

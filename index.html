@@ -24,35 +24,38 @@
         <tr>
             <!-- Title, Logo and Program commands -->
             <img src="media/logo/R4G_Logo_rose_gradient.png" class="logo" style="float:left;margin-top: 20px; margin-left: 5px; height:70px;width:140px;">
-            <!-- Bluetooth communication -->
+			
+            <!-- Bluetooth connection -->
             <div class="bluetooth" style="margin-top: 40px;">
                 <button id="connect" type="button" class="button blue">Verbinden</button>
             </div>
+			
+			<!-- Menu dropdown -->
             <div class="dropdown" style="float:right;margin-top: 40px;">
-                <button onclick="showMenu()" class="dropbtn button black" style="margin-right:15px;">Menu</button>
+                <button onclick="showMenu()" class="dropbtn button black" style="margin-right:30px;">Menu</button>
                 <div id="myDropdown" class="dropdown-content">
                     <button id="disconnect" class="tablinks gray">Trennen</button>
                     <button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
 					<button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
-					
-					<div class="dropdown" style="float:right;">
-                        <button onclick="showMenu('programDropdown')" class="dropbtn tablinks gray" style="margin-right:60px;">Programm</button>
-						
-                        <!-- Load/Save or Delete program from Dropdown menu -->
-                        <div id="programDropdown" class="dropdown-content" >
-                            <div id="container" class="tablinks gray" >
-								<p style="margin-bottom:5px;margin-top:5px;font-size: 13px; color: black;">Programm auswählen</p>
-                                <select id="generate" class="tablinks dropbtn button black select" onclick="createMenu()"></select>
-								
-                                <button id="saveData" class="tablinks button green programButtons" onclick="save()">Speichern</button>
-                                <button id="restoreData" class="tablinks button blue programButtons" onclick="restore()">Laden</button>
-                                <button class="tablinks button rosy programButtons" onclick="deleteItem()" >Löschen</button>
-                                
-                            </div>
-                        </div>
-						
-                    </div>
 				</div>
+            </div>
+			
+			<!-- Program dropdown -->
+			<div class="dropdown" style="float:right;margin-top:40px;">
+				<button onclick="showMenu('programDropdown')" class="dropbtn button black" style="margin-right:30px;">Programm</button>
+
+				<!-- Load/Save or Delete program from Dropdown menu -->
+				<div id="programDropdown" class="dropdown-content" >
+					<div id="container" class="tablinks gray" >
+						<p style="margin-bottom:5px;margin-top:5px;font-size: 13px; color: black;">Programm auswählen</p>
+						<select id="generate" class="tablinks dropbtn button black select" onclick="createMenu()"></select>
+
+						<button id="saveData" class="tablinks button green programButtons" onclick="save()">Speichern</button>
+						<button id="restoreData" class="tablinks button blue programButtons" onclick="restore()">Laden</button>
+						<button class="tablinks button rosy programButtons" onclick="deleteItem()" >Löschen</button>
+
+					</div>
+				</div>	
             </div>
         </tr>
         <tr>
