@@ -23,16 +23,39 @@ window.onclick = function(event) {
 function handlePlay(event) {
 	let delimiter_microbit = ":";
 	Blockly.JavaScript.addReservedWords('code');
+	/*
 	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
+	console.log(code);
+	*/
+	
+	// get program blocks in workspace
+	var programs = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace()).split('\n');
+	var activePrograms = programs.filter(word => word.startsWith("start:"));
+	log(activePrograms);
+	if (activePrograms.length === 0) {
+		alert("Füge einen Start-Block hinzu um ein Programm abzuspielen.\n Diesen findest du unter Steuerung -> Wenn Start gedrückt");
+	}
+	
+	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit;
+	for (let program of activePrograms) {
+		program.replace('start','');
+		code += program;
+	}
+	
+	log(code);
+	
 	var commands = code.split(delimiter_microbit);
+	commands = commands.filter(word => word != "start");
+	
+	// console.log(commands);
 	var max_length = 19;
-	for (var i = 0; i < commands.length; i++) {
+	for (const i in commands) {
 		if (commands[i].length > max_length) {
 			commands[i] = commands[i].substring(0, max_length);
 		}
 		commands[i] += delimiter_microbit;
-		console.log(commands[i]);
 	}
+	log(commands);
 	return sendData(commands);
 }
 
