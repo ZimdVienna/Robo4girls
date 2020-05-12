@@ -496,3 +496,22 @@ Blockly.JavaScript['repetition'] = function (block) {
 	}
 	return code;
 };
+
+
+// Start
+Blockly.Blocks['start_block'] = {
+ 	init: function() {
+    	this.appendDummyInput()
+        	.appendField("Wenn Start gedrückt");
+    	this.setInputsInline(true);
+    	this.setNextStatement(true, null);
+    	this.setColour(120);
+ 		this.setTooltip("Programme, die nicht mit diesem Block anfangen, werden beim Drücken von Start ignoriert");
+ 		this.setHelpUrl("");
+  	}
+};
+
+Blockly.JavaScript['start_block'] = function(block) {
+  var code = 'start:';
+  return code;
+};
