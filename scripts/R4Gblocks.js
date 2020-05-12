@@ -505,7 +505,7 @@ Blockly.Blocks['start_block'] = {
     	this.setInputsInline(true);
     	this.setNextStatement(true, null);
     	this.setColour(120);
- 		this.setTooltip("");
+ 		this.setTooltip("Programme, die nicht mit diesem Block anfangen, werden beim Drücken von Start ignoriert");
  		this.setHelpUrl("");
   	}
 };
