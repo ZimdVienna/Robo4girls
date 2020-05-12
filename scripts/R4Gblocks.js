@@ -60,7 +60,7 @@ Blockly.Blocks['forward'] = {
 		this.appendDummyInput()
 			.appendField("Vorwärts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "forward_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "forward_duration")
 			.appendField("Sekunden")
 			//.appendField(new Blockly.FieldImage("./media/forward.gif", 20, 20, "*"))
 		;
@@ -86,7 +86,7 @@ Blockly.Blocks['back'] = {
 		this.appendDummyInput()
 			.appendField("Rückwärts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "back_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "back_duration")
 			.appendField("Sekunden")
 			//.appendField(new Blockly.FieldImage("./media/back.gif", 20, 20, "*"))
 		;
@@ -112,7 +112,7 @@ Blockly.Blocks['left'] = {
 		this.appendDummyInput()
 			.appendField("Links")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "left_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "left_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -135,7 +135,7 @@ Blockly.Blocks['right'] = {
 		this.appendDummyInput()
 			.appendField("Rechts")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "right_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "right_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -159,7 +159,7 @@ Blockly.Blocks['turn_left'] = {
 		this.appendDummyInput()
 			.appendField("Linkskehre")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "turn_left_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "turn_left_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -184,7 +184,7 @@ Blockly.Blocks['turn_right'] = {
 		this.appendDummyInput()
 			.appendField("Rechtskehre")
 			.appendField("für")
-			.appendField(new Blockly.FieldNumber(0.1, 0.1, 9.9), "turn_right_duration")
+			.appendField(new Blockly.FieldNumber(1, 0.1, 9.9), "turn_right_duration")
 			.appendField("Sekunden");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -451,7 +451,7 @@ Blockly.Blocks['wait_seconds'] = {
 	init: function() {
 		this.appendDummyInput()
 			.appendField("Warte für")
-			.appendField(new Blockly.FieldNumber(1, 1, 9, 1), "seconds")
+			.appendField(new Blockly.FieldNumber(1,0.1,9.9), "seconds")
 			.appendField("Sekunden");
 		this.setInputsInline(true);
 	  	this.setPreviousStatement(true, null);
@@ -462,9 +462,10 @@ Blockly.Blocks['wait_seconds'] = {
   	}
 };
 Blockly.JavaScript['wait_seconds'] = function(block) {
-  var number_seconds_to_wait = block.getFieldValue('seconds');
-  var code = 'W'+ number_seconds_to_wait + delimiter;
-  return code;
+  	var number_seconds_to_wait = block.getFieldValue('seconds');
+	log(number_seconds_to_wait);
+  	var code = 'W'+ number_seconds_to_wait + (number_seconds_to_wait % 1 == 0 ? float_delimiter : delimiter);
+  	return code;
 };
 
 
