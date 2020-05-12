@@ -33,7 +33,7 @@ function handlePlay(event) {
 	var activePrograms = programs.filter(word => word.startsWith("start:"));
 	log(activePrograms);
 	if (activePrograms.length === 0) {
-		alert("Füge einen Start-Block hinzu um ein Programm abzuspielen.\n Diesen findest du unter Steuerung -> Wenn Start gedrückt");
+		alert("Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt");
 	}
 	
 	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit;
