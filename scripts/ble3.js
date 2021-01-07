@@ -70,6 +70,9 @@ function onDisconnectButtonClick(){
 
 // Write to characteristic
 function sendData(commands, counter=0) {
+	if(stopButtonClicked && counter === 0){
+		stopButtonClicked = false;
+	}
 	if (!commands && !characteristicCache_rx) {
 			return;
 	}
