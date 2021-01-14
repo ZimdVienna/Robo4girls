@@ -7,20 +7,15 @@ const disconnectButton = document.getElementById("disconnect");
 const terminalContainer = document.getElementById("terminal");
 const stopButton = document.getElementById("stop");
 const name_prefix = "BBC micro:bit";
-
 const uart_service = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
-/* messages from micro:bit */
-const uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';
-/* messages to the micro:bit */
-const uart_characteristic_rx = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';
-
-/* Save the device for reconnecting */
-var deviceCache = null;
+const uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// Messages from micro:bit
+const uart_characteristic_rx = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';	// Messages to the micro:bit
+var deviceCache = null;	// save bluetooth device for reconnection
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 var stopButtonClicked = false;
 
-/* Event listeners */
+// EVENT LISTENERS
 connectButton.addEventListener('click', function(){
 	onConnectButtonClick();
 });
@@ -31,9 +26,7 @@ stopButton.addEventListener('click', function(){
 	stopButtonClicked = true;
 });
 
-
 // FUNCTIONS
-
 function log(data, type = '') {
 	/* Log to browser console */
 	console.log(data + type);

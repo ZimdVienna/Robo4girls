@@ -1,8 +1,12 @@
+/* Global scope variables */
+const select = document.getElementById("generate");
+const delimiter_microbit = ":";
+var storage_items = [];
+
 /* Toggle to show/hide the dropdown content */
 function showMenu(element="myDropdown") {
 	document.getElementById(element).classList.toggle("show");
 }
-
 
 /* Hide dropdown contents if user clicks somewhere else in the window */
 window.onclick = function(event) {
@@ -18,36 +22,22 @@ window.onclick = function(event) {
 	}
 }
 
-
 /* On Start button clicked */
 function handlePlay(event) {
-	let delimiter_microbit = ":";
 	Blockly.JavaScript.addReservedWords('code');
-	/*
-	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-	console.log(code);
-	*/
-	
-	// get program blocks in workspace
 	var programs = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace()).split('\n');
 	var activePrograms = programs.filter(word => word.startsWith("start:"));
-	log(activePrograms);
 	if (activePrograms.length === 0) {
 		alert("Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt");
 	}
-	
 	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit;
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
 	}
-	
 	log(code);
-	
 	var commands = code.split(delimiter_microbit);
 	commands = commands.filter(word => word != "start");
-	
-	// console.log(commands);
 	var max_length = 19;
 	for (const i in commands) {
 		if (commands[i].length > max_length) {
@@ -59,16 +49,7 @@ function handlePlay(event) {
 	return sendData(commands);
 }
 
-
-
-/* PROGRAM DROPDOWN */
-
-
-/* Global scope variables */
-const select = document.getElementById("generate");
-var storage_items = [];
-
-
+// PROGRAM DROPDOWN
 /* Create program select options - get all saved R4G programs */
 function createMenu() {
 	storage_items = [];
@@ -84,7 +65,6 @@ function createMenu() {
 	}
 	updateMenu();
 }
-
 
 /* Update program select options */
 function updateMenu() {
@@ -103,7 +83,6 @@ function updateMenu() {
 		}
 	}
 }
-
 
 /* Save a blockly program */
 function save() {
@@ -130,7 +109,6 @@ function save() {
 	}
 }
 
-
 /* Load a blockly program into workspace */
 function restore() {
 	createMenu();
@@ -155,7 +133,6 @@ function restore() {
 		}
 	}
 }
-
 
 /* Delete selected blockly program from local storage */
 function deleteItem() {
@@ -183,11 +160,7 @@ function deleteItem() {
 	}
 }
 
-
-
-/* MENU DROPDOWN */
-
-
+// MENU DROPDOWN
 /* Delete all blockly programs from local storage */
 function deleteAll() {	
 	if (storage_items.length === 0) {
@@ -209,7 +182,6 @@ function deleteAll() {
 		}
 	}
 }
-
 
 /* Clear workspace and disconnect micro:bit */
 function end_program() {
