@@ -1,8 +1,8 @@
 /**
-* Blocks created with Blockly blockfactor
-* Blocks Library: 
-* https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
-**/
+ * Blocks created with Blockly blockfactor
+ * Blocks Library: 
+ * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
+ */
 
 // Delimiter for messages to micro:bit
 var delimiter = ":";
@@ -23,9 +23,9 @@ var shake = [	["BL0.2", "BR0.4", "BL0.4", "BR0.4", "BL0.1"],	//weak
 			];			
 var combinations = [dance, zigzag, shake];
 
-
 // HELPER FUNCTIONS
 function send_combination(index=0, repetitions=1, intensity) {
+	/* send comination various times */
 	var code = "Gb31" + delimiter;
 	var inner_index = 0;
 	if(intensity == "middle"){
@@ -34,7 +34,6 @@ function send_combination(index=0, repetitions=1, intensity) {
 	if(intensity == "strong"){
 		inner_index = 2;
 	}
-	// send comination various times
 	for (var l = 0; l < repetitions; l++) {
 		for (var k = 0; k < combinations[index][inner_index].length; k++) {
 			code += combinations[index][inner_index][k] + delimiter;
@@ -44,10 +43,9 @@ function send_combination(index=0, repetitions=1, intensity) {
 }
 
 function strip(str) {
-	// remove unwanted whitespaces
+	/* Remove unwanted whitespaces */
 	return str.replace(/^\s+|\s+$/g, '');
 }
-
 
 // MOVEMENTS 'B'
 // Forward 'v'
@@ -71,7 +69,6 @@ Blockly.Blocks['forward'] = {
 Blockly.JavaScript['forward'] = function (block) {
 	var number_forward_duration = block.getFieldValue('forward_duration');
 	var code = "Bv" + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
 
@@ -141,7 +138,6 @@ Blockly.Blocks['right'] = {
 Blockly.JavaScript['right'] = function (block) {
 	var number_right_duration = block.getFieldValue('right_duration');
 	var code = "Br" + number_right_duration + (number_right_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
 
@@ -163,9 +159,7 @@ Blockly.Blocks['turn_left'] = {
 };
 Blockly.JavaScript['turn_left'] = function (block) {
 	var number_turn_left_duration = block.getFieldValue('turn_left_duration');
-
 	var code = "BL" + number_turn_left_duration + (number_turn_left_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
 
@@ -187,12 +181,9 @@ Blockly.Blocks['turn_right'] = {
 };
 Blockly.JavaScript['turn_right'] = function (block) {
 	var number_turn_right_duration = block.getFieldValue('turn_right_duration');
-
 	var code = "BR" + number_turn_right_duration + (number_turn_right_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
-
 
 // COMBINATIONS 'K'
 // Dance
@@ -238,7 +229,6 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(1, number_repeat, dropdown_intensity);
-
 };
 
 // Shake 
@@ -261,7 +251,6 @@ Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(2, number_repeat, dropdown_intensity);
-
 };
 
 // Pirouette 
@@ -293,9 +282,7 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	return code;
 };
 
-
 // MELODY 'M'
-// Play Melody
 Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -315,7 +302,6 @@ Blockly.JavaScript['melody'] = function (block) {
 	console.log(code);
 	return code;
 };
-
 
 // SETTINGS
 // Motor velocity 'G'
@@ -485,6 +471,6 @@ Blockly.Blocks['start_block'] = {
   	}
 };
 Blockly.JavaScript['start_block'] = function(block) {
-  var code = 'start:';
-  return code;
+	var code = 'start:';
+	return code;
 };
