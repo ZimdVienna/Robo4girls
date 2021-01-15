@@ -1,14 +1,14 @@
 /**
-* Blocks created with Blockly blockfactor
-* Blocks Library: 
-* https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
-**/
+ * Blocks created with Blockly blockfactor
+ * Blocks Library: 
+ * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
+ */
 
-// delimiter for messages to micro:bit
+// Delimiter for messages to micro:bit
 var delimiter = ":";
 var float_delimiter = ".0:";
 
-// movement combinations
+// Movement combinations
 var dance = [	["Bv0.3", "Bz0.3", "BL0.3", "BR0.6", "BL0.6", "BR0.6", "BL0.1"],// weak
 				["Bv0.5", "Bz0.5", "BL0.5", "BR1.0", "BL1.0", "BR1.0", "BL0.3"],// middle
 				["Bv1.0", "Bz1.0", "BL0.8", "BR1.5", "BL1.5", "BR1.5", "BL0.5"]	// strong
@@ -23,11 +23,9 @@ var shake = [	["BL0.2", "BR0.4", "BL0.4", "BR0.4", "BL0.1"],	//weak
 			];			
 var combinations = [dance, zigzag, shake];
 
-
-/* HELPER FUNCTIONS */
-
-
+// HELPER FUNCTIONS
 function send_combination(index=0, repetitions=1, intensity) {
+	/* send comination various times */
 	var code = "Gb31" + delimiter;
 	var inner_index = 0;
 	if(intensity == "middle"){
@@ -36,7 +34,6 @@ function send_combination(index=0, repetitions=1, intensity) {
 	if(intensity == "strong"){
 		inner_index = 2;
 	}
-	// send comination various times
 	for (var l = 0; l < repetitions; l++) {
 		for (var k = 0; k < combinations[index][inner_index].length; k++) {
 			code += combinations[index][inner_index][k] + delimiter;
@@ -46,14 +43,11 @@ function send_combination(index=0, repetitions=1, intensity) {
 }
 
 function strip(str) {
-	// remove unwanted whitespaces
+	/* Remove unwanted whitespaces */
 	return str.replace(/^\s+|\s+$/g, '');
 }
 
-
-/* MOVEMENTS 'B' */
-
-
+// MOVEMENTS 'B'
 // Forward 'v'
 Blockly.Blocks['forward'] = {
 	init: function () {
@@ -75,10 +69,8 @@ Blockly.Blocks['forward'] = {
 Blockly.JavaScript['forward'] = function (block) {
 	var number_forward_duration = block.getFieldValue('forward_duration');
 	var code = "Bv" + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
-
 
 // Backwards 'z'	
 Blockly.Blocks['back'] = {
@@ -105,7 +97,6 @@ Blockly.JavaScript['back'] = function (block) {
 	return code;
 };
 
-
 // Left 'l'
 Blockly.Blocks['left'] = {
 	init: function () {
@@ -128,7 +119,6 @@ Blockly.JavaScript['left'] = function (block) {
 	return code;
 };
 
-
 // Right 'r'
 Blockly.Blocks['right'] = {
 	init: function () {
@@ -148,10 +138,8 @@ Blockly.Blocks['right'] = {
 Blockly.JavaScript['right'] = function (block) {
 	var number_right_duration = block.getFieldValue('right_duration');
 	var code = "Br" + number_right_duration + (number_right_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
-
 
 // Left-turn 'L' 
 Blockly.Blocks['turn_left'] = {
@@ -171,12 +159,9 @@ Blockly.Blocks['turn_left'] = {
 };
 Blockly.JavaScript['turn_left'] = function (block) {
 	var number_turn_left_duration = block.getFieldValue('turn_left_duration');
-
 	var code = "BL" + number_turn_left_duration + (number_turn_left_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
-
 
 // Right-turn 'R' 
 Blockly.Blocks['turn_right'] = {
@@ -196,16 +181,11 @@ Blockly.Blocks['turn_right'] = {
 };
 Blockly.JavaScript['turn_right'] = function (block) {
 	var number_turn_right_duration = block.getFieldValue('turn_right_duration');
-
 	var code = "BR" + number_turn_right_duration + (number_turn_right_duration % 1 == 0 ? float_delimiter : delimiter);
-
 	return code;
 };
 
-
-/* COMBINATIONS 'K' */
-
-
+// COMBINATIONS 'K'
 // Dance
 Blockly.Blocks['dance'] = {
 	init: function () {
@@ -229,7 +209,6 @@ Blockly.JavaScript['dance'] = function (block) {
 	return send_combination(0, number_repeat, dropdown_intensity);
 };
 
-
 // Zigzag 
 Blockly.Blocks['zigzag'] = {
 	init: function () {
@@ -250,9 +229,7 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(1, number_repeat, dropdown_intensity);
-
 };
-
 
 // Shake 
 Blockly.Blocks['shake'] = {
@@ -274,9 +251,7 @@ Blockly.JavaScript['shake'] = function (block) {
 	var number_repeat = block.getFieldValue('repeat');
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(2, number_repeat, dropdown_intensity);
-
 };
-
 
 // Pirouette 
 Blockly.Blocks['pirouette'] = {
@@ -307,11 +282,7 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	return code;
 };
 
-
-/* MELODY 'M' */
-
-
-// Play Melody
+// MELODY 'M'
 Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -332,10 +303,7 @@ Blockly.JavaScript['melody'] = function (block) {
 	return code;
 };
 
-
-/* SETTINGS */
-
-
+// SETTINGS
 // Motor velocity 'G'
 Blockly.Blocks['motor'] = {
 	init: function () {
@@ -361,7 +329,6 @@ Blockly.JavaScript['motor'] = function (block) {
 	return code;
 };
 
-
 // Turn display 'T'
 Blockly.Blocks['turn_display'] = {
 	init: function() {
@@ -384,9 +351,7 @@ Blockly.JavaScript['turn_display'] = function(block) {
 };
 
 
-/* DISPLAY 'A' */
-
-
+// DISPLAY 'A'
 // Write text
 Blockly.Blocks['show_text'] = {
 	init: function () {
@@ -409,7 +374,6 @@ Blockly.JavaScript['show_text'] = function (block) {
 	var code = text_led_text + delimiter;
 	return code;
 };
-
 
 // Show picture
 Blockly.Blocks['show_picture'] = {
@@ -443,9 +407,7 @@ Blockly.JavaScript['show_picture'] = function (block) {
 };
 
 
-/* PROGRAM CONTROL */
-
-
+// PROGRAM CONTROL
 // Wait 'W'
 Blockly.Blocks['wait_seconds'] = {
 	init: function() {
@@ -468,7 +430,6 @@ Blockly.JavaScript['wait_seconds'] = function(block) {
   	return code;
 };
 
-
 // Repeat
 Blockly.Blocks['repetition'] = {
 	init: function () {
@@ -486,8 +447,8 @@ Blockly.Blocks['repetition'] = {
 		this.setHelpUrl("");
 	}
 };
-// Send commands to micro:bit repetition-times
 Blockly.JavaScript['repetition'] = function (block) {
+	// Send commands to micro:bit repetition-times
 	var number_repetition = block.getFieldValue('repetition');
 	var statements_repeat = strip(Blockly.JavaScript.statementToCode(block, 'repeat'));
 	var code = statements_repeat;
@@ -496,7 +457,6 @@ Blockly.JavaScript['repetition'] = function (block) {
 	}
 	return code;
 };
-
 
 // Start
 Blockly.Blocks['start_block'] = {
@@ -510,8 +470,7 @@ Blockly.Blocks['start_block'] = {
  		this.setHelpUrl("");
   	}
 };
-
 Blockly.JavaScript['start_block'] = function(block) {
-  var code = 'start:';
-  return code;
+	var code = 'start:';
+	return code;
 };

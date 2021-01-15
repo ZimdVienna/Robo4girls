@@ -1,10 +1,14 @@
-/* Toggle to show/hide the dropdown content */
+// Global scope variables
+const select = document.getElementById("generate");
+const delimiter_microbit = ":";
+var storage_items = [];
+
+// Toggle to show/hide the dropdown content */
 function showMenu(element="myDropdown") {
 	document.getElementById(element).classList.toggle("show");
 }
 
-
-/* Hide dropdown contents if user clicks somewhere else in the window */
+// Hide dropdown contents if user clicks somewhere else in the window */
 window.onclick = function(event) {
 	if (!event.target.matches('.dropbtn')) {
 		var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -18,36 +22,24 @@ window.onclick = function(event) {
 	}
 }
 
-
-/* On Start button clicked */
 function handlePlay(event) {
-	let delimiter_microbit = ":";
+	/**
+	 * Get code from blockly workspace and run it on Start button pressed
+	 * @param {event} event Reacts on Start button pressed
+	 */
 	Blockly.JavaScript.addReservedWords('code');
-	/*
-	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit + Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace());
-	console.log(code);
-	*/
-	
-	// get program blocks in workspace
 	var programs = Blockly.JavaScript.workspaceToCode(Blockly.getMainWorkspace()).split('\n');
 	var activePrograms = programs.filter(word => word.startsWith("start:"));
-	log(activePrograms);
 	if (activePrograms.length === 0) {
 		alert("Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt");
 	}
-	
 	var code = "Gb31" + delimiter_microbit + "T0" + delimiter_microbit;
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
 	}
-	
-	log(code);
-	
 	var commands = code.split(delimiter_microbit);
 	commands = commands.filter(word => word != "start");
-	
-	// console.log(commands);
 	var max_length = 19;
 	for (const i in commands) {
 		if (commands[i].length > max_length) {
@@ -55,22 +47,12 @@ function handlePlay(event) {
 		}
 		commands[i] += delimiter_microbit;
 	}
-	log(commands);
 	return sendData(commands);
 }
 
-
-
-/* PROGRAM DROPDOWN */
-
-
-/* Global scope variables */
-const select = document.getElementById("generate");
-var storage_items = [];
-
-
-/* Create program select options - get all saved R4G programs */
+// PROGRAM DROPDOWN
 function createMenu() {
+	/* Create program select options - get all saved R4G programs */
 	storage_items = [];
 	for (let i = 0; i < localStorage.length; i++) {
 		if (localStorage.key(i).includes("R4G_")) {
@@ -78,16 +60,14 @@ function createMenu() {
 			storage_items.push(key_i);
 		}
 	}
-	console.log(storage_items);
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
 	}
 	updateMenu();
 }
 
-
-/* Update program select options */
 function updateMenu() {
+	/* Update program select options */
 	for (item of storage_items) {
 		var duplicate = false;
 		for (child of select.children) {
@@ -104,9 +84,8 @@ function updateMenu() {
 	}
 }
 
-
-/* Save a blockly program */
 function save() {
+	/* Save a blockly program */
 	var eingabe = "";
 	var selectElement = document.querySelector("#generate");
 	var eingabe = selectElement.value;
@@ -130,9 +109,8 @@ function save() {
 	}
 }
 
-
-/* Load a blockly program into workspace */
 function restore() {
+	/* Load a blockly program into workspace */
 	createMenu();
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
@@ -156,9 +134,8 @@ function restore() {
 	}
 }
 
-
-/* Delete selected blockly program from local storage */
 function deleteItem() {
+	/* Delete selected blockly program from local storage */
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
 		return 1;
@@ -183,13 +160,9 @@ function deleteItem() {
 	}
 }
 
-
-
-/* MENU DROPDOWN */
-
-
-/* Delete all blockly programs from local storage */
-function deleteAll() {	
+// MENU DROPDOWN
+function deleteAll() {
+	/* Delete all blockly programs from local storage */
 	if (storage_items.length === 0) {
 		alert("Keine gespeicherten Programme vorhanden");
 	} else {
@@ -210,9 +183,8 @@ function deleteAll() {
 	}
 }
 
-
-/* Clear workspace and disconnect micro:bit */
 function end_program() {
+	/* Clear workspace and disconnect micro:bit */
 	var confirmed = confirm("Willst du das Programm wirklich beenden?");
 	if (confirmed) {
 		workspace.clear();
