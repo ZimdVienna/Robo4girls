@@ -3,22 +3,27 @@ const select = document.getElementById("generate");
 const delimiter_microbit = ":";
 var storage_items = [];
 
+function hideDropdowns() {
+	var dropdowns = document.getElementsByClassName("dropdown-content");
+	for (var i = 0; i < dropdowns.length; i++) {
+		var openDropdown = dropdowns[i];
+		if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+		}
+	}
+}
+
 // Toggle to show/hide the dropdown content */
 function showMenu(element="myDropdown") {
+	// hide all dropdowns first
+	hideDropdowns();
 	document.getElementById(element).classList.toggle("show");
 }
 
 // Hide dropdown contents if user clicks somewhere else in the window */
 window.onclick = function(event) {
 	if (!event.target.matches('.dropbtn')) {
-		var dropdowns = document.getElementsByClassName("dropdown-content");
-		var i;
-		for (i = 0; i < dropdowns.length; i++) {
-			var openDropdown = dropdowns[i];
-			if (openDropdown.classList.contains('show')) {
-				openDropdown.classList.remove('show');
-			}
-		}
+		hideDropdowns();
 	}
 }
 
