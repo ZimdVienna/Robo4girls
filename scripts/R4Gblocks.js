@@ -5,33 +5,33 @@
  */
 
 // Delimiter for messages to micro:bit
-var delimiter = ":";
-var float_delimiter = ".0:";
+var delimiter = ':';
+var float_delimiter = '.0:';
 
 // Movement combinations
-var dance = [	["Bv0.3", "Bz0.3", "BL0.3", "BR0.6", "BL0.6", "BR0.6", "BL0.1"],// weak
-				["Bv0.5", "Bz0.5", "BL0.5", "BR1.0", "BL1.0", "BR1.0", "BL0.3"],// middle
-				["Bv1.0", "Bz1.0", "BL0.8", "BR1.5", "BL1.5", "BR1.5", "BL0.5"]	// strong
+var dance = [	['Bv0.3', 'Bz0.3', 'BL0.3', 'BR0.6', 'BL0.6', 'BR0.6', 'BL0.1'],// weak
+				['Bv0.5', 'Bz0.5', 'BL0.5', 'BR1.0', 'BL1.0', 'BR1.0', 'BL0.3'],// middle
+				['Bv1.0', 'Bz1.0', 'BL0.8', 'BR1.5', 'BL1.5', 'BR1.5', 'BL0.5']	// strong
 			];
-var zigzag = [	["BL0.2", "Bv0.5", "BR0.4", "Bv0.5", "BL0.1"],	//weak
-				["BL0.3", "Bv1.0", "BR0.7", "Bv1.0", "BL0.2"],	//middle
-				["BL0.3", "Bv1.3", "BR0.7", "Bv1.3", "BL0.2"]	//strong
+var zigzag = [	['BL0.2', 'Bv0.5', 'BR0.4', 'Bv0.5', 'BL0.1'],	//weak
+				['BL0.3', 'Bv1.0', 'BR0.7', 'Bv1.0', 'BL0.2'],	//middle
+				['BL0.3', 'Bv1.3', 'BR0.7', 'Bv1.3', 'BL0.2']	//strong
 			];
-var shake = [	["BL0.2", "BR0.4", "BL0.4", "BR0.4", "BL0.1"],	//weak
-				["BL0.4", "BR0.8", "BL0.8", "BR0.8", "BL0.2"],	//middle
-				["BL0.8", "BR1.6", "BL1.6", "BR1.6", "BL0.5"]	//strong
+var shake = [	['BL0.2', 'BR0.4', 'BL0.4', 'BR0.4', 'BL0.1'],	//weak
+				['BL0.4', 'BR0.8', 'BL0.8', 'BR0.8', 'BL0.2'],	//middle
+				['BL0.8', 'BR1.6', 'BL1.6', 'BR1.6', 'BL0.5']	//strong
 			];			
 var combinations = [dance, zigzag, shake];
 
 // HELPER FUNCTIONS
 function send_combination(index=0, repetitions=1, intensity) {
 	/* send comination various times */
-	var code = "Gb31" + delimiter;
+	var code = 'Gb31' + delimiter;
 	var inner_index = 0;
-	if(intensity == "middle"){
+	if(intensity == 'middle'){
 		inner_index = 1;
 	}
-	if(intensity == "strong"){
+	if(intensity == 'strong'){
 		inner_index = 2;
 	}
 	for (var l = 0; l < repetitions; l++) {
@@ -68,7 +68,7 @@ Blockly.Blocks['forward'] = {
 };
 Blockly.JavaScript['forward'] = function (block) {
 	var number_forward_duration = block.getFieldValue('forward_duration');
-	var code = "Bv" + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
+	var code = 'Bv' + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
 
@@ -92,8 +92,8 @@ Blockly.Blocks['back'] = {
 };
 Blockly.JavaScript['back'] = function (block) {
 	var number_back_duration = block.getFieldValue('back_duration');
-	var code = "Bz" + number_back_duration + (number_back_duration % 1 == 0 ? float_delimiter : delimiter);
-	console.log("back block duration:" + code);
+	var code = 'Bz' + number_back_duration + (number_back_duration % 1 == 0 ? float_delimiter : delimiter);
+	console.log('back block duration:' + code);
 	return code;
 };
 
@@ -115,7 +115,7 @@ Blockly.Blocks['left'] = {
 };
 Blockly.JavaScript['left'] = function (block) {
 	var number_left_duration = block.getFieldValue('left_duration');
-	var code = "Bl" + number_left_duration + (number_left_duration % 1 == 0 ? float_delimiter : delimiter);
+	var code = 'Bl' + number_left_duration + (number_left_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
 
@@ -137,7 +137,7 @@ Blockly.Blocks['right'] = {
 };
 Blockly.JavaScript['right'] = function (block) {
 	var number_right_duration = block.getFieldValue('right_duration');
-	var code = "Br" + number_right_duration + (number_right_duration % 1 == 0 ? float_delimiter : delimiter);
+	var code = 'Br' + number_right_duration + (number_right_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
 
@@ -159,7 +159,7 @@ Blockly.Blocks['turn_left'] = {
 };
 Blockly.JavaScript['turn_left'] = function (block) {
 	var number_turn_left_duration = block.getFieldValue('turn_left_duration');
-	var code = "BL" + number_turn_left_duration + (number_turn_left_duration % 1 == 0 ? float_delimiter : delimiter);
+	var code = 'BL' + number_turn_left_duration + (number_turn_left_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
 
@@ -181,7 +181,7 @@ Blockly.Blocks['turn_right'] = {
 };
 Blockly.JavaScript['turn_right'] = function (block) {
 	var number_turn_right_duration = block.getFieldValue('turn_right_duration');
-	var code = "BR" + number_turn_right_duration + (number_turn_right_duration % 1 == 0 ? float_delimiter : delimiter);
+	var code = 'BR' + number_turn_right_duration + (number_turn_right_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
 
@@ -272,12 +272,12 @@ Blockly.Blocks['pirouette'] = {
 Blockly.JavaScript['pirouette'] = function (block) {
 	var number_repetition = block.getFieldValue('repeat');
 	var dropdown_direction = block.getFieldValue('direction');
-	var code = "Gb31" + delimiter;
+	var code = 'Gb31' + delimiter;
 	for(var r = 0; r < number_repetition; r++){
-		if(dropdown_direction == "Links" || dropdown_direction == "left")
-			code += "BL2.9:";
+		if(dropdown_direction == 'Links' || dropdown_direction == 'left')
+			code += 'BL2.9:';
 		else
-			code += "BR2.9:";
+			code += 'BR2.9:';
 	}
 	return code;
 };
@@ -346,7 +346,7 @@ Blockly.Blocks['turn_display'] = {
 };
 Blockly.JavaScript['turn_display'] = function(block) {
   	var dropdown_degrees = block.getFieldValue('degrees');
-  	var code = "T" + dropdown_degrees + delimiter;
+  	var code = 'T' + dropdown_degrees + delimiter;
 	return code;
 };
 
@@ -396,13 +396,13 @@ Blockly.Blocks['show_picture'] = {
 	}
 };
 Blockly.JavaScript['show_picture'] = function (block) {
-	var dropdown_pic = block.getFieldValue("pic");
-	if(dropdown_pic == "Wähle ein Bild"){
-		alert("Bitte wähle ein Bild aus");
-		return "?" + delimiter;
+	var dropdown_pic = block.getFieldValue('pic');
+	if(dropdown_pic == 'Wähle ein Bild'){
+		alert('Bitte wähle ein Bild aus');
+		return '?' + delimiter;
 	}
 	var number_show_duration = block.getFieldValue('show_duration');
-	var code = "A" + dropdown_pic + number_show_duration + delimiter;
+	var code = 'A' + dropdown_pic + number_show_duration + delimiter;
 	return code;
 };
 

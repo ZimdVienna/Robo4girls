@@ -7,12 +7,6 @@
     <link href="styles/styles.css" rel="stylesheet">
 
     <title>R4G</title>
-
-    <!-- scripts for blockly code -->
-    <script src="blockly/blockly_compressed.js"></script>
-    <script src="blockly/blocks_compressed.js"></script>
-    <script src="blockly/js/de.js"></script>
-    <script src="blockly/javascript_compressed.js"></script>
 	<!-- favicon files -->
 	<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
 	<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
@@ -31,6 +25,12 @@
 	<meta name="msapplication-TileColor" content="#ffffff">
 	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
+
+    <!-- scripts for blockly code -->
+    <script src="blockly/blockly_compressed.js"></script>
+    <script src="blockly/blocks_compressed.js"></script>
+    <script src="blockly/js/de.js"></script>
+    <script src="blockly/javascript_compressed.js"></script>
 </head>
 
 <!-- body -->
@@ -40,30 +40,25 @@
 	<ul id="navigation" style="float:right; margin-top: 3%;">
 		<li class="dropdown">
 			<button onclick="showMenu('programDropdown')" class="dropbtn button">Programm</button>
-
 			<!-- Load/Save or Delete program from Dropdown menu -->
 			<div id="programDropdown" class="dropdown-content" >
-				<div id="container" class="tablinks gray" >
-					<p style="margin-bottom:5px;margin-top:5px;font-size: 85%;">Programm wählen</p>
-					<select id="generate" class="tablinks dropbtn button gray select" onclick="createMenu()"></select>
-
-					<button id="saveData" class="tablinks button green programButtons" onclick="save()">Speichern</button>
-					<button id="restoreData" class="tablinks button blue programButtons" onclick="restore()">Laden</button>
-					<button class="tablinks button rosy programButtons" onclick="deleteItem()" >Löschen</button>
-
-				</div>
+					<p class="tablinks" style="background: lightgray; margin-bottom:0%;margin-top:0%;font-size: 85%;">Programm wählen</p>
+					<select id="generate" class="tablinks dropbtn select" onclick="createMenu()"></select>
+					<button id="saveData" class="tablinks gray" onclick="save()">Speichern</button>
+					<button id="restoreData" class="tablinks gray" onclick="restore()">Laden</button>
+					<button class="tablinks gray" onclick="deleteItem()">Löschen</button>			
 			</div>
 		</li>
 		<li class="dropdown">
-				<button onclick="showMenu()" class="dropbtn button">Menu</button>
-				<div id="myDropdown" class="dropdown-content">
-					<button id="disconnect" class="tablinks gray">Trennen</button>
-					<button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
-					<button class="tablinks gray" onclick="deleteAll()">Speicher freigeben</button>
-				</div>
+			<button onclick="showMenu()" class="dropbtn button" style="float:center">Menu</button>
+			<div id="myDropdown" class="dropdown-content">
+				<button id="disconnect" class="tablinks gray">Trennen</button>
+				<button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
+				<button class="tablinks gray" onclick="deleteAll()">Speicher leeren</button>
+			</div>
 		</li>
 		<li class="bluetooth">
-			<button id="connect" type="button" class="dropbtn button blue">Verbinden</button>
+			<button id="connect" type="button" class="button blue">Verbinden</button>
 		</li>
 	</ul>
     <table>
@@ -76,7 +71,7 @@
                 <!-- play/stop button starts/stops blockly code execution -->
                 <div class="control_buttons" style="margin-top: 1%;">
                     <button id="start" onclick="handlePlay();" type="button" class="button green" style="float:left; font-size: 13px;">Start</button>
-                    <button id="stop" type="button" class="button rosy" style="float:left; margin-left:3%;font-size: 13px;">Stopp</button>
+                    <button id="stop" type="button" class="button rosy" style="float:left; margin-left:1.5%;font-size: 13px;">Stopp</button>
                 </div>
             </td>
         </tr>
