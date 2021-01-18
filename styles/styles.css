@@ -242,7 +242,7 @@ table {
   	text-decoration: none;
   	display: block;
 	float:right;
-	padding: 1.5% 0% 1.5% 0%;
+	padding: 3% 0% 3% 0%;
 }
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
@@ -252,4 +252,5 @@ table {
 .select {
 	font:100% Arial, Sans-Serif;
 	border:1px solid #ccc;
+	background:lightgray;
 }
