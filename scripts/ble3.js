@@ -27,10 +27,6 @@ stopButton.addEventListener('click', function(){
 });
 
 // FUNCTIONS
-function log(data, type = '') {
-	/* Log to browser console */
-	console.log(data + type);
-}
 
 function onConnectButtonClick() {
 	/** 
@@ -42,7 +38,7 @@ function onConnectButtonClick() {
 		startNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
-		log(error);
+		console.log(error);
 	});
 }
 
@@ -56,7 +52,7 @@ function onDisconnectButtonClick(){
 	}
 	var confirmed = confirm("Willst du die Verbindung wirklich trennen?");
 	if (confirmed) {
-		log("Disconnecting from Bluetooth device...");
+		console.log("Disconnecting from Bluetooth device...");
 		if(deviceCache.gatt.connected){
 			deviceCache.gatt.disconnect();
 		} else {
@@ -84,7 +80,7 @@ function sendData(commands, counter=0) {
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
 	characteristicCache_rx.writeValue(data);
-	// log(commands[counter], 'out');
+	// console.log(commands[counter], 'out');
 	var promise = new Promise(async function(resolve,reject){
 		/**
 			Await confirmation from micro:bit
@@ -98,18 +94,18 @@ function sendData(commands, counter=0) {
 	})
 	.then(function(counter){
 		/* Call self if not reached end of command list and stop button not clicked */
-		// log("success " + counter);
+		// console.log("success " + counter);
 		if(counter < commands.length-1){
 			if(stopButtonClicked){
 				stopButtonClicked = false;
-				log("Program stopped");
+				console.log("Program stopped");
 				return;
 			}
 			sendData(commands, counter);
 		}
 	})
 	.catch(error => {
-		log(error);
+		console.log(error);
 	});
 }
 
@@ -117,7 +113,7 @@ function onDisconnected(event) {
 	/** 
 	 * Alert user when connection to device is lost 
 	 */
-	log("Bluetooth Device disconnected");
+	console.log("Bluetooth Device disconnected");
 	alert("Verbindung zu Bluetooth Gerät getrennt");
 	deviceCache = null;
 	connectButton.innerHTML = "Verbinden";
@@ -133,16 +129,16 @@ function requestBluetoothDevice() {
 		filters: [{namePrefix: name_prefix}],
 		optionalServices: [uart_service] 
 	}
-	log("Requesting Bluetooth device...");
+	console.log("Requesting Bluetooth device...");
 	return navigator.bluetooth.requestDevice(options)
 	.then(device => {
 		deviceCache = device;
 		deviceCache.addEventListener('gattserverdisconnected', onDisconnected);
-		log(deviceCache.name);
+		console.log(deviceCache.name);
 		return deviceCache;
 	})
 	.catch(error => {
-			log(error);
+		console.log(error);
 	});
 }
 
@@ -152,22 +148,22 @@ function connectDeviceAndCacheCharacteristic(device){
 	 * @param {object}	Bluetooth device to connect to
 	 */
 	if(device.gatt.connected && characteristicCache_rx) {
-			return Promise.resolve(characteristicCache_rx);
+		return Promise.resolve(characteristicCache_rx);
 	}
 	return device.gatt.connect()
 	.then(server => {
-			return server.getPrimaryService(uart_service);
+		return server.getPrimaryService(uart_service);
 	})
 	.then(service => {
-			return service.getCharacteristics();
+		return service.getCharacteristics();
 	})
 	.then(characteristics => {
-			// log('> Characteristics: ' + characteristics.map(c => c.uuid));
-			characteristicCache_tx = characteristics[0];
-			characteristicCache_rx = characteristics[1];
+		// console.log('> Characteristics: ' + characteristics.map(c => c.uuid));
+		characteristicCache_tx = characteristics[0];
+		characteristicCache_rx = characteristics[1];
 	})
 	.catch(error => {
-			log(error);
+		console.log(error);
 	});
 
 }
@@ -178,13 +174,13 @@ function startNotifications(characteristic){
 	 */
 	return characteristic.startNotifications()
 	.then(() => {
-		log('Notifications started');
+		console.log('Notifications started');
 		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
 		sendData(["C:"]);
 		connectButton.innerHTML = "Verbunden";
 		connectButton.className = "button green";
 	})
 	.catch(error => {
-		log(error);
+		console.log(error);
 	});
 }
