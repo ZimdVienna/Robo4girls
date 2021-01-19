@@ -126,7 +126,7 @@ function restore() {
 	}
 	var selectElement = document.querySelector('#generate');
 	var eingabe = selectElement.value;
-	console.log(eingabe);
+	// console.log('Programm "' + eingabe + '" restored');
 	
 	if (eingabe != null) {
 		if (!storage_items.includes(eingabe)) {
@@ -160,7 +160,7 @@ function deleteItem() {
 			for (child of select.children) {
 				if (child.value === eingabe) {
 					select.removeChild(child);
-					console.log(child.value);
+					// console.log('Program "' +child.value + '" deleted');
 				}
 			}
 			createMenu();

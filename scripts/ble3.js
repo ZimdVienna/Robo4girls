@@ -39,10 +39,10 @@ function onConnectButtonClick() {
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
 	.then(characteristics => {
-			startNotifications(characteristicCache_tx);
+		startNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
-			log(error);
+		log(error);
 	});
 }
 
@@ -84,7 +84,7 @@ function sendData(commands, counter=0) {
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
 	characteristicCache_rx.writeValue(data);
-	log(commands[counter], 'out');
+	// log(commands[counter], 'out');
 	var promise = new Promise(async function(resolve,reject){
 		/**
 			Await confirmation from micro:bit
@@ -98,7 +98,7 @@ function sendData(commands, counter=0) {
 	})
 	.then(function(counter){
 		/* Call self if not reached end of command list and stop button not clicked */
-		log("success " + counter);
+		// log("success " + counter);
 		if(counter < commands.length-1){
 			if(stopButtonClicked){
 				stopButtonClicked = false;
@@ -107,6 +107,9 @@ function sendData(commands, counter=0) {
 			}
 			sendData(commands, counter);
 		}
+	})
+	.catch(error => {
+		log(error);
 	});
 }
 
