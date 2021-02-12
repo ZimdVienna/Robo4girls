@@ -1,5 +1,5 @@
 /**
- * Handle Bluetooth connection and communication
+ * Script to handle Bluetooth connection and communication with micro:bit
  */
 
 const connectButton = document.getElementById("connect");
@@ -34,7 +34,7 @@ function onConnectButtonClick() {
 	*/
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
-	.then(characteristics => {
+	.then(() => {
 		startNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
@@ -62,9 +62,9 @@ function onDisconnectButtonClick(){
 }
 
 function timeout(ms) {
-	/**
-	 * Create a timeout promise
-	 */
+	/** Create a timeout promise 
+	 * @param {number} ms Time to wait in milliseconds
+	*/
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -73,6 +73,7 @@ function waitForConfirmation(counter) {
 		/**
 			Create a promise that awaits confirmation from micro:bit
 			If successfull increase counter to send next command
+			@param {number} counter number of sent commands from command list
 		*/
 		characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
 			let decoder = new TextDecoder();
@@ -81,7 +82,7 @@ function waitForConfirmation(counter) {
 			if (value == "OK"){
 				resolve(counter + 1);
 			} else {
-				reject("received: '" + value + "'");
+				reject("received: '" + value + "'"); // TODO: Test if this works
 			}
 		});
 	})
@@ -136,7 +137,7 @@ function sendData(commands, counter=0) {
 	});
 }
 
-function onDisconnected(event) {
+function onDisconnected() {
 	/** 
 	 * Alert user when connection to device is lost 
 	 */
