@@ -82,7 +82,7 @@ function waitForConfirmation(counter) {
 			if (value == "OK"){
 				resolve(counter + 1);
 			} else {
-				reject("received: '" + value + "'"); // TODO: Test if this works
+				reject(new Error("Received wrong confirmation value: " + value));
 			}
 		});
 	})
@@ -112,12 +112,12 @@ function sendData(commands, counter=0) {
 	Promise.race([
 		/**
 		 * Wait for confirmation from micro:bit that command has been executed
-		 * Trow timeout error if the micro:bit does not confirm action within 10 seconds
+		 * Trow timeout error if the micro:bit does not confirm action within 15 seconds
 		 * (longest possible action is 9 seconds)
 		 */
 		waitForConfirmation(counter),
-		timeout(10000).then(() => {
-			throw new Error("No confirmation from micro:bit received within 10 seconds");
+		timeout(15000).then(() => {
+			throw new Error("No confirmation from micro:bit received within 15 seconds");
 		})
 	])
 	.then(function(counter){
@@ -133,6 +133,7 @@ function sendData(commands, counter=0) {
 		}
 	})
 	.catch(error => {
+		alert(error);
 		console.log(error);
 	});
 }
