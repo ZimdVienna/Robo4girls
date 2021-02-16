@@ -91,6 +91,18 @@
     <!-- R4G blocks design -->
     <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none;">
         <!-- Category Movements -->
+        <category name="LED-Anzeige" colour="#5ba593">
+            <block type="show_text"></block>
+            <block type="show_picture">
+                <field name="pic">Wähle ein Bild</field>
+                <field name="show_duration">1</field>
+            </block>
+        </category>
+        <!--
+        <category name ="Fühlen" colour="195">
+            <block type="show_sensor_value"></block>
+        </category>
+        -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
@@ -111,7 +123,7 @@
                 <field name="turn_right_duration">0.1</field>
             </block>
         </category>
-        <category name="Kombinationen" colour="#a55b6d">
+        <category name="Kombinationen" colour="290">
             <block type="dance">
                 <field name="repeat">1</field>
                 <field name="intensity">kurz</field>
@@ -134,12 +146,14 @@
                 <field name="melody">M1</field>
             </block>
         </category>
-        <category name="LED-Anzeige" colour="#5ba593">
-            <block type="show_text"></block>
-            <block type="show_picture">
-                <field name="pic">Wähle ein Bild</field>
-                <field name="show_duration">1</field>
+        <category name="Einstellungen" colour="65">
+            <block type="motor">
+                <field name="motor">1</field>
+                <field name="velocity">400</field>
             </block>
+			<block type="turn_display" colour="#5ba593">
+				<field name="degrees">0</field>
+			</block>
         </category>
         <category name="Steuerung" colour="#5ba55b">
             <block type="repetition">
@@ -150,15 +164,22 @@
 			</block>
 			<block type="start_block"></block>
         </category>
-        <category name="Einstellungen" colour="#a5a55b">
-            <block type="motor">
-                <field name="motor">1</field>
-                <field name="velocity">400</field>
+        <!--
+        <category name="Logic" colour="#5b80a5">
+            <block type="controls_if"></block>
+            <block type="logic_compare">
+              <field name="OP">EQ</field>
             </block>
-			<block type="turn_display" colour="#5ba593">
-				<field name="degrees">0</field>
-			</block>
-        </category>
+            <block type="logic_operation">
+              <field name="OP">AND</field>
+            </block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean">
+              <field name="BOOL">TRUE</field>
+            </block>
+          </category>
+          <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+        -->
     </xml>
 	
 	<!-- Making Toolbox visible and resizable in Web-browser -->

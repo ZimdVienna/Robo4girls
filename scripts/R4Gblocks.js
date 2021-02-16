@@ -189,7 +189,7 @@ Blockly.Blocks['dance'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -211,7 +211,7 @@ Blockly.Blocks['zigzag'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -233,7 +233,7 @@ Blockly.Blocks['shake'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -255,7 +255,7 @@ Blockly.Blocks['pirouette'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -414,7 +414,7 @@ Blockly.Blocks['wait_seconds'] = {
 };
 Blockly.JavaScript['wait_seconds'] = function(block) {
   	var number_seconds_to_wait = block.getFieldValue('seconds');
-	log(number_seconds_to_wait);
+	//console.log(number_seconds_to_wait);
   	var code = 'W'+ number_seconds_to_wait + (number_seconds_to_wait % 1 == 0 ? float_delimiter : delimiter);
   	return code;
 };

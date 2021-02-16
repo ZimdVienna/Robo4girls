@@ -1,5 +1,5 @@
 /**
- * Handle Bluetooth connection and communication
+ * Script to handle Bluetooth connection and communication with micro:bit
  */
 
 const connectButton = document.getElementById("connect");
@@ -34,7 +34,7 @@ function onConnectButtonClick() {
 	*/
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
-	.then(characteristics => {
+	.then(() => {
 		startNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
@@ -61,6 +61,33 @@ function onDisconnectButtonClick(){
 	}
 }
 
+function timeout(ms) {
+	/** Create a timeout promise 
+	 * @param {number} ms Time to wait in milliseconds
+	*/
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function waitForConfirmation(counter) {
+	return new Promise(async function(resolve,reject){
+		/**
+			Create a promise that awaits confirmation from micro:bit
+			If successfull increase counter to send next command
+			@param {number} counter number of sent commands from command list
+		*/
+		characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
+			let decoder = new TextDecoder();
+			let value = decoder.decode(event.target.value).replace(/\r?\n|\r/,'');
+			console.log("received: '" + value + "'");
+			if (value == "OK"){
+				resolve(counter + 1);
+			} else {
+				reject(new Error("Received wrong confirmation value: " + value));
+			}
+		});
+	})
+}
+
 function sendData(commands, counter=0) {
 	/** 
 	 * Send commands to micro:bit recursively when Start button is clicked
@@ -80,18 +107,19 @@ function sendData(commands, counter=0) {
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
 	characteristicCache_rx.writeValue(data);
-	// console.log(commands[counter], 'out');
-	var promise = new Promise(async function(resolve,reject){
+	console.log("sending: '" + commands[counter] + "'");
+
+	Promise.race([
 		/**
-			Await confirmation from micro:bit
-			If successfull increase counter to send next command
-		*/
-		characteristicCache_tx.addEventListener('characteristicvaluechanged',function(event){
-			let decoder = new TextDecoder();
-			let value = decoder.decode(event.target.value);
-			resolve(counter + 1);
-		});
-	})
+		 * Wait for confirmation from micro:bit that command has been executed
+		 * Trow timeout error if the micro:bit does not confirm action within 15 seconds
+		 * (longest possible action is 9 seconds)
+		 */
+		waitForConfirmation(counter),
+		timeout(15000).then(() => {
+			throw new Error("No confirmation from micro:bit received within 15 seconds");
+		})
+	])
 	.then(function(counter){
 		/* Call self if not reached end of command list and stop button not clicked */
 		// console.log("success " + counter);
@@ -105,11 +133,12 @@ function sendData(commands, counter=0) {
 		}
 	})
 	.catch(error => {
+		alert(error);
 		console.log(error);
 	});
 }
 
-function onDisconnected(event) {
+function onDisconnected() {
 	/** 
 	 * Alert user when connection to device is lost 
 	 */
