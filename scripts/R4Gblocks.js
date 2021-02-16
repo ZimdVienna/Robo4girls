@@ -189,7 +189,7 @@ Blockly.Blocks['dance'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -211,7 +211,7 @@ Blockly.Blocks['zigzag'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -233,7 +233,7 @@ Blockly.Blocks['shake'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -255,7 +255,7 @@ Blockly.Blocks['pirouette'] = {
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(330);
+		this.setColour(290);
 		this.setTooltip("");
 		this.setHelpUrl("");
 	}
@@ -273,11 +273,11 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	return code;
 };
 
-// MELODY 'M'
+// MELODY 'M/K'
 Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField("Melodie abspielen")
+			.appendField("Spiele Melodie")
 			.appendField(new Blockly.FieldDropdown([["Tusch","M1"],["Romantisch","M2"],["Star Wars","M3"],["Super Mario","M4"],["Donauwalzer","M5"],["Tango Kriminalis","M6"],["Don't Worry be Happy","M7"],["Somewhere over the Rainbow","M8"]]), "melody");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
@@ -292,6 +292,27 @@ Blockly.JavaScript['melody'] = function (block) {
 	var code = dropdown_melody + delimiter;
 	return code;
 };
+
+// MELODY 'M'
+Blockly.Blocks['sound'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("Spiele Klang")
+			.appendField(new Blockly.FieldDropdown([["Kichern","K01"],["Fröhlich","K02"],["Hallo","K03"],["Mysteriös","K04"],["Traurig","K05"],["Rutschen","K06"],["Aufsteigen","K07"],["Federn","K08"],["Funkeln","K09"],["Gähnen","K10"]]), "sound");
+		this.setInputsInline(false);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(0);
+		this.setTooltip("");
+		this.setHelpUrl("");
+	}
+};
+Blockly.JavaScript['sound'] = function (block) {
+	var dropdown_melody = block.getFieldValue('sound');
+	var code = dropdown_melody + delimiter;
+	return code;
+};
+
 
 // SETTINGS
 // Motor velocity 'G'
@@ -395,6 +416,47 @@ Blockly.JavaScript['show_picture'] = function (block) {
 	return code;
 };
 
+Blockly.Blocks['show_picture_async'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("Zeige");
+		this.appendDummyInput()
+			.appendField(new Blockly.FieldDropdown([["Fröhlich","1"],["Herz","2"],["Herz klein","3"],["Traurig","4"], ["Böse","5"],["Müde","6"],["Überrascht","7"],["Richtig","8"],["Falsch","9"]]), "picture")
+		this.setInputsInline(true);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(160);
+		this.setTooltip("");
+		this.setHelpUrl("");
+	}
+};
+Blockly.JavaScript['show_picture_async'] = function (block) {
+	var pic = block.getFieldValue('picture');
+	if(pic == 'Wähle ein Bild'){
+		alert('Bitte wähle ein Bild aus');
+		return '?' + delimiter;
+	}
+	var code = 'A' + pic + '0' + delimiter;
+	return code;
+};
+// LEDs off
+Blockly.Blocks['leds_off'] = {
+	init: function() {
+		this.appendDummyInput()
+			.appendField("Schalte Display aus");
+		this.setInputsInline(true);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(160);
+			this.setTooltip("Schaltet alle Lichter der LED Matrix aus");
+			this.setHelpUrl("");
+	 }
+};
+Blockly.JavaScript['leds_off'] = function(block) {
+   var code = 'A0' + delimiter;
+   return code;
+};
 
 // PROGRAM CONTROL
 // Wait 'W'
@@ -463,3 +525,62 @@ Blockly.JavaScript['start_block'] = function(block) {
 	var code = 'start' + delimiter;
 	return code;
 };
+
+Blockly.Blocks['show_sensor_value'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("Zeige Wert von")
+		  .appendField(new Blockly.FieldDropdown([["Temperatursensor","t"], ["Kompass","k"], ["Bewegungssensor","b"]]), "Sensor");
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(195);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
+  Blockly.JavaScript['show_sensor_value'] = function(block) {
+	var dropdown_sensor = block.getFieldValue('Sensor');
+	// TODO: Assemble JavaScript into code variable.
+	var code = 'S' + dropdown_sensor + delimiter;
+	return code;
+  };
+
+  Blockly.Blocks['temperature'] = {
+	init: function() {
+	  this.appendDummyInput()
+		  .appendField("Temperatur");
+	  this.setOutput(true, "Number");
+	  this.setColour(190);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
+  Blockly.JavaScript['temperature'] = function(block) {
+	// TODO: Assemble JavaScript into code variable.
+	var code = '...';
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.JavaScript.ORDER_NONE];
+  };
+
+  Blockly.Blocks['show_value'] = {
+	init: function() {
+	  this.appendValueInput("NAME")
+		  .setCheck(null)
+		  .appendField("Zeige Wert von");
+	  this.setInputsInline(true);
+	  this.setPreviousStatement(true, null);
+	  this.setNextStatement(true, null);
+	  this.setColour(150);
+   this.setTooltip("");
+   this.setHelpUrl("");
+	}
+  };
+
+  Blockly.JavaScript['show_value'] = function(block) {
+	var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
+	// TODO: Assemble JavaScript into code variable.
+	var code = '...;\n';
+	return code;
+  };

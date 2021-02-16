@@ -94,9 +94,13 @@
         <category name="LED-Anzeige" colour="#5ba593">
             <block type="show_text"></block>
             <block type="show_picture">
-                <field name="pic">Wähle ein Bild</field>
+                <field name="pic">1</field>
                 <field name="show_duration">1</field>
             </block>
+            <block type="show_picture_async">
+                <field name="picture"></field>
+            </block>
+            <block type="leds_off"></block>
         </category>
         <category name ="Fühlen" colour="195">
             <block type="show_sensor_value"></block>
@@ -139,9 +143,12 @@
                 <field name="direction">Links</field>
             </block>
         </category>
-        <category name="Melodie" colour="#a55b5b">
+        <category name="Klänge" colour="#a55b5b">
             <block type="melody">
                 <field name="melody">M1</field>
+            </block>
+            <block type="sound">
+                <field name="sound">K01</field>
             </block>
         </category>
         <category name="Einstellungen" colour="65">
@@ -162,6 +169,7 @@
 			</block>
 			<block type="start_block"></block>
         </category>
+        <!--
         <category name="Logic" colour="#5b80a5">
             <block type="controls_if"></block>
             <block type="logic_compare">
@@ -176,6 +184,7 @@
             </block>
           </category>
           <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+        -->
     </xml>
 	
 	<!-- Making Toolbox visible and resizable in Web-browser -->
