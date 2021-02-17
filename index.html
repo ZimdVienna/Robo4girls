@@ -69,7 +69,7 @@
         <tr>
             <td>
                 <!-- play/stop button starts/stops blockly code execution -->
-                <div class="control_buttons" style="padding-bottom: 1%;">
+                <div class="control_buttons">
                     <button id="start" onclick="handlePlay();" type="button" class="button green" style="float:left; margin-left:10px;font-size: 13px;padding-left:30px;padding-right: 30px;">Start</button>
                     <button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 13px;">Stopp</button>
                 </div>
@@ -102,9 +102,11 @@
             </block>
             <block type="leds_off"></block>
         </category>
+        <!--
         <category name ="Fühlen" colour="195">
             <block type="show_sensor_value"></block>
         </category>
+        -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
