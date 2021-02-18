@@ -36,7 +36,7 @@ table {
 }
 
 #blocklyArea {
-    	height: 100%;
+    height: 90%;
 }
 
 .bluetooth {
@@ -255,9 +255,4 @@ table {
 	font:100% Arial, Sans-Serif;
 	border:1px solid #ccc;
 	background:lightgray;
-}
-
-.control_buttons {
-	position: relative;
-	padding-bottom: 10%;
 }
