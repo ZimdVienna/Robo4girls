@@ -55,7 +55,7 @@ Blockly.Blocks['forward'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter fährt Vorwärts für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -79,7 +79,7 @@ Blockly.Blocks['back'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter fährt rückwärts für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -101,7 +101,7 @@ Blockly.Blocks['left'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter biegt nach lins ab für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -123,7 +123,7 @@ Blockly.Blocks['right'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter biegt nach rechts ab für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -145,7 +145,7 @@ Blockly.Blocks['turn_left'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter dreht sich um sich selbst gegen den Uhrzeigersinn für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -167,7 +167,7 @@ Blockly.Blocks['turn_right'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(230);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter dreht sich um sich selbst im Uhrzeigersinn für die Dauer der Eingabe.");
 		this.setHelpUrl("");
 	}
 };
@@ -190,7 +190,7 @@ Blockly.Blocks['dance'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(290);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter führt einen kleinen Tanz auf.");
 		this.setHelpUrl("");
 	}
 };
@@ -212,7 +212,7 @@ Blockly.Blocks['zigzag'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(290);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter fährt einmal im Zick-Zack.");
 		this.setHelpUrl("");
 	}
 };
@@ -234,7 +234,7 @@ Blockly.Blocks['shake'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(290);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter schüttelt sich.");
 		this.setHelpUrl("");
 	}
 };
@@ -256,7 +256,7 @@ Blockly.Blocks['pirouette'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(290);
-		this.setTooltip("");
+		this.setTooltip("Der Roboter dreht sich eine Sekunde lang im Kreis.");
 		this.setHelpUrl("");
 	}
 };
@@ -266,9 +266,9 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	var code = fullVelocity + delimiter;
 	for(var r = 0; r < number_repetition; r++){
 		if(dropdown_direction == 'Links' || dropdown_direction == 'left')
-			code += 'BL2.9' + delimiter;
+			code += 'BL1.0' + delimiter;
 		else
-			code += 'BR2.9' + delimiter;
+			code += 'BR1.0' + delimiter;
 	}
 	return code;
 };
@@ -283,7 +283,7 @@ Blockly.Blocks['melody'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(0);
-		this.setTooltip("");
+		this.setTooltip("Die von dir ausgewählte Melodie wird ganz abgespielt, das Programm pausiert so lange.");
 		this.setHelpUrl("");
 	}
 };
@@ -303,7 +303,7 @@ Blockly.Blocks['sound'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(0);
-		this.setTooltip("");
+		this.setTooltip("Der ausgewählte Klang wird abgespielt während das Programm weiterläuft. Dieser Baustein funktioniert nur mit dem Micro:bit V2!");
 		this.setHelpUrl("");
 	}
 };
@@ -326,7 +326,7 @@ Blockly.Blocks['motor'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(60);
-		this.setTooltip("");
+		this.setTooltip("Hiermit kannst du die Motorleistung anpassen wenn der Roboter zu schnell oder langsam fährt oder die Motoren unterschiedlich schnell drehen.");
 		this.setHelpUrl("");
 	}
 };
@@ -350,7 +350,7 @@ Blockly.Blocks['turn_display'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(65);
-		this.setTooltip("Dreht die Anzeige im Uhrzeigersinn");
+		this.setTooltip("Dreht das Display im Uhrzeigersinn um die angegebenen Grad. Dieser Baustein funktioniert nur mit dem Micro:bit V1!");
 		this.setHelpUrl("");
 	}
 };
@@ -375,7 +375,7 @@ Blockly.Blocks['show_text'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-		this.setTooltip("");
+		this.setTooltip("Schreibe einen Text in das Eingabefeld, er wird dann am Display angezeigt.");
 		this.setHelpUrl("");
 	}
 };
@@ -401,7 +401,7 @@ Blockly.Blocks['show_picture'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-		this.setTooltip("");
+		this.setTooltip("Zeigt das ausgewählte Bild für die angegebene Sekundenanzahl an.");
 		this.setHelpUrl("");
 	}
 };
@@ -426,7 +426,7 @@ Blockly.Blocks['show_picture_async'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-		this.setTooltip("");
+		this.setTooltip("Zeigt das ausgewählte Bild während das Programm weiterläuft. Hört nicht von alleine auf!");
 		this.setHelpUrl("");
 	}
 };
@@ -449,14 +449,37 @@ Blockly.Blocks['leds_off'] = {
 		this.setNextStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(160);
-			this.setTooltip("Schaltet alle Lichter der LED Matrix aus");
-			this.setHelpUrl("");
-	 }
+		this.setTooltip("Schaltet das Display aus.");
+		this.setHelpUrl("");
+	}
 };
 Blockly.JavaScript['leds_off'] = function(block) {
    var code = 'A0' + delimiter;
    return code;
 };
+/* 
+// block with input field for number or text
+Blockly.Blocks['show_value'] = {
+		init: function() {
+		this.appendValueInput("VALUE")
+			.setCheck(null)
+			.appendField("Zeige Wert von");
+		this.setInputsInline(true);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(150);
+		this.setTooltip("Der Wert den du diesem Baustein fütterst wird am Display angezeigt");
+		this.setHelpUrl("");
+	}
+};
+Blockly.JavaScript['show_value'] = function(block) {
+	var value_name = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
+	// TODO: Assemble JavaScript into code variable.
+	console.log(value_name);
+	var code = value_name + delimiter;
+	return code;
+};
+*/
 
 // PROGRAM CONTROL
 // Wait 'W'
@@ -470,7 +493,7 @@ Blockly.Blocks['wait_seconds'] = {
 	  	this.setPreviousStatement(true, null);
 	  	this.setNextStatement(true, null);
 	  	this.setColour(120);
-	  	this.setTooltip("");
+	  	this.setTooltip("Der Roboter macht eine Pause für die angegebene Sekundenanzahl");
 	  	this.setHelpUrl("");
   	}
 };
@@ -494,7 +517,7 @@ Blockly.Blocks['repetition'] = {
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(120);
-		this.setTooltip("");
+		this.setTooltip("Die Kommandos, die innerhalb dieses Bausteins sind, werden so oft wiederholt bis die eingegebene Zahl erreicht ist. Wenn die Zahl 1 ist dann wird alles genau einmal ausgeführt.");
 		this.setHelpUrl("");
 	}
 };
@@ -528,31 +551,31 @@ Blockly.JavaScript['start_block'] = function(block) {
 
 Blockly.Blocks['show_sensor_value'] = {
 	init: function() {
-	  this.appendDummyInput()
-		  .appendField("Zeige Wert von")
-		  .appendField(new Blockly.FieldDropdown([["Temperatursensor","t"], ["Kompass","k"], ["Bewegungssensor","b"]]), "Sensor");
-	  this.setPreviousStatement(true, null);
-	  this.setNextStatement(true, null);
-	  this.setColour(195);
-   this.setTooltip("");
-   this.setHelpUrl("");
+		this.appendDummyInput()
+			.appendField("Zeige Wert ")
+			.appendField(new Blockly.FieldDropdown([["Temperatur","t"]]), "Sensor"); // to add ["Richtung","k"],["Helligkeit","b"],["Lautstärke","l"]
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(195);
+		this.setTooltip("Zeigt den aktuellen Wert des ausgewählten Sensors");
+		this.setHelpUrl("");
 	}
-  };
-
-  Blockly.JavaScript['show_sensor_value'] = function(block) {
+};
+Blockly.JavaScript['show_sensor_value'] = function(block) {
 	var dropdown_sensor = block.getFieldValue('Sensor');
 	// TODO: Assemble JavaScript into code variable.
 	var code = 'S' + dropdown_sensor + delimiter;
 	return code;
-  };
+};
 
+/*
   Blockly.Blocks['temperature'] = {
 	init: function() {
 	  this.appendDummyInput()
 		  .appendField("Temperatur");
 	  this.setOutput(true, "Number");
 	  this.setColour(190);
-   this.setTooltip("");
+   this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
    this.setHelpUrl("");
 	}
   };
@@ -563,24 +586,4 @@ Blockly.Blocks['show_sensor_value'] = {
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
   };
-
-  Blockly.Blocks['show_value'] = {
-	init: function() {
-	  this.appendValueInput("NAME")
-		  .setCheck(null)
-		  .appendField("Zeige Wert von");
-	  this.setInputsInline(true);
-	  this.setPreviousStatement(true, null);
-	  this.setNextStatement(true, null);
-	  this.setColour(150);
-   this.setTooltip("");
-   this.setHelpUrl("");
-	}
-  };
-
-  Blockly.JavaScript['show_value'] = function(block) {
-	var value_name = Blockly.JavaScript.valueToCode(block, 'NAME', Blockly.JavaScript.ORDER_ATOMIC);
-	// TODO: Assemble JavaScript into code variable.
-	var code = '...;\n';
-	return code;
-  };
+*/
