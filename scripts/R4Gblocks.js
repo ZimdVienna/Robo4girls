@@ -467,7 +467,7 @@ Blockly.Blocks['show_value'] = {
 		this.setInputsInline(true);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(150);
+		this.setColour(160);
 		this.setTooltip("Der Wert den du diesem Baustein fütterst wird am Display angezeigt");
 		this.setHelpUrl("");
 	}
@@ -566,22 +566,97 @@ Blockly.JavaScript['show_sensor_value'] = function(block) {
 	return code;
 };
 
-
-  Blockly.Blocks['temperature'] = {
+Blockly.Blocks['temperature'] = {
 	init: function() {
-	  this.appendDummyInput()
-		  .appendField("Temperatur");
-	  this.setOutput(true, "Number");
-	  this.setColour(190);
-   this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
-   this.setHelpUrl("");
+		this.appendDummyInput()
+			.appendField("Temperatur");
+		this.setOutput(true, "Number");
+		this.setColour(190);
+	this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
+	this.setHelpUrl("");
 	}
-  };
+};
 
-  Blockly.JavaScript['temperature'] = function(block) {
+Blockly.JavaScript['temperature'] = function(block) {
 	// TODO: Assemble JavaScript into code variable.
 	var code = currentTemperature;
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
+};
+
+
+
+  Blockly.defineBlocksWithJsonArray([ {
+    type: "c_if", message0: "%{BKY_CONTROLS_IF_MSG_IF} %1", args0: [{ type: "input_value", name: "IF0", check: "Boolean" }], message1: "%{BKY_CONTROLS_IF_MSG_THEN} %1", args1: [{
+        type: "input_statement",
+        name: "DO0"
+    }], previousStatement: null, nextStatement: null, style: "logic_blocks", helpUrl: "%{BKY_CONTROLS_IF_HELPURL}", mutator: "controls_if_mutator", extensions: ["controls_if_tooltip"]
+}])
+
+Blockly.JavaScript['c_if'] = function(block) {
+	// If/elseif/else condition.
+	var n = 0;
+	var code = '', branchCode, conditionCode;
+	if (Blockly.JavaScript.STATEMENT_PREFIX) {
+	  // Automatic prefix insertion is switched off for this block.  Add manually.
+	  code += Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_PREFIX,
+		  block);
+	}
+	do {
+	  conditionCode = Blockly.JavaScript.valueToCode(block, 'IF' + n,
+		  Blockly.JavaScript.ORDER_NONE) || 'false';
+	  branchCode = 'result = "'+Blockly.JavaScript.statementToCode(block, 'DO' + n)+'"';
+	  if (Blockly.JavaScript.STATEMENT_SUFFIX) {
+		branchCode = Blockly.JavaScript.prefixLines(
+			Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_SUFFIX,
+			block), Blockly.JavaScript.INDENT) + branchCode;
+	  }
+	  code += (n > 0 ? ' else ' : '') +
+		  'if (' + conditionCode + ') {\n' + branchCode + '}';
+	  ++n;
+	} while (block.getInput('IF' + n));
+  
+	if (block.getInput('ELSE') || Blockly.JavaScript.STATEMENT_SUFFIX) {
+	  branchCode = 'result = "' + Blockly.JavaScript.statementToCode(block, 'ELSE') + '"';
+	  if (Blockly.JavaScript.STATEMENT_SUFFIX) {
+		branchCode = Blockly.JavaScript.prefixLines(
+			Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_SUFFIX,
+			block), Blockly.JavaScript.INDENT) + branchCode;
+	  }
+	  code += ' else {\n' + branchCode + '}';
+	}
+	try {
+		var result = '';
+		eval(code);
+		// console.log(strip(result));
+		return strip(result);
+	} catch(e) {
+		console.log(e);
+	}
   };
 
+  
+
+Blockly.defineBlocksWithJsonArray([ {
+    type: "math_random_i", message0: "%{BKY_MATH_RANDOM_INT_TITLE}", args0: [{ type: "input_value", name: "FROM", check: "Number" },
+    { type: "input_value", name: "TO", check: "Number" }], inputsInline: !0, output: "Number", style: "logic_blocks", tooltip: "%{BKY_MATH_RANDOM_INT_TOOLTIP}", helpUrl: "%{BKY_MATH_RANDOM_INT_HELPURL}"
+}])
+
+Blockly.JavaScript['math_random_i'] = function (a) {
+	var b = Blockly.JavaScript.valueToCode(a, "TO", Blockly.JavaScript.ORDER_COMMA) || "0"; 
+	// a = Blockly.JavaScript.valueToCode(a, "TO", Blockly.JavaScript.ORDER_COMMA) || "0"; 
+	random_int = Math.random(b);
+	console.log(random_int);
+	/*
+	[Blockly.JavaScript.provideFunction_("mathRandomInt", ["function " + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + "(a, b) {", "  if (a > b) {", "    // Swap a and b to ensure a is smaller.", "    var c = a;", "    a = b;", "    b = c;", "  }", "  return Math.floor(Math.random() * (b - a + 1) + a);","}"]) + "(" + b + ", " + a + ")", Blockly.JavaScript.ORDER_FUNCTION_CALL];
+	console.log(code);
+	try {
+		var result = '';
+		result = eval(code);
+		console.log(result);
+		// return strip(result);
+	} catch(e) {
+		console.log(e);
+	} 
+	*/
+};
