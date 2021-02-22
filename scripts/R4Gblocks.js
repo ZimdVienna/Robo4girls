@@ -457,7 +457,7 @@ Blockly.JavaScript['leds_off'] = function(block) {
    var code = 'A0' + delimiter;
    return code;
 };
-/* 
+
 // block with input field for number or text
 Blockly.Blocks['show_value'] = {
 		init: function() {
@@ -475,11 +475,9 @@ Blockly.Blocks['show_value'] = {
 Blockly.JavaScript['show_value'] = function(block) {
 	var value_name = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
 	// TODO: Assemble JavaScript into code variable.
-	console.log(value_name);
-	var code = value_name + delimiter;
-	return code;
+	// console.log(value_name);
+	return value_name + delimiter;;
 };
-*/
 
 // PROGRAM CONTROL
 // Wait 'W'
@@ -568,7 +566,7 @@ Blockly.JavaScript['show_sensor_value'] = function(block) {
 	return code;
 };
 
-/*
+
   Blockly.Blocks['temperature'] = {
 	init: function() {
 	  this.appendDummyInput()
@@ -582,8 +580,8 @@ Blockly.JavaScript['show_sensor_value'] = function(block) {
 
   Blockly.JavaScript['temperature'] = function(block) {
 	// TODO: Assemble JavaScript into code variable.
-	var code = '...';
+	var code = currentTemperature;
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
   };
-*/
+

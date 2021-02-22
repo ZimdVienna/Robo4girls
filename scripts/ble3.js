@@ -19,6 +19,7 @@ var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 var characteristicCache_temp = null;
 var stopButtonClicked = false;
+var currentTemperature = 0;
 
 // EVENT LISTENERS
 connectButton.addEventListener('click', function(){
@@ -40,32 +41,12 @@ function onConnectButtonClick() {
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
 	.then(() => {
-		startNotifications(characteristicCache_tx);
+		return Promise.all([startUartNotifications(characteristicCache_tx),startTemperatureNotifications(characteristicCache_temp)])
 	})
 	.catch(error => {
 		console.log(error);
 	});
 }
-
-/*
-function onTemperatureButtonClick() {
-	return deviceCache.gatt.connect()
-	.then(server => {
-		return server.getPrimaryService(temp_service);
-	})
-	.then(service => {
-		return service.getCharacteristics(temp_characteristic);
-	})
-	.then(characteristics => {
-		console.log('> Characteristics: ' + characteristics.map(c => c.uuid));
-		characteristicCache_temp = characteristics;
-		startNotifications(characteristicCache_temp);
-	})
-	.catch(error => {
-		console.log(error);
-	})
-}
-*/
 
 function onDisconnectButtonClick(){
 	/** 
@@ -196,6 +177,49 @@ function requestBluetoothDevice() {
 	});
 }
 
+function getUartCharacteristics(server) {
+	return new Promise(async function(resolve){
+		/**
+		 * Get the characteristics (tx/rx) for uart via BLE communication with micro:bit
+		 * @param {number} server connected gatt server
+		 * @returns {array} array of characteristics
+		*/
+		return server.getPrimaryService(uart_service)
+		.then(service => {
+			return service.getCharacteristics();
+		})
+		.then(characteristics => {
+			characteristicCache_tx = characteristics[0];
+			characteristicCache_rx = characteristics[1];
+			resolve(characteristics);
+		})
+		.catch(error => {
+			console.log(error);
+		})
+	})
+}
+
+function getTemperatureCharacteristic(server) {
+	return new Promise(async function(resolve){
+		/**
+		 * Get the characteristics for the temperature service from micro:bit
+		 * @param {number} server connected gatt server
+		 * @returns {array} array of characteristics
+		*/
+		return server.getPrimaryService(temp_service)
+		.then(service => {
+			return service.getCharacteristics(temp_characteristic);
+		})
+		.then(characteristics => {
+			characteristicCache_temp = characteristics[0];
+			resolve(characteristics);
+		})
+		.catch(error => {
+			console.log(error);
+		})
+	})
+}
+
 function connectDeviceAndCacheCharacteristic(device){
 	/**
 	 * Connect to-, and get service and characteristics rx/tx from device
@@ -206,15 +230,8 @@ function connectDeviceAndCacheCharacteristic(device){
 	}
 	return device.gatt.connect()
 	.then(server => {
-		return server.getPrimaryService(uart_service);
-	})
-	.then(service => {
-		return service.getCharacteristics();
-	})
-	.then(characteristics => {
-		// console.log('> Characteristics: ' + characteristics.map(c => c.uuid));
-		characteristicCache_tx = characteristics[0];
-		characteristicCache_rx = characteristics[1];
+		return Promise.all([getUartCharacteristics(server), getTemperatureCharacteristic(server)])
+		.then(values => console.log(values))
 	})
 	.catch(error => {
 		console.log(error);
@@ -222,7 +239,7 @@ function connectDeviceAndCacheCharacteristic(device){
 
 }
 
-function startNotifications(characteristic){
+function startUartNotifications(characteristic){
 	/**
 	 * Confirm device connected and start notifications
 	 */
@@ -230,11 +247,24 @@ function startNotifications(characteristic){
 	.then(() => {
 		console.log('Notifications started');
 		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
-		sendData(['C:']);
+		// sendData(['C:']);
 		connectButton.innerHTML = 'Verbunden';
 		connectButton.className = 'button green';
 	})
 	.catch(error => {
 		console.log(error);
 	});
+}
+
+function startTemperatureNotifications(characteristic) {
+	return characteristic.startNotifications()
+	.then(() => {
+		characteristic.addEventListener('characteristicvaluechanged',function(event) {
+			currentTemperature = event.target.value.getUint8(0);
+			console.log(`Temperature service: "${currentTemperature}"`);
+		})
+	})
+	.catch(error => {
+		console.log(error);
+	})
 }
