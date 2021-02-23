@@ -10,14 +10,17 @@ const name_prefix = 'BBC micro:bit';
 const uart_service = '6e400001-b5a3-f393-e0a9-e50e24dcca9e';
 const uart_characteristic_tx = '6e400002-b5a3-f393-e0a9-e50e24dcca9e';	// Messages from micro:bit
 const uart_characteristic_rx = '6e400003-b5a3-f393-e0a9-e50e24dcca9e';	// Messages to the micro:bit
-
 const temp_service = 'e95d6100-251d-470a-a062-fa1922dfa9a8';
 const temp_characteristic = 'e95d9250-251d-470a-a062-fa1922dfa9a8';
+const accelerometer_service = '';
+const accelerometer_characteristic = '';
+
 
 var deviceCache = null;	// save bluetooth device for reconnection
 var characteristicCache_tx = null;
 var characteristicCache_rx = null;
 var characteristicCache_temp = null;
+var characteristicCache_accel = null;
 var stopButtonClicked = false;
 var currentTemperature = 0;
 

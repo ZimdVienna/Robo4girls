@@ -100,10 +100,43 @@
             <block type="leds_off"></block>
             <block type="show_value"></block>
         </category>
+
         <category name ="Fühlen" colour="195">
             <block type="show_sensor_value"></block>
             <block type="temperature"></block>
         </category>
+
+        <category name="Logic" colour="#5b80a5">
+            <block type="c_if"></block>
+            <block type="logic_compare">
+              <field name="OP">EQ</field>
+            </block>
+            <!--
+            <block type="logic_operation">
+              <field name="OP">AND</field>
+            </block>
+            <block type="logic_negate"></block>
+            <block type="logic_boolean">
+              <field name="BOOL">TRUE</field>
+            </block>
+            <block type="math_rand_i">
+                <value name="FROM">
+                    <shadow type="math_number">
+                        <field name="NUM">1</field>
+                    </shadow>
+                </value>
+                <value name="TO">
+                    <shadow type="math_number">
+                        <field name="NUM">100</field>
+                    </shadow>
+                </value>
+            </block>
+            -->
+            <block type="math_number">
+                <field name="NUM">0</field>
+            </block>
+        </category>
+
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
@@ -124,6 +157,7 @@
                 <field name="turn_right_duration">0.1</field>
             </block>
         </category>
+
         <category name="Kombinationen" colour="290">
             <block type="dance">
                 <field name="repeat">1</field>
@@ -142,6 +176,9 @@
                 <field name="direction">Links</field>
             </block>
         </category>
+        <!--
+        <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+        -->
         <category name="Klänge" colour="#a55b5b">
             <block type="melody">
                 <field name="melody">M1</field>
@@ -150,6 +187,7 @@
                 <field name="sound">K01</field>
             </block>
         </category>
+
         <category name="Einstellungen" colour="65">
             <block type="motor">
                 <field name="motor">1</field>
@@ -159,6 +197,7 @@
 				<field name="degrees">0</field>
 			</block>
         </category>
+
         <category name="Steuerung" colour="#5ba55b">
             <block type="repetition">
                 <field name="repetition">1</field>
@@ -167,36 +206,6 @@
 				<field name="seconds">0.1</field>
 			</block>
 			<block type="start_block"></block>
-        </category>
-        
-        <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
-        <category name="Logic" colour="#5b80a5">
-            <block type="c_if"></block>
-            <block type="logic_compare">
-              <field name="OP">EQ</field>
-            </block>
-            <block type="logic_operation">
-              <field name="OP">AND</field>
-            </block>
-            <block type="logic_negate"></block>
-            <block type="logic_boolean">
-              <field name="BOOL">TRUE</field>
-            </block>
-            <block type="math_number">
-                <field name="NUM">0</field>
-            </block>
-            <block type="math_random_i">
-            <value name="FROM">
-                <shadow type="math_number">
-                <field name="NUM">1</field>
-                </shadow>
-            </value>
-            <value name="TO">
-                <shadow type="math_number">
-                <field name="NUM">100</field>
-                </shadow>
-            </value>
-            </block>
         </category>
     </xml>
 	
