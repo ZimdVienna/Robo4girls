@@ -439,7 +439,6 @@ Blockly.JavaScript['show_picture_async'] = function (block) {
 	var code = 'A' + pic + '0' + delimiter;
 	return code;
 };
-
 // LEDs off
 Blockly.Blocks['leds_off'] = {
 	init: function() {
@@ -458,7 +457,7 @@ Blockly.JavaScript['leds_off'] = function(block) {
    var code = 'A0' + delimiter;
    return code;
 };
-/* 
+
 // block with input field for number or text
 Blockly.Blocks['show_value'] = {
 		init: function() {
@@ -468,7 +467,7 @@ Blockly.Blocks['show_value'] = {
 		this.setInputsInline(true);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
-		this.setColour(150);
+		this.setColour(160);
 		this.setTooltip("Der Wert den du diesem Baustein fütterst wird am Display angezeigt");
 		this.setHelpUrl("");
 	}
@@ -476,11 +475,9 @@ Blockly.Blocks['show_value'] = {
 Blockly.JavaScript['show_value'] = function(block) {
 	var value_name = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_ATOMIC);
 	// TODO: Assemble JavaScript into code variable.
-	console.log(value_name);
-	var code = value_name + delimiter;
-	return code;
+	value = value_name.replace('(','').replace(')','');
+	return value + delimiter;
 };
-*/
 
 // PROGRAM CONTROL
 // Wait 'W'
@@ -569,22 +566,137 @@ Blockly.JavaScript['show_sensor_value'] = function(block) {
 	return code;
 };
 
-/*
-  Blockly.Blocks['temperature'] = {
+Blockly.Blocks['temperature'] = {
 	init: function() {
-	  this.appendDummyInput()
-		  .appendField("Temperatur");
-	  this.setOutput(true, "Number");
-	  this.setColour(190);
-   this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
-   this.setHelpUrl("");
+		this.appendDummyInput()
+			.appendField("Temperatur");
+		this.setOutput(true, "Number");
+		this.setColour(190);
+	this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
+	this.setHelpUrl("");
 	}
-  };
-
-  Blockly.JavaScript['temperature'] = function(block) {
+};
+Blockly.JavaScript['temperature'] = function(block) {
 	// TODO: Assemble JavaScript into code variable.
-	var code = '...';
+	var code = currentTemperature;
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
-  };
+};
+
+Blockly.defineBlocksWithJsonArray([ {
+    type: "c_if", 
+	message0: "%{BKY_CONTROLS_IF_MSG_IF} %1", 
+	args0: [{ 
+		type: "input_value", 
+		name: "IF0", 
+		check: "Boolean" 
+	}], 
+	message1: "%{BKY_CONTROLS_IF_MSG_THEN} %1", 
+	args1: [{
+        type: "input_statement",
+        name: "DO0"
+    }], 
+	previousStatement: null, 
+	nextStatement: null, 
+	style: "logic_blocks", 
+	helpUrl: "%{BKY_CONTROLS_IF_HELPURL}", 
+	mutator: "controls_if_mutator", 
+	extensions: ["controls_if_tooltip"]
+}])
+Blockly.JavaScript['c_if'] = function(block) {
+	// If/elseif/else condition.
+	var n = 0;
+	var code = '', branchCode, conditionCode;
+	if (Blockly.JavaScript.STATEMENT_PREFIX) {
+		// Automatic prefix insertion is switched off for this block.  Add manually.
+		code += Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_PREFIX,
+			block);
+	}
+	do {
+		conditionCode = Blockly.JavaScript.valueToCode(block, 'IF' + n,
+			Blockly.JavaScript.ORDER_NONE) || 'false';
+		branchCode = 'result = "'+Blockly.JavaScript.statementToCode(block, 'DO' + n)+'"';
+		if (Blockly.JavaScript.STATEMENT_SUFFIX) {
+		branchCode = Blockly.JavaScript.prefixLines(
+			Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_SUFFIX,
+			block), Blockly.JavaScript.INDENT) + branchCode;
+		}
+		code += (n > 0 ? ' else ' : '') +
+			'if (' + conditionCode + ') {\n' + branchCode + '}';
+		++n;
+	} while (block.getInput('IF' + n));
+
+	if (block.getInput('ELSE') || Blockly.JavaScript.STATEMENT_SUFFIX) {
+		branchCode = 'result = "' + Blockly.JavaScript.statementToCode(block, 'ELSE') + '"';
+		if (Blockly.JavaScript.STATEMENT_SUFFIX) {
+		branchCode = Blockly.JavaScript.prefixLines(
+			Blockly.JavaScript.injectId(Blockly.JavaScript.STATEMENT_SUFFIX,
+			block), Blockly.JavaScript.INDENT) + branchCode;
+		}
+		code += ' else {\n' + branchCode + '}';
+	}
+	try {
+		var result = '';
+		eval(code);
+		return strip(result);
+	} catch(e) {
+		console.log(e);
+	}
+};
+
+/*
+function getRndInteger(a, b) {
+	if (a > b) {
+		var c = a;
+		a = b;
+		b = c;
+	}
+	return Math.floor(Math.random() * (b - a + 1) + a);
+}
+
+Blockly.defineBlocksWithJsonArray([ {
+    type: "math_rand_i", 
+	message0: "%{BKY_MATH_RANDOM_INT_TITLE}", 
+	args0: [
+		{ type: "input_value", name: "FROM", check: "Number" },
+    	{ type: "input_value", name: "TO", check: "Number" }
+	], 
+	inputsInline: !0, 
+	output: "Number", 
+	style: "logic_blocks", 
+	tooltip: "%{BKY_MATH_RANDOM_INT_TOOLTIP}", 
+	helpUrl: "%{BKY_MATH_RANDOM_INT_HELPURL}"
+}])
+Blockly.JavaScript.math_rand_i=function(a){
+	var b=Blockly.JavaScript.valueToCode(a,"FROM",Blockly.JavaScript.ORDER_COMMA)||"0";
+	a=Blockly.JavaScript.valueToCode(a,"TO",Blockly.JavaScript.ORDER_COMMA)||"0"; 
+	try {
+		var rand_int = getRndInteger(a,b);
+		console.log(rand_int);
+		var result = "('" + rand_int + "')";
+		return rand_int;
+	} catch(e) {
+		console.log(e);
+	}
+};
+*/
+
+Blockly.defineBlocksWithJsonArray([{ 
+	type: "math_number", 
+	message0: "%1", 
+	args0: [{ 
+		type: "field_number", 
+		name: "NUM", value: 0 
+	}], 
+	output: "Number", 
+	helpUrl: "%{BKY_MATH_NUMBER_HELPURL}", 
+	style: "logic_blocks", 
+	tooltip: "%{BKY_MATH_NUMBER_TOOLTIP}", 
+	extensions: ["parent_tooltip_when_inline"] 
+}])
+/*
+Blockly.JavaScript['math_num'] = function(a) {
+	a=parseFloat(a.getFieldValue("NUM"));
+	return[a,0<=a?Blockly.JavaScript.ORDER_ATOMIC:Blockly.JavaScript.ORDER_UNARY_NEGATION]
+};
 */
