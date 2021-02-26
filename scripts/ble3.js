@@ -115,7 +115,11 @@ function sendData(commands, counter=0) {
 	}
 	let encoder = new TextEncoder('utf-8');
 	let data = encoder.encode(commands[counter]);
-	characteristicCache_rx.writeValue(data);
+	characteristicCache_rx.writeValue(data)
+	.catch(error => {
+		console.log(error);
+		return;
+	});
 	console.log('sending: "' + commands[counter] + '"');
 
 	Promise.race([
