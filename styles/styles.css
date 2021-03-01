@@ -5,7 +5,7 @@ ul#navigation {
     }
 
     ul#navigation li {
-        padding: 0px;
+        padding: 10px;
         margin: 0px;
         display: inline;
     }
@@ -50,7 +50,7 @@ table {
 	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
-	font: 12px/70% Arial, Helvetica, sans-serif;
+	font: 14px/90% Arial, Helvetica, sans-serif;
 	padding: .5em 2em .55em;
 	text-shadow: 0 1px 1px rgba(0,0,0,.3);
 	-webkit-border-radius: .5em; 
@@ -213,10 +213,13 @@ table {
 	background: -moz-linear-gradient(top,  #DCDCDC,  #888);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#DCDCDC', endColorstr='#888888');
   	cursor: pointer;
+	font: 14px/90% Arial, Helvetica, sans-serif;
+	text-align: center;
+	width: auto;
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:hover {
 	background: #616161;
 	background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#757575));
 	background: -moz-linear-gradient(top, #A9A9A9,  #757575);
@@ -231,7 +234,9 @@ table {
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  	display: none;
+	width: auto;
+	height: auto;
+  	display:none;
   	position:absolute;
   	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   	z-index: 999;
@@ -240,19 +245,73 @@ table {
 /* Links inside the dropdown */
 .tablinks {
 	width:100%;
+	height: 100%;
   	color: black;
+	outline-width: 0px;
+	outline-color: transparent;
   	text-decoration: none;
   	display: block;
 	float:right;
 	padding: 3% 0% 3% 0%;
+	padding-bottom: 10px;
+	padding-top:10px;
+	font: 14px/90% Arial, Helvetica, sans-serif;
+	text-align: center;
 }
-
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {display:block;}
 
 /* Select and options elements */
 .select {
-	font:100% Arial, Sans-Serif;
-	border:1px solid #ccc;
+	border-top-color: lightgray;
+	border-bottom-color: transparent;
+	border-right-color:transparent;
+	border-left-color: transparent;
+	background:white;
+	text-align: center;
+}
+.select:hover {
 	background:lightgray;
 }
+.select:focus {
+	background:lightskyblue;
+	border: transparent;
+}
+select > option {
+	float:center;
+	background-color: white;
+	font: 14px/90% Arial, Helvetica, sans-serif;
+	padding: 3% 0% 3% 0%;
+	padding-bottom: 10px;
+	padding-top:10px;
+}
+
+.download {
+	background-color: transparent;
+	color:rgb(4, 176, 255);
+	text-decoration-line: underline;
+	text-underline-offset: 2px;
+	font: 14px/90% Arial, Helvetica, sans-serif;
+	float:right;
+	margin-top: 10px;
+	border-color:transparent;
+	outline: none;
+}
+
+.programChoice {
+	background: white;
+	font-size: 90%;
+	margin-bottom: 0%;
+	margin-top: 0%;
+}
+
+.screenReaderText { 
+	border: 0; 
+	clip: rect(0 0 0 0); 
+	height: 1px; 
+	margin: -1px; 
+	overflow: hidden; 
+	padding: 0; 
+	position: absolute; 
+	width: 1px; 
+  }

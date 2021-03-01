@@ -42,19 +42,19 @@
 			<button onclick="showMenu('programDropdown')" class="dropbtn button">Programm</button>
 			<!-- Load/Save or Delete program from Dropdown menu -->
 			<div id="programDropdown" class="dropdown-content" >
-					<p class="tablinks" style="background: lightgray; margin-bottom:0%;margin-top:0%;font-size: 85%;">Programm wählen</p>
-					<select id="generate" class="tablinks dropbtn select" onclick="createMenu()"></select>
-					<button id="saveData" class="tablinks gray" onclick="save()">Speichern</button>
-					<button id="restoreData" class="tablinks gray" onclick="restore()">Laden</button>
-					<button class="tablinks gray" onclick="deleteItem()">Löschen</button>			
+					<p class="tablinks programChoice">Wähle ein Programm:</p>
+					<select id="generate" class="select tablinks dropbtn programChoice" style="border-color:transparent;" onclick="createMenu()"></select>
+					<button id="saveData" class="select tablinks " onclick="save()">Speichern</button>
+					<button id="restoreData" class="select tablinks" onclick="restore()">Laden</button>
+					<button class="select tablinks" onclick="deleteItem()">Löschen</button>			
 			</div>
 		</li>
 		<li class="dropdown">
 			<button onclick="showMenu()" class="dropbtn button">Menu</button>
 			<div id="myDropdown" class="dropdown-content" style="margin-left:120%">
-				<button id="disconnect" class="tablinks gray">Trennen</button>
-				<button id="endProgram" class="tablinks gray" onclick="end_program()">Beenden</button>
-				<button class="tablinks gray" onclick="deleteAll()">Speicher leeren</button>
+				<button id="disconnect" class="select tablinks">Trennen</button>
+				<button id="endProgram" class="select tablinks" onclick="end_program()">Beenden</button>
+				<button class="select tablinks" onclick="deleteAll()">Speicher leeren</button>
 			</div>
 		</li>
 		<li class="bluetooth">
