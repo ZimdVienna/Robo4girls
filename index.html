@@ -70,7 +70,9 @@
             <td class="control_buttons">
                     <button id="start" onclick="handlePlay();" type="button" class="button green" style="float:left;font-size: 13px;padding-left:30px;padding-right:30px;">Start</button>
                     <button id="stop" type="button" class="button rosy" style="float:left; margin-left:20px;font-size: 13px;">Stopp</button>
+                    <!--
                     <button id="downloadHex" onclick="hexFileUploadTipp();" type="button" class="download">Micro:bit Firmware Download</button>
+                    -->
             </td>
         </tr>
         <tr>
@@ -95,13 +97,15 @@
                 <field name="pic">1</field>
                 <field name="show_duration">1</field>
             </block>
+            <!--
             <block type="show_picture_async">
                 <field name="picture">1</field>
             </block>
             <block type="leds_off"></block>
             <block type="show_value"></block>
+            -->
         </category>
-
+        <!--
         <category name ="Fühlen" colour="195">
             <block type="temperature"></block>
         </category>
@@ -111,32 +115,11 @@
             <block type="logic_compare">
               <field name="OP">EQ</field>
             </block>
-            <!--
-            <block type="logic_operation">
-              <field name="OP">AND</field>
-            </block>
-            <block type="logic_negate"></block>
-            <block type="logic_boolean">
-              <field name="BOOL">TRUE</field>
-            </block>
-            <block type="math_rand_i">
-                <value name="FROM">
-                    <shadow type="math_number">
-                        <field name="NUM">1</field>
-                    </shadow>
-                </value>
-                <value name="TO">
-                    <shadow type="math_number">
-                        <field name="NUM">100</field>
-                    </shadow>
-                </value>
-            </block>
-            -->
             <block type="math_number">
                 <field name="NUM">0</field>
             </block>
         </category>
-
+        -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
