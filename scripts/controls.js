@@ -199,3 +199,21 @@ function end_program() {
 		onDisconnectButtonClick();
 	}
 }
+
+function hexFileUploadTipp() {
+	var confirmed = confirm('Willst du die R4g hex Datei auf deinen Computer laden?');
+	if(confirmed) {
+		downloadFile('https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdVienna/Robo4girls/tree/master/microbit');
+		confirmed = confirm('Ein Ordner mit den R4g-hex-Dateien wird heruntergeladen. Entpacke den heruntergeladenen Zip Ordner und spiele die "universal-hex" Datei auf deinen Micro:bit.\n\nWillst du ein Anleitungs-Video dazu ansehen? Dann klicke nochmal auf "Ok".');
+		if(confirmed) {
+			open('https://www.youtube.com/watch?v=Ltm49uZVvqI&ab_channel=T%C3%BCftelAkademie');
+		}
+	}
+}
+
+function downloadFile(filePath){
+    var downloadFrame = document.createElement('iframe');
+	downloadFrame.setAttribute('src',filePath);
+	downloadFrame.setAttribute('class', 'screenReaderText');
+	document.body.appendChild(downloadFrame);
+}
