@@ -1,6 +1,8 @@
 // Global scope variables
 const select = document.getElementById('generate');
 const delimiter_microbit = ':';
+const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdVienna/Robo4girls/tree/master/microbit';
+const PATH_TO_HEXFILE_VIDEO_TUTORIAL = 'https://www.youtube.com/watch?v=Ltm49uZVvqI&ab_channel=T%C3%BCftelAkademie'; // TO DO: eigenes Video Tutorial erstellen
 var storage_items = [];
 
 function hideDropdowns() {
@@ -203,10 +205,10 @@ function end_program() {
 function hexFileUploadTipp() {
 	var confirmed = confirm('Willst du die R4g hex Datei auf deinen Computer laden?');
 	if(confirmed) {
-		downloadFile('https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdVienna/Robo4girls/tree/master/microbit');
+		downloadFile(PATH_TO_HEX_FILE);
 		confirmed = confirm('Ein Ordner mit den R4g-hex-Dateien wird heruntergeladen. Entpacke den heruntergeladenen Zip Ordner und spiele die "universal-hex" Datei auf deinen Micro:bit.\n\nWillst du ein Anleitungs-Video dazu ansehen? Dann klicke nochmal auf "Ok".');
 		if(confirmed) {
-			open('https://www.youtube.com/watch?v=Ltm49uZVvqI&ab_channel=T%C3%BCftelAkademie');
+			open(PATH_TO_HEXFILE_VIDEO_TUTORIAL);
 		}
 	}
 }
