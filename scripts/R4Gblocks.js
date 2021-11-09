@@ -3,11 +3,11 @@
  * Blocks Library: 
  * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
  */
-
 // Delimiter for messages to micro:bit
 var delimiter = ':';
 var float_delimiter = '.0:';
 var fullVelocity = 'Gb31';
+let motorVelocity = {1:'31',2:'31'};
 
 // Movement combinations
 var combinations = [
@@ -32,6 +32,9 @@ function send_combination(index=0, repetitions=1, intensity) {
 			code += combinations[index][k] + delimiter;
 		}
 	}
+	// reset motor velocity to latest value before combination
+	code += 'Gl' + motorVelocity['1'] + delimiter;
+	code += 'Gr' + motorVelocity['2'] + delimiter;
 	return code;
 }
 
@@ -336,6 +339,12 @@ Blockly.JavaScript['motor'] = function (block) {
 	// Number must have two digits: 01 to 31
 	let velocity = number_velocity < 10 ? '0' + number_velocity : number_velocity;
 	var code = 'G' + dropdown_motor + velocity + delimiter;
+	if(dropdown_motor == "b"){
+		motorVelocity['1'] = velocity;
+		motorVelocity['2'] = velocity;
+	}else{ 
+		motorVelocity[dropdown_motor] = velocity;
+	}
 	return code;
 };
 
