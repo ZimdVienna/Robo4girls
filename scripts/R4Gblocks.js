@@ -4,9 +4,9 @@
  * https://blockly-demo.appspot.com/static/demos/blockfactory/index.html#ohkyip
  */
 // Delimiter for messages to micro:bit
-var delimiter = ':';
-var float_delimiter = '.0:';
-var fullVelocity = 'Gb31';
+const delimiter = ':';
+const float_delimiter = '.0:';
+const fullVelocity = 'Gb31';
 let motorVelocity = {1:'31',2:'31'};
 
 // Movement combinations
@@ -33,8 +33,8 @@ function send_combination(index=0, repetitions=1, intensity) {
 		}
 	}
 	// reset motor velocity to latest value before combination
-	code += 'Gl' + motorVelocity['1'] + delimiter;
-	code += 'Gr' + motorVelocity['2'] + delimiter;
+	code += 'G1' + motorVelocity['1'] + delimiter;
+	code += 'G2' + motorVelocity['2'] + delimiter;
 	return code;
 }
 
@@ -296,26 +296,6 @@ Blockly.JavaScript['melody'] = function (block) {
 	return code;
 };
 
-// MELODY 'M'
-Blockly.Blocks['sound'] = {
-	init: function () {
-		this.appendDummyInput()
-			.appendField("Spiele Klang")
-			.appendField(new Blockly.FieldDropdown([["Kichern","K01"],["Fröhlich","K02"],["Hallo","K03"],["Mysteriös","K04"],["Traurig","K05"],["Rutschen","K06"],["Aufsteigen","K07"],["Federn","K08"],["Funkeln","K09"],["Gähnen","K10"]]), "sound");
-		this.setInputsInline(false);
-		this.setPreviousStatement(true, null);
-		this.setNextStatement(true, null);
-		this.setColour(0);
-		this.setTooltip("Der ausgewählte Klang wird abgespielt während das Programm weiterläuft. Dieser Baustein funktioniert nur mit dem Micro:bit V2!");
-		this.setHelpUrl("");
-	}
-};
-Blockly.JavaScript['sound'] = function (block) {
-	var dropdown_melody = block.getFieldValue('sound');
-	var code = dropdown_melody + delimiter;
-	return code;
-};
-
 
 // SETTINGS
 // Motor velocity 'G'
@@ -323,13 +303,13 @@ Blockly.Blocks['motor'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Motor")
-			.appendField(new Blockly.FieldDropdown([["1", "1"], ["2", "2"], ["1+2", "b"]]), "motor")
-			.appendField("Leistung:")
+			.appendField(new Blockly.FieldDropdown([["Links","2"],["Rechts","1"],["Beide","b"]]), "motor")
+			.appendField("Geschwindigkeit:")
 			.appendField(new Blockly.FieldNumber(20, 1, 31, 1), "velocity");
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(60);
-		this.setTooltip("Hiermit kannst du die Motorleistung anpassen wenn der Roboter zu schnell oder langsam fährt oder die Motoren unterschiedlich schnell drehen.");
+		this.setTooltip("Hier kannst du die Motorgeschwindigkeit anpassen wenn der Roboter zu schnell oder langsam fährt oder die Motoren unterschiedlich schnell drehen.\nDie Motoren stehen bei 0 und fahren bei 31 mit voller Kraft.");
 		this.setHelpUrl("");
 	}
 };
@@ -425,6 +405,7 @@ Blockly.JavaScript['show_picture'] = function (block) {
 	return code;
 };
 
+// Show picture Async
 Blockly.Blocks['show_picture_async'] = {
 	init: function () {
 		this.appendDummyInput()
@@ -556,6 +537,8 @@ Blockly.JavaScript['start_block'] = function(block) {
 	return code;
 };
 
+// SENSORS, LOGIC, MATH currently unused - And Microbit V2 functions
+/* //Show sensor value
 Blockly.Blocks['show_sensor_value'] = {
 	init: function() {
 		this.appendDummyInput()
@@ -574,7 +557,8 @@ Blockly.JavaScript['show_sensor_value'] = function(block) {
 	var code = 'S' + dropdown_sensor + delimiter;
 	return code;
 };
-
+*/
+/* //Temperature
 Blockly.Blocks['temperature'] = {
 	init: function() {
 		this.appendDummyInput()
@@ -591,7 +575,8 @@ Blockly.JavaScript['temperature'] = function(block) {
 	// TODO: Change ORDER_NONE to the correct strength.
 	return [code, Blockly.JavaScript.ORDER_NONE];
 };
-
+*/
+/* //Conditions
 Blockly.defineBlocksWithJsonArray([ {
     type: "c_if", 
 	message0: "%{BKY_CONTROLS_IF_MSG_IF} %1", 
@@ -652,8 +637,8 @@ Blockly.JavaScript['c_if'] = function(block) {
 		console.log(e);
 	}
 };
-
-/*
+*/
+/* //Round Number
 function getRndInteger(a, b) {
 	if (a > b) {
 		var c = a;
@@ -689,7 +674,7 @@ Blockly.JavaScript.math_rand_i=function(a){
 	}
 };
 */
-
+/* //Number block
 Blockly.defineBlocksWithJsonArray([{ 
 	type: "math_number", 
 	message0: "%1", 
@@ -703,9 +688,32 @@ Blockly.defineBlocksWithJsonArray([{
 	tooltip: "%{BKY_MATH_NUMBER_TOOLTIP}", 
 	extensions: ["parent_tooltip_when_inline"] 
 }])
-/*
+
+
+ not finished nor needed yet
 Blockly.JavaScript['math_num'] = function(a) {
 	a=parseFloat(a.getFieldValue("NUM"));
 	return[a,0<=a?Blockly.JavaScript.ORDER_ATOMIC:Blockly.JavaScript.ORDER_UNARY_NEGATION]
 };
 */
+
+/* // Sound 'K'
+Blockly.Blocks['sound'] = {
+	init: function () {
+		this.appendDummyInput()
+			.appendField("Spiele Klang")
+			.appendField(new Blockly.FieldDropdown([["Kichern","K01"],["Fröhlich","K02"],["Hallo","K03"],["Mysteriös","K04"],["Traurig","K05"],["Rutschen","K06"],["Aufsteigen","K07"],["Federn","K08"],["Funkeln","K09"],["Gähnen","K10"]]), "sound");
+		this.setInputsInline(false);
+		this.setPreviousStatement(true, null);
+		this.setNextStatement(true, null);
+		this.setColour(0);
+		this.setTooltip("Der ausgewählte Klang wird abgespielt während das Programm weiterläuft. Dieser Baustein funktioniert nur mit dem Micro:bit V2!");
+		this.setHelpUrl("");
+	}
+};
+Blockly.JavaScript['sound'] = function (block) {
+	var dropdown_melody = block.getFieldValue('sound');
+	var code = dropdown_melody + delimiter;
+	return code;
+};
+ */
