@@ -197,7 +197,6 @@ Blockly.JavaScript['dance'] = function (block) {
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(0, number_repeat, dropdown_intensity);
 };
-
 // Zigzag 
 Blockly.Blocks['zigzag'] = {
 	init: function () {
@@ -219,7 +218,6 @@ Blockly.JavaScript['zigzag'] = function (block) {
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(1, number_repeat, dropdown_intensity);
 };
-
 // Shake 
 Blockly.Blocks['shake'] = {
 	init: function () {
@@ -241,7 +239,6 @@ Blockly.JavaScript['shake'] = function (block) {
 	var dropdown_intensity = block.getFieldValue('intensity');
 	return send_combination(2, number_repeat, dropdown_intensity);
 };
-
 // Pirouette 
 Blockly.Blocks['pirouette'] = {
 	init: function () {
@@ -270,7 +267,6 @@ Blockly.JavaScript['pirouette'] = function (block) {
 	}
 	return code;
 };
-
 // MELODY 'M/K'
 Blockly.Blocks['melody'] = {
 	init: function () {
@@ -322,7 +318,6 @@ Blockly.JavaScript['motor'] = function (block) {
 	}
 	return code;
 };
-
 // Turn display 'T'
 Blockly.Blocks['turn_display'] = {
 	init: function() {
@@ -368,7 +363,6 @@ Blockly.JavaScript['show_text'] = function (block) {
 	var code = text_led_text + delimiter;
 	return code;
 };
-
 // Show picture
 Blockly.Blocks['show_picture'] = {
 	init: function () {
@@ -399,7 +393,6 @@ Blockly.JavaScript['show_picture'] = function (block) {
 	var code = 'A' + dropdown_pic + number_show_duration + delimiter;
 	return code;
 };
-
 // Show picture Async
 Blockly.Blocks['show_picture_async'] = {
 	init: function () {
@@ -442,7 +435,6 @@ Blockly.JavaScript['leds_off'] = function(block) {
    var code = 'A0' + delimiter;
    return code;
 };
-
 // block with input field for number or text
 Blockly.Blocks['show_value'] = {
 		init: function() {
@@ -486,7 +478,6 @@ Blockly.JavaScript['wait_seconds'] = function(block) {
   	var code = 'W'+ number_seconds_to_wait + (number_seconds_to_wait % 1 == 0 ? float_delimiter : delimiter);
   	return code;
 };
-
 // Repeat
 Blockly.Blocks['repetition'] = {
 	init: function () {
@@ -514,7 +505,6 @@ Blockly.JavaScript['repetition'] = function (block) {
 	}
 	return code;
 };
-
 // Start
 Blockly.Blocks['start_block'] = {
  	init: function() {
