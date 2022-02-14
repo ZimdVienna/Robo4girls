@@ -7,23 +7,10 @@
 
     <title>R4G</title>
 	<!-- favicon files -->
-	<link rel="apple-touch-icon" sizes="57x57" href="favicon/apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="favicon/apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="favicon/apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="favicon/apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="favicon/apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="favicon/apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="favicon/apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="favicon/apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="favicon/android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-	<link rel="manifest" href="favicon/manifest.json">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-	<meta name="theme-color" content="#ffffff">
+	<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
 
     <!-- scripts for blockly code -->
     <script src="blockly/blockly_compressed.js"></script>
@@ -97,11 +84,9 @@
                 <field name="picture">1</field>
             </block>
             <block type="leds_off"></block>
-            <!--
             <block type="show_value"></block>
-            -->
         </category>
-        <!--
+
         <category name ="Fühlen" colour="195">
             <block type="temperature"></block>
         </category>
@@ -115,7 +100,7 @@
                 <field name="NUM">0</field>
             </block>
         </category>
-        -->
+
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
@@ -155,30 +140,29 @@
                 <field name="direction">Links</field>
             </block>
         </category>
-        <!--
-        <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
-        -->
+
         <category name="Klänge" colour="#a55b5b">
             <block type="melody">
                 <field name="melody">M1</field>
             </block>
-            <!--
             <block type="sound">
                 <field name="sound">K01</field>
             </block>
-            -->
         </category>
 
         <category name="Einstellungen" colour="65">
+            </block>
             <block type="motor">
                 <field name="motor">1</field>
-                <field name="velocity">400</field>
+                <field name="velocity">15</field>
             </block>
+            <!--turn display
 			<block type="turn_display" colour="#5ba593">
 				<field name="degrees">0</field>
 			</block>
+            -->
+        
         </category>
-
         <category name="Steuerung" colour="#5ba55b">
             <block type="repetition">
                 <field name="repetition">1</field>
@@ -188,6 +172,9 @@
 			</block>
 			<block type="start_block"></block>
         </category>
+        <!-- Variables
+        <category name="Variables" colour="#a55b80" custom="VARIABLE"></category>
+        -->
     </xml>
 	
 	<!-- Making Toolbox visible and resizable in Web-browser -->
