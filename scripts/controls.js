@@ -43,7 +43,8 @@ function handlePlay(event) {
 	if (activePrograms.length === 0) {
 		alert('Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt');
 	}
-	var code = '';//'Gb31' + delimiter_microbit + 'T0' + delimiter_microbit;
+	// reset display and motor settings at program start
+	var code = 'Gb31' + delimiter_microbit + 'T0' + delimiter_microbit;
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;

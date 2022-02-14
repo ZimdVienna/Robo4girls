@@ -30,6 +30,7 @@ disconnectButton.addEventListener('click', function() {
 });
 stopButton.addEventListener('click', function(){
 	stopButtonClicked = true;
+	//console.log("stop button clicked");
 });
 
 // FUNCTIONS
@@ -103,6 +104,7 @@ function sendData(commands, counter=0) {
 	 */
 	if(stopButtonClicked && counter === 0){
 		stopButtonClicked = false;
+		console.log("reset stop button");
 	}
 	if (!commands && !characteristicCache_rx) {
 		return;
