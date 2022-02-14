@@ -223,14 +223,10 @@ function end_program() {
 	}
 }
 
-function hexFileUploadTipp() {
+function hexFileDownload() {
 	var confirmed = confirm('Willst du die R4g hex Datei auf deinen Computer laden?');
 	if(confirmed) {
 		downloadFile(PATH_TO_HEX_FILE);
-		confirmed = confirm('Ein Ordner mit den R4g-hex-Dateien wird heruntergeladen. Entpacke den heruntergeladenen Zip Ordner und spiele die "universal-hex" Datei auf deinen Micro:bit.\n\nWillst du ein Anleitungs-Video dazu ansehen? Dann klicke nochmal auf "Ok".');
-		if(confirmed) {
-			open(PATH_TO_HEXFILE_VIDEO_TUTORIAL);
-		}
 	}
 }
 
