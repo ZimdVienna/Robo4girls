@@ -6,6 +6,9 @@ const PATH_TO_HEXFILE_VIDEO_TUTORIAL = 'https://www.youtube.com/watch?v=Ltm49uZV
 var storage_items = [];
 
 function hideDropdowns() {
+	/**
+	 * Close all dropdown contents
+	 */
 	var dropdowns = document.getElementsByClassName('dropdown-content');
 	for (var i = 0; i < dropdowns.length; i++) {
 		var openDropdown = dropdowns[i];
@@ -15,8 +18,10 @@ function hideDropdowns() {
 	}
 }
 
-// Toggle to show/hide the dropdown content */
 function showMenu(element='myDropdown') {
+	/**
+	 * Toggle Dropdown Menu visibility
+	 */
 	if (document.getElementById(element).classList.contains('show')) {
 		hideDropdowns();
 	} else {
@@ -25,8 +30,10 @@ function showMenu(element='myDropdown') {
 	}
 }
 
-// Hide dropdown contents if user clicks somewhere else in the window */
 window.onclick = function(event) {
+	/**
+	 * Hide Dropdown when user clicks anywhere else on screen
+	 */
 	if (!event.target.matches('.dropbtn')) {
 		hideDropdowns();
 	}
@@ -44,13 +51,14 @@ function handlePlay(event) {
 		alert('Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt');
 	}
 	// reset display and motor settings at program start
-	var code = 'Gb31' + delimiter_microbit + 'T0' + delimiter_microbit;
+	var code = fullVelocity + delimiter_microbit + 'T0' + delimiter_microbit;
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
 	}
 	var commands = code.split(delimiter_microbit);
 	commands = commands.filter(word => word != 'start');
+	// micro:bit can only receive a maximum of 20 characters at once
 	var max_length = 19;
 	for (const i in commands) {
 		if (commands[i].length > max_length) {
@@ -63,7 +71,9 @@ function handlePlay(event) {
 
 // PROGRAM DROPDOWN
 function createMenu() {
-	/* Create program select options - get all saved R4G programs */
+	/** 
+	 * Create program select options - get all saved R4G programs
+	 */
 	storage_items = [];
 	for (let i = 0; i < localStorage.length; i++) {
 		if (localStorage.key(i).includes('R4G_')) {
@@ -97,7 +107,9 @@ function updateMenu() {
 }
 
 function save() {
-	/* Save a blockly program */
+	/**
+	 * Save a blockly program on the local storage of the device
+	 */
 	var eingabe = '';
 	var selectElement = document.querySelector('#generate');
 	var eingabe = selectElement.value;
@@ -122,7 +134,9 @@ function save() {
 }
 
 function restore() {
-	/* Load a blockly program into workspace */
+	/**
+	 * Load a blockly program into the workspace
+	 */
 	var ret_val = createMenu();
 	if (ret_val === 1) {
 		return;
@@ -146,7 +160,9 @@ function restore() {
 }
 
 function deleteItem() {
-	/* Delete selected blockly program from local storage */
+	/**
+	 *  Delete selected blockly program from local storage
+	 */
 	if (storage_items.length === 0) {
 		alert('Keine gespeicherten Programme vorhanden');
 		return;
@@ -173,7 +189,9 @@ function deleteItem() {
 
 // MENU DROPDOWN
 function deleteAll() {
-	/* Delete all blockly programs from local storage */
+	/**
+	 * Delete all blockly programs from local storage
+	 */
 	if (storage_items.length === 0) {
 		alert('Keine gespeicherten Programme vorhanden');
 	} else {
@@ -195,7 +213,9 @@ function deleteAll() {
 }
 
 function end_program() {
-	/* Clear workspace and disconnect micro:bit */
+	/**
+	 * Clear workspace and disconnect micro:bit
+	 */
 	var confirmed = confirm('Willst du das Programm wirklich beenden?');
 	if (confirmed) {
 		workspace.clear();
