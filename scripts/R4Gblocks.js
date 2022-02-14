@@ -67,7 +67,6 @@ Blockly.JavaScript['forward'] = function (block) {
 	var code = 'Bv' + number_forward_duration + (number_forward_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
-
 // Backwards 'z'	
 Blockly.Blocks['back'] = {
 	init: function () {
@@ -91,7 +90,6 @@ Blockly.JavaScript['back'] = function (block) {
 	var code = 'Bz' + number_back_duration + (number_back_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
-
 // Left 'l'
 Blockly.Blocks['left'] = {
 	init: function () {
@@ -113,7 +111,6 @@ Blockly.JavaScript['left'] = function (block) {
 	var code = 'Bl' + number_left_duration + (number_left_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
-
 // Right 'r'
 Blockly.Blocks['right'] = {
 	init: function () {
@@ -135,7 +132,6 @@ Blockly.JavaScript['right'] = function (block) {
 	var code = 'Br' + number_right_duration + (number_right_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
-
 // Left-turn 'L' 
 Blockly.Blocks['turn_left'] = {
 	init: function () {
@@ -157,7 +153,6 @@ Blockly.JavaScript['turn_left'] = function (block) {
 	var code = 'BL' + number_turn_left_duration + (number_turn_left_duration % 1 == 0 ? float_delimiter : delimiter);
 	return code;
 };
-
 // Right-turn 'R' 
 Blockly.Blocks['turn_right'] = {
 	init: function () {
