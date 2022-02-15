@@ -51,7 +51,7 @@ function handlePlay(event) {
 		alert('Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt');
 	}
 	// reset display and motor settings at program start
-	var code = fullVelocity + delimiter_microbit + delimiter_microbit; // fullVelocity is a constant from script R4Gblocks.js
+	var code = fullVelocity + delimiter_microbit; // fullVelocity is a constant from script R4Gblocks.js
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
