@@ -524,6 +524,12 @@ Blockly.JavaScript['motor'] = function (block) {
 	// Number must have two digits: 01 to 31
 	let velocity = number_velocity < 10 ? '0' + number_velocity : number_velocity;
 	var code = 'G' + dropdown_motor + velocity + delimiter;
+	if(dropdown_motor == "b"){
+		motorVelocity['1'] = velocity;
+		motorVelocity['2'] = velocity;
+	}else{ 
+		motorVelocity[dropdown_motor] = velocity;
+	}
 	return code;
 };
 
@@ -591,6 +597,24 @@ Blockly.Blocks['start_block'] = {
 Blockly.JavaScript['start_block'] = function(block) {
 	var code = 'start' + delimiter;
 	return code;
+};
+
+// Temperature
+Blockly.Blocks['temperature'] = {
+	init: function() {
+		this.appendDummyInput()
+			.appendField("Temperatur");
+		this.setOutput(true, "Number");
+		this.setColour(190);
+	this.setTooltip("Eine Variable, die den aktuellen Wert des Temperatursensors enthält.");
+	this.setHelpUrl("");
+	}
+};
+Blockly.JavaScript['temperature'] = function(block) {
+	// TODO: Assemble JavaScript into code variable.
+	var code = currentTemperature;
+	// TODO: Change ORDER_NONE to the correct strength.
+	return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
 /* works only with micro:bit version 1
