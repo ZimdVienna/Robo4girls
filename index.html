@@ -21,13 +21,22 @@
 <body ontouchstart="" id="body">
     <!-- ontouchstart="" enables low-delay CSS transitions. -->
 	<ul id="navigation" style="float:right; margin-top: 3%;">
+        <!-- <li class="dropdown">
+            <div class="button dropbtn">
+                <select id="generate" class="select" onclick="createMenu()" style="color:black;"></select>
+                Programm wählen
+            </div>
+        </li> -->
+        <li class="dropdown">
+            <div class="button dropbtn" onclick="save();" class="dropbtn button">Speichern</div>
+        </li>
 		<li class="dropdown">
 			<button onclick="showMenu('programDropdown')" class="dropbtn button">Programm</button>
 			<!-- Load/Save or Delete program from Dropdown menu -->
 			<div id="programDropdown" class="dropdown-content" >
 					<p class="tablinks programChoice">Wähle ein Programm:</p>
 					<select id="generate" class="select tablinks dropbtn programChoice" style="border-color:transparent;" onclick="createMenu()"></select>
-					<button id="saveData" class="select tablinks " onclick="save()">Speichern</button>
+					<button id="saveData" class="select tablinks " onclick="saveNew()">Speichern Unter</button>
 					<button id="restoreData" class="select tablinks" onclick="restore()">Laden</button>
 					<button class="select tablinks" onclick="deleteItem()">Löschen</button>			
 			</div>
@@ -48,7 +57,7 @@
     <table>
         <tr>
             <!-- Title, Logo and Program commands -->
-            <img src="media/logo/ecology.png" class="logo" style="float:left; height:10%;">
+            <img src="media/logo/ecology.png" class="logo" style="float:left; height:10%;padding-top:0.5% ;">
         </tr>
         <tr>
             <td class="control_buttons">

@@ -51,7 +51,7 @@ function handlePlay(event) {
 		alert('Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt');
 	}
 	// reset display and motor settings at program start
-	var code = fullVelocity + delimiter_microbit + 'T0' + delimiter_microbit;
+	var code = fullVelocity + delimiter_microbit + 'T0' + delimiter_microbit; // fullVelocity is a constant from script R4Gblocks.js
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
@@ -101,36 +101,61 @@ function updateMenu() {
 			const option = document.createElement('option');
 			option.value = item;
 			option.text = item;
-			select.appendChild(option);
+			select.prepend(option);
 		}
 	}
 }
 
-function save() {
-	/**
-	 * Save a blockly program on the local storage of the device
-	 */
-	var eingabe = '';
-	var selectElement = document.querySelector('#generate');
-	var eingabe = selectElement.value;
-	if (eingabe == '') {
-		eingabe = prompt('Bitte Programm benennen:', '');
-	}
+function validateUserInput(eingabe) {
+	if (eingabe === null || eingabe === '') {return 0;}
 	for (let i = 0; i < localStorage.length; i++) {
 		if (localStorage.key(i).includes('R4G_' + eingabe)) {
-			if (!confirm('Das Programm "'+ eingabe + '" ist bereits vorhanden.\nSoll es überschrieben werden?\nKlicke auf Abbrechen um ein neues Programm zu speichern.')) {
-				eingabe = prompt('Bitte Programm benennen:', '');
+			if (!confirm('Das Programm "'+ eingabe + '" ist bereits vorhanden.\nSoll es überschrieben werden?\n')) {
+				return 0;
 			}
 		}
 	}
-	if (eingabe !== null) {
+	return 1;
+}
+
+function writeToLocalStorage(eingabe) {
+	/**
+	 * writes a blockly program on the local storage of the device and updates selected program
+	 */
+	if(eingabe !== null) {
 		if (confirm('Programm "'+ eingabe +'" speichern?')) {
 			var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
 			var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
 			localStorage.setItem('R4G_' + eingabe, xmlText);
 			createMenu();
 		}
+		select.value = eingabe;
 	}
+}
+
+function save() {
+	/**
+	 * quick save for program changes
+	 */
+	var selectElement = document.querySelector('#generate');
+	var eingabe = selectElement.value;
+	if (eingabe == '') {
+		while (validateUserInput(eingabe) !== 1 && eingabe !== null) {
+			eingabe = prompt('Bitte Programm benennen:', '');
+		}
+	}
+	writeToLocalStorage(eingabe);
+}
+
+function saveNew() {
+	/**
+	 * save program under new name
+	 */
+	var eingabe='';
+	while(validateUserInput(eingabe) !== 1 && eingabe !== null) {
+		eingabe = prompt('Bitte Programm benennen:', '');
+	}
+	writeToLocalStorage(eingabe);
 }
 
 function restore() {
@@ -143,9 +168,7 @@ function restore() {
 	}
 	var selectElement = document.querySelector('#generate');
 	var eingabe = selectElement.value;
-	// console.log('Programm "' + eingabe + '" restored');
-	
-	if (eingabe != null) {
+	if (eingabe !== null) {
 		if (!storage_items.includes(eingabe)) {
 			alert('Kein Programm mit Namen "' + eingabe + '" vorhanden');
 			return 1;
@@ -179,7 +202,6 @@ function deleteItem() {
 			for (child of select.children) {
 				if (child.value === eingabe) {
 					select.removeChild(child);
-					// console.log('Program "' +child.value + '" deleted');
 				}
 			}
 			createMenu();
