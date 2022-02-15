@@ -42,8 +42,8 @@ function onConnectButtonClick() {
 	return (deviceCache ? Promise.resolve(deviceCache) : requestBluetoothDevice())
 	.then(device => connectDeviceAndCacheCharacteristic(device))
 	.then(() => {
-		// return Promise.all([startUartNotifications(characteristicCache_tx),startTemperatureNotifications(characteristicCache_temp)])
-		return startUartNotifications(characteristicCache_tx);
+		return Promise.all([startUartNotifications(characteristicCache_tx),startTemperatureNotifications(characteristicCache_temp)])
+		//return startUartNotifications(characteristicCache_tx);
 	})
 	.catch(error => {
 		console.log(error);
