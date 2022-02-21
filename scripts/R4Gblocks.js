@@ -485,7 +485,7 @@ Blockly.JavaScript['melody'] = function (block) {
 Blockly.Blocks['sound'] = {
 	init: function () {
 		this.appendDummyInput()
-			.appendField("Spiele Klang")
+			.appendField("Starte Klang")
 			.appendField(new Blockly.FieldDropdown([["Kichern","K01"],["Fröhlich","K02"],["Hallo","K03"],["Mysteriös","K04"],["Traurig","K05"],["Rutschen","K06"],["Aufsteigen","K07"],["Federn","K08"],["Funkeln","K09"],["Gähnen","K10"]]), "sound");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
