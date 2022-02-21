@@ -29,7 +29,7 @@
 			<!-- Load/Save or Delete program from Dropdown menu -->
 			<div id="programDropdown" class="dropdown-content" >
 					<p class="tablinks programChoice">Wähle ein Programm:</p>
-					<select id="generate" class="select tablinks dropbtn programChoice" style="border-color:transparent;" onclick="createMenu()"></select>
+					<select id="generate" class="select tablinks dropbtn programChoice" style="border-color:transparent;font-style: italic;" onclick="createMenu()"></select>
 					<button id="saveData" class="select tablinks " onclick="saveNew()">Speichern Unter</button>
 					<button id="restoreData" class="select tablinks" onclick="restore()">Laden</button>
 					<button class="select tablinks" onclick="deleteItem()">Löschen</button>			
@@ -88,9 +88,9 @@
                 <field name="picture">1</field>
             </block>
             <block type="leds_off"></block>
-            <block type="show_value"></block>
+            <!-- <block type="show_value"></block> -->
         </category>
-
+        <!--
         <category name ="Fühlen" colour="195">
             <block type="temperature"></block>
         </category>
@@ -104,7 +104,7 @@
                 <field name="NUM">0</field>
             </block>
         </category>
-
+        -->
         <category name="Bewegungen" colour="#5b5ba5">
             <block type="forward">
                 <field name="forward_duration">0.1</field>
