@@ -1,8 +1,7 @@
 // Global scope variables
 const select = document.getElementById('generate');
 const delimiter_microbit = ':';
-const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/ZimdVienna/Robo4girls/tree/master/microbit';
-const PATH_TO_HEXFILE_VIDEO_TUTORIAL = 'https://www.youtube.com/watch?v=Ltm49uZVvqI&ab_channel=T%C3%BCftelAkademie'; // TO DO: eigenes Video Tutorial erstellen
+const PATH_TO_HEX_FILE = 'https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/makkelaig/Robo4earth/tree/master/microbit';
 var storage_items = [];
 
 function hideDropdowns() {
