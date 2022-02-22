@@ -256,4 +256,4 @@ function downloadFile(filePath){
 	downloadFrame.setAttribute('src',filePath);
 	downloadFrame.setAttribute('class', 'screenReaderText');
 	document.body.appendChild(downloadFrame);
-}
+}s
