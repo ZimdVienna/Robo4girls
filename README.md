@@ -7,7 +7,7 @@ Web application and Micro:bit program to wirelessly control a Micro:bit robot pl
 Robo4earth builds on the project Robo4girls, a project funded by [netidee](https://www.netidee.at/robo4girls) in 2018.
 The [ZIMD](www.zimd.at) (Center for Interaction, Media & Social Diversity) offers a workshop format, where girls build and program robots. The workshops are offered for girls in fifth grade. The aim of the workshops is to inspire the 10- to 11-year old girls in technology and especially robotics.
 
-This repository hosts the R4G web application, which can be reached at [robo4earth.zimd.at](https://robo4earth.zimd.at). It also contains instructions on how to build the R4G block and how to control it with the R4G web app.
+This repository hosts the R4E web application, which can be reached at [robo4earth.zimd.at](https://robo4earth.zimd.at). The housing and base of the robots are build from wood and are personalized by the kids participating in the workshop.
 
 ## Instructions
 
