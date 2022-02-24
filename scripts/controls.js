@@ -48,9 +48,10 @@ function handlePlay(event) {
 	var activePrograms = programs.filter(word => word.startsWith('start:'));
 	if (activePrograms.length === 0) {
 		alert('Füge einen Start-Block hinzu um ein Programm abzuspielen.\nDiesen findest du unter Steuerung -> Wenn Start gedrückt');
+		return;
 	}
+	let code = fullVelocity + delimiter_microbit;
 	// reset display and motor settings at program start
-	var code = fullVelocity + delimiter_microbit; // fullVelocity is a constant from script R4Gblocks.js
 	for (let program of activePrograms) {
 		program.replace('start','');
 		code += program;
@@ -65,7 +66,9 @@ function handlePlay(event) {
 		}
 		commands[i] += delimiter_microbit;
 	}
-	return sendData(commands);
+	if(sending_data === false) {
+		return sendData(commands);
+	} else{return;}
 }
 
 // PROGRAM DROPDOWN
@@ -256,4 +259,4 @@ function downloadFile(filePath){
 	downloadFrame.setAttribute('src',filePath);
 	downloadFrame.setAttribute('class', 'screenReaderText');
 	document.body.appendChild(downloadFrame);
-}s
+}

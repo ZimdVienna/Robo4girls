@@ -20,6 +20,7 @@ var characteristicCache_rx = null;
 var characteristicCache_temp = null;
 var stopButtonClicked = false;
 var currentTemperature = 0;
+var sending_data = false;
 
 // EVENT LISTENERS
 connectButton.addEventListener('click', function(){
@@ -90,7 +91,11 @@ function waitForConfirmation(counter) {
 			if (value == 'OK'){
 				resolve(counter + 1);
 			} else {
-				reject(new Error('Received wrong confirmation value: ' + value));
+				if(value == 'STOP') {
+					reject(new Error('Das Programm wurde abgebrochen'));
+				} else {
+					reject(new Error('Received wrong confirmation value: ' + value));
+				}
 			}
 		});
 	})
@@ -121,7 +126,7 @@ function sendData(commands, counter=0) {
 		return;
 	});
 	console.log('sending: "' + commands[counter] + '"');
-
+	sending_data = true;
 	Promise.race([
 		/**
 		 * Wait for confirmation from micro:bit that command has been executed
@@ -130,6 +135,7 @@ function sendData(commands, counter=0) {
 		 */
 		waitForConfirmation(counter),
 		timeout(15000).then(() => {
+			sending_data = false;
 			throw new Error('No confirmation from micro:bit received within 15 seconds');
 		})
 	])
@@ -139,15 +145,19 @@ function sendData(commands, counter=0) {
 		if(counter < commands.length-1){
 			if(stopButtonClicked){
 				stopButtonClicked = false;
+				sending_data = false;
 				console.log('Program stopped');
 				return;
 			}
 			sendData(commands, counter);
+		} else {
+			sending_data = false;
 		}
 	})
 	.catch(error => {
 		alert(error);
 		console.log(error);
+		sending_data = false;
 	});
 }
 
