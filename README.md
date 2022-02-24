@@ -1,7 +1,7 @@
 # Robo4girls
 Web application and Micro:bit program to wirelessly control a Micro:bit robot platform.
 
-![R4E System overview](Dokumentation/Diagramme/R4G_system_overview.png)
+![R4E System overview](https://github.com/makkelaig/Robo4earth/blob/master/Dokumentation/Diagramme/r4g_system_overview.png)
 
 ## About the project
 Robo4earth builds on the project Robo4girls, a project funded by [netidee](https://www.netidee.at/robo4girls) in 2018.
