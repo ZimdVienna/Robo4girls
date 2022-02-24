@@ -1,4 +1,4 @@
-# Robo4girls
+# Robo4earth
 Web application and Micro:bit program to wirelessly control a Micro:bit robot platform.
 
 ![R4E System overview](https://github.com/makkelaig/Robo4earth/blob/master/Dokumentation/Diagramme/r4g_system_overview.png)
