@@ -467,13 +467,13 @@ Blockly.Blocks['melody'] = {
 	init: function () {
 		this.appendDummyInput()
 			.appendField("Spiele Melodie")
-			.appendField(new Blockly.FieldDropdown([["Tusch","M1"],["Romantisch","M2"],["Star Wars","M3"],["Super Mario","M4"],["Donauwalzer","M5"],["Tango Kriminalis","M6"],["Don't Worry be Happy","M7"],["Somewhere over the Rainbow","M8"],["Harry Potter","M9"]]), "melody");
+			.appendField(new Blockly.FieldDropdown([["Tusch","M01"],["Romantisch","M02"],["Star Wars","M03"],["Super Mario","M04"],["Donauwalzer","M05"],["Tango Kriminalis","M06"],["Don't Worry be Happy","M07"],["Somewhere over the Rainbow","M08"],["Harry Potter","M09"],["Happy Birthday","M10"]]), "melody");
 		this.setInputsInline(false);
 		this.setPreviousStatement(true, null);
 		this.setNextStatement(true, null);
 		this.setColour(0);
 		this.setTooltip("Die von dir ausgewählte Melodie wird ganz abgespielt, das Programm pausiert so lange.");
-		this.setHelpUrl("");
+		this.setHelpUrl(""); 
 	}
 };
 Blockly.JavaScript['melody'] = function (block) {
