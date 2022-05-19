@@ -6,7 +6,7 @@
 // Delimiter for messages to micro:bit
 const delimiter = ':';
 const float_delimiter = '.0:';
-const fullVelocity = 'Gb15';
+const fullVelocity = 'Gb31';
 let motorVelocity = {1:'31',2:'31'};
 
 // Movement combinations
