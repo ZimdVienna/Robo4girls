@@ -59,7 +59,7 @@ function handlePlay(event) {
 	var commands = code.split(delimiter_microbit);
 	commands = commands.filter(word => word != 'start');
 	// micro:bit can only receive a maximum of 20 characters at once
-	var max_length = 19;
+	var max_length = 8;
 	for (const i in commands) {
 		if (commands[i].length > max_length) {
 			commands[i] = commands[i].substring(0, max_length);

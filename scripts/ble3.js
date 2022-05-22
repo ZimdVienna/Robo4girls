@@ -130,13 +130,13 @@ function sendData(commands, counter=0) {
 	Promise.race([
 		/**
 		 * Wait for confirmation from micro:bit that command has been executed
-		 * Trow timeout error if the micro:bit does not confirm action within 15 seconds
+		 * Trow timeout error if the micro:bit does not confirm action within 20 seconds
 		 * (longest possible action is 9 seconds)
 		 */
 		waitForConfirmation(counter),
-		timeout(15000).then(() => {
+		timeout(20000).then(() => {
 			sending_data = false;
-			throw new Error('No confirmation from micro:bit received within 15 seconds');
+			throw new Error('No confirmation from micro:bit received within 20 seconds');
 		})
 	])
 	.then(function(counter){
@@ -265,7 +265,7 @@ function startUartNotifications(characteristic){
 	.then(() => {
 		console.log('Notifications started');
 		alert('Bluetooth Gerät ' + deviceCache.name + ' verbunden');
-		// sendData(['C:']);
+		sendData(['C:']);
 		connectButton.innerHTML = 'Verbunden';
 		connectButton.className = 'button green';
 	})
