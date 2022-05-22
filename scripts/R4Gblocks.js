@@ -6,7 +6,7 @@
 // Delimiter for messages to micro:bit
 const delimiter = ':';
 const float_delimiter = '.0:';
-const fullVelocity = 'Gb15';
+const fullVelocity = 'Gb31';
 let motorVelocity = {1:'31',2:'31'};
 
 // Movement combinations
@@ -20,12 +20,12 @@ var combinations = [
 // HELPER FUNCTIONS
 function send_combination(index=0, repetitions=1, intensity) {
 	/* send comination various times */
-	var code = 'Gb7' + delimiter;
+	var code = 'Gb15' + delimiter;
 	if(intensity == 'middle'){
-		code = 'Gb14' + delimiter
+		code = 'Gb28' + delimiter
 	}
 	if(intensity == 'strong'){
-		code = 'Gb21' + delimiter
+		code = 'Gb32' + delimiter
 	}
 	for (var l = 0; l < repetitions; l++) {
 		for (var k = 0; k < combinations[index].length; k++) {
@@ -617,7 +617,7 @@ Blockly.JavaScript['temperature'] = function(block) {
 	return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-/* works only with micro:bit version 1
+// works only with micro:bit version 1
 // Turn display 'T'
 Blockly.Blocks['turn_display'] = {
 	init: function() {
@@ -638,4 +638,3 @@ Blockly.JavaScript['turn_display'] = function(block) {
   	var code = 'T' + dropdown_degrees + delimiter;
 	return code;
 };
-*/
