@@ -617,7 +617,7 @@ Blockly.JavaScript['temperature'] = function(block) {
 	return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-/* works only with micro:bit version 1
+// works only with micro:bit version 1
 // Turn display 'T'
 Blockly.Blocks['turn_display'] = {
 	init: function() {
@@ -638,4 +638,3 @@ Blockly.JavaScript['turn_display'] = function(block) {
   	var code = 'T' + dropdown_degrees + delimiter;
 	return code;
 };
-*/
