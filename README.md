@@ -9,7 +9,7 @@ Building on the LEGO Mindstorms <b>Robotics Invention System (RIS)</b>(1998), th
 At the heart of the RIS is the Robotic Command eXplorer (RCX) unit, a compact yellow block incorporating an 8-bit microcontroller. The RCX controls the LEGO RIS hardware and can be programmed with the proprietary RIS software. Since the release of RIS in 1998, two new Lego Mindstorms systems were released and support for the RCX unit has been discontinued. The remaining RCX units are operated with the help of outdated technology and are cumbersome to handle from today's perspective. In order to update the proven ZIMD workshops, the project <b>Robo4girls</b> was launched by ZIMD in October 2018 and funded by [netidee](https://www.netidee.at/robo4girls). The technical goal of this project was to develop the <b>R4G block</b>, a control unit that replaces the RCX in the ZIMD workshops. 
 The developed R4G block is based on a BBC [Micro:bit](https://microbit.org) and can be programmed via a mobile device with the R4G web application. 
 
-This repository hosts the R4G web application, which can be reached at [robo4girls.zimd.at](https://robo4girls.zimd.at). It also contains instructions on how to build the R4G block and how to control it with the R4G web app.
+This repository hosts the R4G web application, which can be reached at [robo4girls.zimd.at](https://robo4girls.zimd.at). It also contains instructions on how to build the R4G block and how to control it with the R4G web app. If you are using a Micro:bit V2 with an onboard speaker, I recommend you use the [robo4earth.zimd.at](https://robo4earth.zimd.at) instead.
 
 ## Instructions
 
